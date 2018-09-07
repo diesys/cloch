@@ -21,8 +21,10 @@ window.onload = function () {
         return vars;
     }
 
-    // divisione 10 minuti: (4) -> 2.5m ma con due semitrasp (6) -> 1.6m
-    // lancetta minuti piena (L1 es. min 00), L1 semitrasp .6 - L2 SemiTrasp .3, L2 piena, L2 ST - L3 semi; poi ricomincia L3 piena  
+    // divisione 10 minuti: (4) -> 2.5m ma con due semitrasp (6) -> 1.6m 
+
+    /// AGGIUNGERE PIENA - ST .55, PIENA - ST .3 DIVENTANO 7 :(
+    // lancetta minuti piena (L1 es. min 00) 1.0, L1 semitrasp .6 - L2 SemiTrasp .3, L2 piena, L2 ST - L3 semi; poi ricomincia L3 piena  
 
     // maschera sole ad esagono
     // bg esagonale, colori piatti, o al massimo tipo cartone come il quadrante
