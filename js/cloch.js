@@ -21,8 +21,11 @@ window.onload = function () {
         return vars;
     }
 
-    // divisione 10 minuti
-    // lancetta minuti piena (L1 es. min 00), L1 semitrasp, L1 semitrasp - L2 SemiTrasp, L2 piena, L2 ST, L2 ST - L3 semi, L3 semi; poi ricomincia L3 piena  
+    // divisione 10 minuti: (4) -> 2.5m ma con due semitrasp (6) -> 1.6m
+    // lancetta minuti piena (L1 es. min 00), L1 semitrasp .6 - L2 SemiTrasp .3, L2 piena, L2 ST - L3 semi; poi ricomincia L3 piena  
+
+    // maschera sole ad esagono
+    // bg esagonale, colori piatti, o al massimo tipo cartone come il quadrante
 
     function updateCloch(hour, minute) {
         $('#sunmoon_indicator').animate({
