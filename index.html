@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="it" manifest="glock.appcache">
+
+<head>
+  <title>Cloch</title>
+  <!-- Version: 0.1 !-->
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="Keywords" content="clock, symmetries, time, geometry">
+  <meta name="Description" content="Glock - Graphic Clock">
+  <!-- <script src="jscolor.min.js"></script> -->
+  <!-- <script src="bower_components/Snap.svg/dist/snap.svg-min.js"></script> -->
+  <script src="js/jquery.min.js"></script>
+  <link rel="stylesheet" href="css/cloch.css">
+  <script src="js/cloch.js"></script>
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Mobile Specifics -->
+  <meta name="HandheldFriendly" content="true" />
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="MobileOptimized" content="320" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5 maximum-scale=1.0">
+
+  <!-- Colors and bars -->
+  <!-- Chrome, Firefox OS and Opera -->
+  <!-- <meta id="browserColor" name="theme-color" content="#030303"> -->
+  <meta name="theme-color" content="#008CB2" id="browserColor">
+
+  <!-- Windows Phone -->
+  <meta name="msapplication-navbutton-color" content="#008CB2">
+
+  <!-- Apple bar specific -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <!-- Favicon -->
+  <!-- <link rel="icon" href="img/favicon.png" type="image/x-icon">
+  <link rel="shortcut icon" href="#">
+
+  <link rel="icon" sizes="114x114" href="img/favicon114.png" type="image/x-icon">
+  <link rel="icon" sizes="72x72" href="img/favicon72.png" type="image/x-icon">
+  <link rel="icon" sizes="144x144" href="img/favicon144.png" type="image/x-icon">
+  <link rel="icon" sizes="256x256" href="img/favicon256.png" type="image/x-icon"> -->
+
+  <!-- Apple favicon -->
+  <!-- <link rel="apple-touch-icon" sizes="114x114" href="img/favicon114.png" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="72x72" href="img/favicon72.png" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="144x144" href="img/favicon144.png" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="256x256" href="img/favicon256.png" type="image/x-icon"> -->
+
+</head>
+<div id="grad"></div>
+
+<body class="dark">
+  <!-- JSCOLOR http://jscolor.com/!-->
+    
+    <g id="quadranthx_container">
+      <svg id="cloch" width="500" height="500" version="1.1" viewBox="0 0 132.29 132.29" xmlns="http://www.w3.org/2000/svg">
+        <g id="quadranthx">
+          <path id="backgroundhx" d="m66.146 9.4495c10.489 3e-7 43.856 19.265 49.101 28.348 5.2444 9.0836 5.2444 47.613-1e-5 56.696-5.2444 9.0836-38.612 28.348-49.101 28.348s-43.856-19.265-49.101-28.348c-5.2444-9.0836-5.2444-47.613 1e-6 -56.696 5.2444-9.0836 38.612-28.348 49.101-28.348z"
+            fill="#71c3b1" style="paint-order:stroke fill" />
+          <g id="minutes_angle" fill-opacity=".20373">
+            <path id="minAng_top" d="m66.146 9.4493c-5.2444 0-16.209 4.8162-26.517 10.768 8.4968-4.9056 44.537-4.9056 53.034 0-10.308-5.9516-21.272-10.768-26.517-10.768z"
+              style="paint-order:stroke fill" />
+            <path id="minAng_topR" d="m92.663 20.217c8.4968 4.9056 26.517 36.118 26.517 45.929 0-11.903-1.3109-23.806-3.9331-28.348-2.6222-4.5418-12.275-11.629-22.584-17.581z"
+              style="paint-order:stroke fill" />
+            <path id="minAng_bottomR" d="m119.18 66.146c0 9.8113-18.02 41.023-26.517 45.928 10.308-5.9516 19.961-13.039 22.584-17.58 2.6222-4.5418 3.9331-16.445 3.9331-28.348z"
+              style="paint-order:stroke fill" />
+            <path id="minAng_bottom" d="m92.663 112.07c-8.4968 4.9056-44.537 4.9056-53.034 0 10.308 5.9516 21.273 10.768 26.517 10.768 5.2444 0 16.208-4.8162 26.517-10.768z"
+              style="paint-order:stroke fill" />
+            <path id="minAng_bottomL" d="m39.629 112.07c-8.4968-4.9056-26.517-36.117-26.517-45.928 0 11.903 1.3109 23.806 3.9331 28.348 2.6222 4.5418 12.275 11.629 22.584 17.58z"
+              style="paint-order:stroke fill" />
+            <path id="minAng_topL" d="m13.112 66.146c0-9.8113 18.02-41.023 26.517-45.929-10.308 5.9516-19.961 13.039-22.584 17.581-2.6222 4.5418-3.9331 16.445-3.9331 28.348z"
+              style="paint-order:stroke fill" />
+          </g>
+          <g id="minutes_middle" fill="#0b0808" fill-opacity=".11765">
+            <path id="minMid_right" d="m119.18 66.146c0-4.9056-4.505-15.162-10.072-24.804 4.5887 7.9479 4.5887 41.66 0 49.608 5.5671-9.6425 10.072-19.898 10.072-24.804z"
+              style="paint-order:stroke fill" />
+            <path id="minMid_rightB" d="m109.11 90.95c-4.5887 7.9479-33.784 24.804-42.962 24.804 11.134 0 22.268-1.2262 26.517-3.679 4.2484-2.4528 10.878-11.482 16.445-21.125z"
+              style="paint-order:stroke fill" />
+            <path id="minMid_leftB" d="m66.146 115.75c-9.1774 0-38.373-16.856-42.961-24.804 5.5671 9.6425 12.196 18.672 16.445 21.125 4.2484 2.4528 15.383 3.679 26.517 3.679z"
+              style="paint-order:stroke fill" />
+            <path id="minMid_left" d="m23.184 90.95c-4.5887-7.9479-4.5887-41.66 0-49.608-5.5671 9.6425-10.072 19.899-10.072 24.804 0 4.9056 4.5051 15.161 10.072 24.804z"
+              style="paint-order:stroke fill" />
+            <path id="minMId_leftT" d="m23.184 41.342c4.5887-7.9479 33.784-24.804 42.961-24.804-11.134 0-22.268 1.2262-26.517 3.679-4.2484 2.4528-10.877 11.482-16.445 21.125z"
+              style="paint-order:stroke fill" />
+            <path id="minMid_rightT" d="m66.146 16.538c9.1774 0 38.373 16.856 42.962 24.804-5.5671-9.6425-12.197-18.672-16.445-21.125-4.2484-2.4528-15.383-3.679-26.517-3.679z"
+              style="paint-order:stroke fill" />
+          </g>
+          <g id="sunmoon_indicator">
+            <path id="sun" d="m99.947 39.993c-0.23513 0-0.42414 0.18901-0.42414 0.42414v0.98637c7e-6 0.23513 0.18902 0.42414 0.42414 0.42414 0.23511 0 0.42414-0.18901 0.42414-0.42414v-0.98637c0-0.23513-0.18903-0.42414-0.42414-0.42414zm-4.2919 1.7767c-0.10848 0-0.21648 0.0414-0.29961 0.12453-0.16626 0.16626-0.16626 0.4342 0 0.60045l0.69663 0.69786c0.16626 0.16626 0.43419 0.16626 0.60045 0s0.16626-0.4342 0-0.60045l-0.69663-0.69786c-0.08313-0.08313-0.19235-0.12453-0.30084-0.12453zm8.5839 0c-0.10849 0-0.21771 0.0414-0.30084 0.12453l-0.69663 0.69786c-0.16626 0.16626-0.16626 0.4342 0 0.60045 0.16625 0.16626 0.43418 0.16626 0.60046 0l0.69663-0.69786c0.16624-0.16626 0.16624-0.4342 0-0.60045-0.083-0.08313-0.19114-0.12453-0.29962-0.12453zm-4.292 1.1849a3.5317 3.5317 0 0 0-3.5312 3.5312 3.5317 3.5317 0 0 0 3.5312 3.5324 3.5317 3.5317 0 0 0 3.5312-3.5324 3.5317 3.5317 0 0 0-3.5312-3.5312zm-6.0686 3.1071c-0.23512 0-0.42537 0.18901-0.42537 0.42414s0.19025 0.42537 0.42537 0.42537h0.98514c0.23512 0 0.42537-0.19025 0.42537-0.42537s-0.19024-0.42414-0.42537-0.42414zm11.152 0c-0.23512 0-0.42537 0.18901-0.42537 0.42414s0.19025 0.42537 0.42537 0.42537h0.98514c0.23513 0 0.42538-0.19025 0.42538-0.42537s-0.19025-0.42414-0.42538-0.42414zm-8.6776 3.5941c-0.10848 0-0.21772 0.04141-0.30084 0.12453l-0.69663 0.69786c-0.16626 0.16626-0.16626 0.43296 0 0.59922s0.43419 0.16626 0.60045 0l0.69663-0.69662c0.16626-0.16626 0.16626-0.4342 0-0.60045-0.08313-0.08314-0.19112-0.12453-0.29961-0.12453zm7.1882 0c-0.10849 0-0.21648 0.04141-0.29961 0.12453-0.16626 0.16626-0.16626 0.4342 0 0.60045l0.69663 0.69662c0.16624 0.16626 0.43418 0.16626 0.60046 0 0.16624-0.16626 0.16624-0.43296 0-0.59922l-0.69663-0.69786c-0.083-0.08314-0.19237-0.12453-0.30085-0.12453zm-3.5941 1.4894c-0.23513 0-0.42414 0.18901-0.42414 0.42414v0.98637c0 0.23512 0.18902 0.42414 0.42414 0.42414 0.23511 0 0.42414-0.18901 0.42414-0.42414v-0.98637c0-0.23513-0.18903-0.42414-0.42414-0.42414z"
+              fill="#fff" />
+            <path id="moon_mask" d="m100.02 39.542c-3.9724-4.92e-4 -6.9244 2.6825-6.9246 6.6549-4.9e-4 3.9728 2.4148 7.1936 6.3876 7.1931 3.9724-1.76e-4 7.1924-3.2207 7.1919-7.1931-1.8e-4 -3.9719-2.683-6.6547-6.6549-6.6549zm1.5134 2.9017c1.3727 0.74978 2.2266 2.189 2.2267 3.7531 7e-5 2.3622-1.9149 4.2772-4.2772 4.2772-1.7503-7.87e-4 -3.3235-1.068-3.9714-2.694 4.2039 2.119 7.3126-2.2436 6.0218-5.3363z"
+              fill="#71c3b1" opacity=".539" />
+          </g>
+          <g id="cubex">
+            <path id="cubex_top" d="m66.146 37.758c-5.3009 0-22.045 9.9081-24.695 14.499 2.1114 2.7209 20.676 13.454 24.384 14.122 0.0598 0.0108 0.11599 0.0188 0.16793 0.0243 0.052 5e-3 0.0999 8e-3 0.14367 8e-3 0.0438 0 0.0917-3e-3 0.14367-8e-3 0.0519-5e-3 0.10813-0.0135 0.16793-0.0243 3.7081-0.66823 22.274-11.402 24.384-14.123-2.6505-4.5908-19.394-14.498-24.695-14.498z"
+              fill-opacity=".035294" style="paint-order:stroke fill" />
+            <path id="cubex_left" d="m41.451 52.257c-2.4744 4.9947-2.4276 23.608 0.14467 28.063 2.6222 4.5418 19.306 14.174 24.55 14.174v-28.083c-2.8045 0-22.516-11.346-24.695-14.155z"
+              fill-opacity=".05098" style="paint-order:stroke fill" />
+            <path id="cubex_right" d="m90.841 52.256c-2.178 2.8081-21.89 14.155-24.695 14.155v28.083c5.2444 0 21.928-9.6325 24.55-14.174 2.5724-4.4555 2.6193-23.069 0.1447-28.063z"
+              fill-opacity=".062745" stroke-opacity="0" style="paint-order:stroke fill" />
+          </g>
+        </g>
+      </svg>
+    </div>
+
+  </div>
+  
+  
+  
+  
+  <!-- <a class="button howto semitransp" onclick="HowTo(1)" href="#">Glock</a>
+  <a id="credits_button" class="button credits semitransp" onclick="show_credits()" href="#">Credits</a>
+  <div id="credits" class="HowTo inactive">
+    <img src="img/howto/ht1.png" alt="glock logo" />
+    <h1>Credits</h1>
+    <p>Glock è stato realizzato usando HTML5, CSS3, JavaScript, <a href="http://snapsvg.io/">Snap.svg</a>, <a href="http://jscolor.com">jscolor</a>.
+      <br />Ideato e realizzato da <a href="http://flowin.space">Diego Turtulici</a>.<br /> Rilasciato sotto
+      <a href="https://www.gnu.org/licenses/gpl-3.0.html">licenza GPLv3</a>. <br /><a href="glock.zip">Scarica il
+        pacchetto.</a></p>
+    <br><br>
+    <a class="button closeHowTo" onclick="close_credits()">chiudi</a>
+  </div>
+
+  <div id="HT5" class="HowTo inactive">
+    <img src="img/howto/ht5.png" alt="HowTo" />
+    <h1>Personalizzalo!</h1>
+    <p>Hai provato a cliccare sul quadrante? Ti si aprirà un menù dove visualizzerai il colore attuale in esadecimale
+      (o notazione HTML), ne hai trovato uno che ti piace? Questo sito non utilizza cookie quindi puoi salvare quel
+      valore e metterlo come
+      suffisso nella barra degli indirizzi. Così puoi aggiungere ai preferiti il link con il colore che preferisci!<br>Prova
+      a cliccare <a href="http://glock.flowin.space?c=#00AFAF">qui</a> e guarda la barra degli indirizzi.<br><br> Ci
+      sono altre
+      opzioni che puoi utilizzare con le variabili nell'indirizzo:<br> c=... accetta ogni colore CSS (esadecimale:
+      #000000, RGB: rgb(0,0,0), etc.), <a href="http://glock.flowin.space/?c=#00AFAF">provalo!</a><br> o=... il numero
+      di ore di cui traslare
+      l'orologio (ad es. fusi orari), <a href="http://glock.flowin.space/?o=3">provalo!</a><br> h=..., m=..., s=... per
+      indicare un'ora ben precisa rispettivamente <a href="http://glock.flowin.space/?h=21F">ora</a>, <a href="http://glock.flowin.space/?m=10F">minuto</a>,
+      <a href="http://glock.flowin.space/?s=40F">secondo</a>, prova a vedere le <a href="http://glock.flowin.space/?c=#00F0AF&o=10&h=23&m=45">23:45!</a><br>
+      <br>Ricorda che le variabili nell'URL vanno inserite dopo il punto interrogativo (che ne determina l'inizio) e
+      ogni coppia <i>variabile=valore</i> va divisa dall'altra con un &amp. <a href="http://glock.flowin.space/?c=#00F0AF&o=10&h=21&m=10&s=10">Provale
+        tutte!</a>
+    </p>
+    <br><br>
+    <a class="button closeHowTo" onclick="HowTo('close')" href="#">chiudi</a>
+    <a class="button HowTo next" onclick="HowTo('close')" href="#">&#62;</a>
+    <a class="button HowTo prev" onclick="HowTo(4)" href="#">&#60;</a>
+  </div>
+  <div id="HT4" class="HowTo inactive">
+    <img src="img/howto/ht4.png" alt="HowTo" />
+    <h1>I minuti</h1>
+    <p>Esattamente come per le ore i minuti vanno al doppio della velocità. Anziché essere 60 in un giro completo sono
+      30. Questa volta la figura è un triangolo che ruota, avrai così il primo minuto e la mezz'ora con il vertice in
+      alto e 15 e 45 minuti
+      con il vertice in basso. In tutti i minuti multipli di 5 il triangolo è orientato con uno dei vertici in alto o
+      in basso.</p>
+    <br><br>
+    <a class="button closeHowTo" onclick="HowTo('close')" href="#">chiudi</a>
+    <a class="button HowTo next" onclick="HowTo(5)" href="#">&#62;</a>
+    <a class="button HowTo prev" onclick="HowTo(3)" href="#">&#60;</a>
+  </div>
+  <div id="HT3" class="HowTo inactive">
+    <img src="img/howto/ht3.png" alt="HowTo" />
+    <h1>Le ore</h1>
+    <p>Immagina di far andare la lancetta dell'ora a velocità doppia, quando sono le 3 o le 9, anziché essere nei
+      quarti del quadrante, l'ora sarà indicata nel vertice in basso; se invece sono le 6 o le 12 in quello in alto. Un
+      orologio «solare» che
+      anziché dirti AM o PM ti dice se che usa il sole per farti capire se le 18 (<i>tramonto</i>) sono già passate
+      così da poterti orientare con l'ausilio della luce solare.</p>
+    <br><br>
+    <a class="button closeHowTo" onclick="HowTo('close')" href="#">chiudi</a>
+    <a class="button HowTo next" onclick="HowTo(4)" href="#">&#62;</a>
+    <a class="button HowTo prev" onclick="HowTo(2)" href="#">&#60;</a>
+  </div>
+  <div id="HT2" class="HowTo inactive">
+    <img src="img/howto/ht2.png" alt="HowTo" />
+    <h1>Gli indicatori</h1>
+    <p>Glock non ha lancette ma indicatori. Il funzionamento è quasi identico, ce ne sono di due tipi: l'indicatore
+      delle ore è mobile e passa tra i vertici dell'esagono, quello dei minuti sta su un vertice fisso del triangolo
+      che fa una rotazione ad
+      ogni minuto. Entrambi gli indicatori hanno due possibili stati che indicano se ha già compiuto il primo giro.</p>
+    <br><br>
+    <a class="button closeHowTo" onclick="HowTo('close')" href="#">chiudi</a>
+    <a class="button HowTo next" onclick="HowTo(3)" href="#">&#62;</a>
+    <a class="button HowTo prev" onclick="HowTo(1)" href="#">&#60;</a>
+  </div>
+  <div id="HT1" class="HowTo inactive">
+    <img src="img/howto/ht1.png" alt="HowTo" />
+    <h1>Colpo d'occhio</h1>
+    <p>Glock è un'orologio grafico che cerca un altro approccio nello scandire il tempo, è fatto per essere visto e non
+      letto.<br /> Una volta compreso il funzionamento anche vedendolo a distanza o di sfuggita sarà facile capire
+      l'ora indicata e ancora
+      più immediato, con una precisione dell'ordine di 5 minuti.</p>
+    <br><br>
+    <a class="button HowTo next" onclick="HowTo(2)" href="#">&#62;</a>
+    <a class="button closeHowTo" onclick="HowTo('close')" href="#">chiudi</a>
+  </div> -->
+  
+  <script type="text/javascript" src="js/TweenMax.min.js"></script>
+</body>
+
+</html>
