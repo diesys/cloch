@@ -1,16 +1,17 @@
 // document.addEventListener('DOMContentLoaded', function() {
 window.onload = function () {
-    var cloch = $('#cloch'),
-        quadrant = $('#quadranthx'),
-        background = $('#background'),
-        // MINUTES ANGLE: IN POSITIONS H%6 = 0, like - if they were extact - 0, 10, 20, 30, 50, 60m in clockwise order
-        minAngle = [$('#minAng_top'), $('#minAng_topR'), $('#minAng_bottomR'), $('#minAng_bottom'), $('#minAng_bottomL'), $('#minAng_topL')],
-        // MINUTES MIDDLE: IN MIDDLE POSITIONS, like - if they were extact - 5, 15, 25, 35, 45, 55 in clockwise order
-        minMid = [$('#minMid_rightT'), $('#minMid_right'), $('#minMid_rightB'), $('#minMid_leftB'), $('#minMid_left'), $('#minMid_leftT')],
-        // indicator, sun and moon mask. sunMoon[2].opacity=0 -> sun; sunMoon[2].opacity=0 -> moon
-        sunMoon = [$('#sunmoon_indicator'), $('#sun'), $('#moon_mask')],
-        // sort of a false perspective cube on the center of the quadrant
-        cubex = [$('#cubex_top'), $('#cubex_left'), $('#cubex_right')];
+    cloch = $('#cloch'),
+    quadrant = $('#quadranthx'),
+    background = $('#background'),
+    // MINUTES ANGLE: IN POSITIONS H%6 = 0, like - if they were extact - 0, 10, 20, 30, 50, 60m in clockwise order
+    minAngle = [$('#minAng_top'), $('#minAng_topR'), $('#minAng_bottomR'), $('#minAng_bottom'), $('#minAng_bottomL'), $('#minAng_topL')],
+    // MINUTES MIDDLE: IN MIDDLE POSITIONS, like - if they were extact - 5, 15, 25, 35, 45, 55 in clockwise order
+    minMid = [$('#minMid_rightT'), $('#minMid_right'), $('#minMid_rightB'), $('#minMid_leftB'), $('#minMid_left'), $('#minMid_leftT')],
+    // indicator, sun and moon mask. sunMoon[2].opacity=0 -> sun; sunMoon[2].opacity=0 -> moon
+    sunMoon = [$('#sunmoon_indicator'), $('#sun'), $('#moon_mask')],
+    // sort of a false perspective cube on the center of the quadrant
+    cubex = [$('#cubex_top'), $('#cubex_left'), $('#cubex_right')],
+    ;
 
 
     function getUrlVars() {
@@ -21,7 +22,20 @@ window.onload = function () {
         return vars;
     }
 
+    function changeColor(color) {
+        exagon.animate({
+            fill: color
+        }, 10);
+        background.animate({
+            fill: color
+        }, 10);
+        colorpicker = $("colorpicker");
+        colorpicker.value = color.replace('#', '');
+        colorpicker.style.backgroundColor = color;
+    }
+
     // divisione 10 minuti: (4) -> 2.5m ma con due semitrasp (6) -> 1.6m 
+    // sun/moon anche semitrasparente 0-6 semitr, 6-12 sole, 12-18 semitr, 18-0 luna
 
     /// AGGIUNGERE PIENA - ST .55, PIENA - ST .3 DIVENTANO 7 :(
     // lancetta minuti piena (L1 es. min 00) 1.0, L1 semitrasp .6 - L2 SemiTrasp .3, L2 piena, L2 ST - L3 semi; poi ricomincia L3 piena  
