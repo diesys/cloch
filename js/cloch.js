@@ -113,6 +113,8 @@ window.onload = function () {
     /// AGGIUNGERE PIENA - ST .55, PIENA - ST .3 DIVENTANO 7 :(
     // lancetta minuti piena (L1 es. min 00) 1.0, L1 semitrasp .6 - L2 SemiTrasp .3, L2 piena, L2 ST - L3 semi; poi ricomincia L3 piena  
 
+    // menu per scegliere l'ora, cosi la si impara pure (magari integrata con l'url :Q )
+
     // bg esagonale, colori piatti, o al massimo tipo cartone come il quadrante
 
     // far partire l'indicatore da trasparente (cosi non vedi che si aggiorna )
