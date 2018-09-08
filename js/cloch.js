@@ -63,8 +63,60 @@ function setHour(hour, style) {
     config['hourXY'] = hourXY;
 }
 
-function setMinute(){
+function setMinute(min, lazy=true) {
 
+    // usare la parte intera per trovare l'indicatore giusto e la parte decimale per la trasparenza!
+
+    if(min < 61) {
+        // var minOpacity = lazy ? minutesStateLazy : minutesState;
+        // console.log('lazy = ', lazy, '\nopacity levels:', minOpacity);
+
+        // every minute is about 0.2, toFixed gives 1 decimal digits prec.
+        var newMinIndex = ((min / 5) % 12).toFixed(1),
+        
+        // convert to string and separate decimal from floor
+        newMin = newMinIndex.toString().split('.');
+        newMin[1] /= 2;
+
+        // uses the floor of newMin to get the indicator from the list
+        newMinIndicator = minutes[newMin[0]];
+
+        console.log(newMin);
+        
+        // select the min opacity from the corresponding list
+        // if(lazy) {
+        //     var i = Math.floor(newMin[1] / 2); 
+        //     newMinOpacity = minutesStateLazy[i % 2]
+        //     console.log(i);
+        // }
+        // else {
+        //     var i = newMin[1] / 3; 
+        //     newMinOpacity = minutesState[i % 3];
+        // }
+
+        // console.log(newMin[0], newMin[1]);
+        // console.log(newMinOpacity);
+
+        // console.log(newMinDec, newMinInt, newMinIndex);
+
+        // minAng.forEach(element => {
+        //     pos = minAng.indexOf(element);
+        //     setTimeout(() => {
+        //         if (min == 0) {
+
+        //         } else if(min == 1) {
+
+        //         } else if(min == 2) {
+
+        //         } else if(min == 3) {
+
+        //         } else if(min == 4) {
+                    
+        //         };
+        //     }, 60000);        
+        // });
+    }
+    else console.log('error: minutes can be [0..60]');
 }
 
 // function toggle_colorpicker() {
@@ -82,16 +134,22 @@ window.onload = function () {
     quadrant = $('#quadranthx'),
     background = $('#backgroundhx'),
     // MINUTES ANGLE: IN POSITIONS H%6 = 0, like - if they were extact - 0, 10, 20, 30, 50, 60m in clockwise order
-    minAngle = [$('#minAng_top'), $('#minAng_topR'), $('#minAng_bottomR'), $('#minAng_bottom'), $('#minAng_bottomL'), $('#minAng_topL')],
-    // MINUTES MIDDLE: IN MIDDLE POSITIONS, like - if they were extact - 5, 15, 25, 35, 45, 55 in clockwise order
+    minAng = [$('#minAng_top'), $('#minAng_topR'), $('#minAng_bottomR'), $('#minAng_bottom'), $('#minAng_bottomL'), $('#minAng_topL')],
+    // // MINUTES MIDDLE: IN MIDDLE POSITIONS, like - if they were extact - 5, 15, 25, 35, 45, 55 in clockwise order
     minMid = [$('#minMid_rightT'), $('#minMid_right'), $('#minMid_rightB'), $('#minMid_leftB'), $('#minMid_left'), $('#minMid_leftT')],
+    
+    // all minutes indicator clockwise
+    minutes = [$('#minAng_top'), $('#minMid_rightT'), $('#minAng_topR'), $('#minMid_right'), $('#minAng_bottomR'), $('#minMid_rightB'), $('#minAng_bottom'), $('#minMid_leftB'), $('#minAng_bottomL'), $('#minMid_left'), $('#minAng_topL'), $('#minMid_leftT')],
+    
     // indicator, sun and moon mask. sunMoon[2].opacity=0 -> sun; sunMoon[2].opacity=0 -> moon
     sunMoon = [$('#sunmoon_indicator'), $('#sun'), $('#moon_mask')],
+    
     // sort of a false perspective cube on the center of the quadrant
     cubex = [$('#cubex_top'), $('#cubex_left'), $('#cubex_right')];
-    
+
     // Hours traslation coordinates
-    hoursXY = new Array([-33.7, -19], [0, 0], [0, 40], [-33.8, 58], [-71, 40], [-67, 0]);
+    hoursXY = new Array([-33.8, -19], [0, 0], [0, 40], [-33.8, 58], [-67, 38], [-67, 0]);
+
     
     // Minutes opacity lazy values, 90% or 30% 
         // es 5min, 2 'triangles' indicators (angle and middle) with 2 (lazy) states 
@@ -99,7 +157,7 @@ window.onload = function () {
         // [1,2]: [A=90, M=30],
         // [3,4]: [A=30, M=90],
         // [5]: M=90, 
-    minutesStateLazy = new Array(90,30);
+    minutesStateLazy = new Array(90,30,0);
     
     // Minutes opacity values 
        // es 5min, 2 'triangles' indicators (angle and middle) with 3 states 
@@ -109,10 +167,9 @@ window.onload = function () {
        // [3]: [A=70, M=30],
        // [4]: [A=30, M=70],
        // [5]: M=100,
-    minutesState = new Array(100,70,30);
+    minutesState = new Array(100,70,30,0);
 
     config = getUrlVars();
-    
     
     
     // main
@@ -136,7 +193,6 @@ window.onload = function () {
     
     date = new Date();
     config['actHour'] = date.getHours();
-    console.log('ora', date.getHours());
     // setHour(config['actHour'], 'fade');
 
     ////////// TO - DO //////////////////
@@ -178,24 +234,19 @@ window.onload = function () {
         },
     });
     
+    $('#prova0').bind({click: function () {setHour(0, 'fade');}});
     $('#prova1').bind({click: function () {setHour(1, 'fade');}});
     $('#prova2').bind({click: function () {setHour(2, 'fade');}});
     $('#prova3').bind({click: function () {setHour(3, 'fade');}});
     $('#prova4').bind({click: function () {setHour(4, 'fade');}});
     $('#prova5').bind({click: function () {setHour(5, 'fade');}});
-    $('#prova6').bind({click: function () {setHour(6, 'fade');}});
     
+    $('#prova0a').bind({click: function () {setHour(0, 'move');}});
     $('#prova1a').bind({click: function () {setHour(1, 'move');}});
     $('#prova2a').bind({click: function () {setHour(2, 'move');}});
     $('#prova3a').bind({click: function () {setHour(3, 'move');}});
-    $('#prova4a').bind({
-        click: function () {
-            setHour(4, 'move');
-        }
-    })
-;
+    $('#prova4a').bind({click: function () {setHour(4, 'move');}});
     $('#prova5a').bind({click: function () {setHour(5, 'move');}});
-    $('#prova6a').bind({click: function () {setHour(6, 'move');}});
 
 
     function updateCloch(hour, minute) {
