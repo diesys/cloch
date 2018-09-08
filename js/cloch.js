@@ -25,13 +25,18 @@ function changeColor(color) {
 }
 
 function moveSun(hour, style) {
-    hours = new Array([-33.7, -19], [0, 0], [0, 40], [-33.8, 58], [-67, 38], [-67, 0]);
+    hours = new Array([-33.8, -19], [0, 0], [0, 40], [-33.8, 58], [-67, 38], [-67, 0]);
     var hourXY = hours[hour % 6],
         transl = "translate(" + hourXY[0] + 'px, ' + hourXY[1] + "px)",
         duration = 1;
         durationFade = .1;
 
     if(style == 'fade'){
+        TweenMax.from(sunMoon[0], 4 * durationFade, {
+            // css: { scale: 2 },
+            transformOrigin: "0% 0%",
+            delay: 0,
+        });
         TweenMax.to(sunMoon[0], 2 * durationFade, {
             delay: 0,
             opacity: 0,
@@ -83,16 +88,21 @@ window.onload = function () {
     cubex = [$('#cubex_top'), $('#cubex_left'), $('#cubex_right')];
     hours = new Array([-33.7, -19], [0, 0], [0, 40], [-33.8, 58], [-71, 40], [-67, 0]);
 
-    config = new Array(getUrlVars());
+    config = getUrlVars();
     
     
     
     // main
     
     // sets sun in the center for initial animation
-    TweenMax.set(sunMoon[0], {x:-33.8, y:20, opacity:1});
-
-    if (!config['color']) config['color'] = '#aaa';
+    TweenMax.set(sunMoon[0], {
+        x:-33.8, y:20, opacity:1,
+        // css: { transfom: "scale(1px)"},
+        transformOrigin: "-33px 20px",
+    });
+      
+    if (!config['color'])
+        config['color'] = '#aaa';
     changeColor(config['color']);
 
     setTimeout(function () {
