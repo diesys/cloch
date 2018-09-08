@@ -7,13 +7,13 @@ function getUrlVars() {
     return vars;
 }
 
-function changeColor(color) {
-    var backgroundColorChange = TweenMax.to(background, .5, {
+function changeColor(color, duration=.5) {
+    var backgroundColorChange = TweenMax.to(background, duration, {
         delay: 0,
         transformOrigin: "50% 50%",
         css: {fill: color},
     });
-    var maskColorChange = TweenMax.to(sunMoon[2], .5, {
+    var maskColorChange = TweenMax.to(sunMoon[2], duration, {
         delay: 0,
         transformOrigin: "50% 50%",
         css: {fill: color},
@@ -24,19 +24,18 @@ function changeColor(color) {
     //     colorpicker.style.backgroundColor = color;
 }
 
-function moveSun(hour, style) {
-    hours = new Array([-33.8, -19], [0, 0], [0, 40], [-33.8, 58], [-67, 38], [-67, 0]);
-    var hourXY = hours[hour % 6],
+function setHour(hour, style) {
+    var hourXY = hoursXY[hour % 6],
         transl = "translate(" + hourXY[0] + 'px, ' + hourXY[1] + "px)",
         duration = 1;
         durationFade = .1;
 
     if(style == 'fade'){
-        TweenMax.from(sunMoon[0], 4 * durationFade, {
-            // css: { scale: 2 },
-            transformOrigin: "0% 0%",
-            delay: 0,
-        });
+        // TweenMax.from(sunMoon[0], 4 * durationFade, {
+        //     // css: { scale: 2 },
+        //     transformOrigin: "0% 0%",
+        //     delay: 0,
+        // });
         TweenMax.to(sunMoon[0], 2 * durationFade, {
             delay: 0,
             opacity: 0,
@@ -64,6 +63,10 @@ function moveSun(hour, style) {
     config['hourXY'] = hourXY;
 }
 
+function setMinute(){
+
+}
+
 // function toggle_colorpicker() {
 //     picker = $("colorpicker");
 //     if (picker.className == "jscolor active") {
@@ -86,7 +89,27 @@ window.onload = function () {
     sunMoon = [$('#sunmoon_indicator'), $('#sun'), $('#moon_mask')],
     // sort of a false perspective cube on the center of the quadrant
     cubex = [$('#cubex_top'), $('#cubex_left'), $('#cubex_right')];
-    hours = new Array([-33.7, -19], [0, 0], [0, 40], [-33.8, 58], [-71, 40], [-67, 0]);
+    
+    // Hours traslation coordinates
+    hoursXY = new Array([-33.7, -19], [0, 0], [0, 40], [-33.8, 58], [-71, 40], [-67, 0]);
+    
+    // Minutes opacity lazy values, 90% or 30% 
+        // es 5min, 2 'triangles' indicators (angle and middle) with 2 (lazy) states 
+        // [0]: A=90, 
+        // [1,2]: [A=90, M=30],
+        // [3,4]: [A=30, M=90],
+        // [5]: M=90, 
+    minutesStateLazy = new Array(90,30);
+    
+    // Minutes opacity values 
+       // es 5min, 2 'triangles' indicators (angle and middle) with 3 states 
+       // [0]: A=100, 
+       // [1]: [A=100, M=30],
+       // [2]: [A=100, M=70],
+       // [3]: [A=70, M=30],
+       // [4]: [A=30, M=70],
+       // [5]: M=100,
+    minutesState = new Array(100,70,30);
 
     config = getUrlVars();
     
@@ -103,18 +126,18 @@ window.onload = function () {
       
     if (!config['color'])
         config['color'] = '#aaa';
-    changeColor(config['color']);
+    changeColor(config['color'],0);
 
     setTimeout(function () {
         date = new Date();
-        moveSun(date.getHours(), 'fade');
+        setHour(date.getHours(), 'fade');
         console.log('auto ora', date.getHours());
     }, 1000);
     
     date = new Date();
     config['actHour'] = date.getHours();
     console.log('ora', date.getHours());
-    // moveSun(config['actHour'], 'fade');
+    // setHour(config['actHour'], 'fade');
 
     ////////// TO - DO //////////////////
     // divisione 10 minuti: (4) -> 2.5m ma con due semitrasp (6) -> 1.6m 
@@ -135,10 +158,10 @@ window.onload = function () {
     $('#prova').bind({
         click: function () {
             /// non funziona ma stic..
-            console.log(config['actHour'],hours.indexOf(config['actHour']), config['actHour']);
-            ca = hours.indexOf(config['actHour']) + 1 % 6;
-            moveSun(ca, 'move');
-            console.log(ca, hours.indexOf(config['actHour']));
+            console.log(config['hourXY'],hoursXY.indexOf(config['actHour']), config['hourXY']);
+            ca = hoursXY.indexOf(config['hourXY']) + 1 % 6;
+            setHour(ca, 'fade');
+            console.log(ca, hoursXY.indexOf(config['hourXY']));
         },
     //     mouseover: function () {
     //         $("body").css("background-color", "#E9E9E4");
@@ -150,27 +173,29 @@ window.onload = function () {
     
     $('#provaa').bind({
         click: function () {
-            
-            console.log(config['hour'],hours.indexOf(config['hour']), config['hour']);
-            ca = hours.indexOf(config['hour']) + 1 % 6;
-            moveSun(ca,'move');
-            console.log(ca, hours.indexOf(config['hour']));
+            ca = hoursXY.indexOf(config['hourXY']) + 1 % 6;
+            setHour(ca,'move');
         },
     });
     
-    $('#prova1').bind({click: function () {moveSun(1, 'fade');}});
-    $('#prova2').bind({click: function () {moveSun(2, 'fade');}});
-    $('#prova3').bind({click: function () {moveSun(3, 'fade');}});
-    $('#prova4').bind({click: function () {moveSun(4, 'fade');}});
-    $('#prova5').bind({click: function () {moveSun(5, 'fade');}});
-    $('#prova6').bind({click: function () {moveSun(6, 'fade');}});
+    $('#prova1').bind({click: function () {setHour(1, 'fade');}});
+    $('#prova2').bind({click: function () {setHour(2, 'fade');}});
+    $('#prova3').bind({click: function () {setHour(3, 'fade');}});
+    $('#prova4').bind({click: function () {setHour(4, 'fade');}});
+    $('#prova5').bind({click: function () {setHour(5, 'fade');}});
+    $('#prova6').bind({click: function () {setHour(6, 'fade');}});
     
-    $('#prova1a').bind({click: function () {moveSun(1, 'move');}});
-    $('#prova2a').bind({click: function () {moveSun(2, 'move');}});
-    $('#prova3a').bind({click: function () {moveSun(3, 'move');}});
-    $('#prova4a').bind({click: function () {moveSun(4, 'move');}});
-    $('#prova5a').bind({click: function () {moveSun(5, 'move');}});
-    $('#prova6a').bind({click: function () {moveSun(6, 'move');}});
+    $('#prova1a').bind({click: function () {setHour(1, 'move');}});
+    $('#prova2a').bind({click: function () {setHour(2, 'move');}});
+    $('#prova3a').bind({click: function () {setHour(3, 'move');}});
+    $('#prova4a').bind({
+        click: function () {
+            setHour(4, 'move');
+        }
+    })
+;
+    $('#prova5a').bind({click: function () {setHour(5, 'move');}});
+    $('#prova6a').bind({click: function () {setHour(6, 'move');}});
 
 
     function updateCloch(hour, minute) {
