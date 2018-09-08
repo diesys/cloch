@@ -107,3 +107,10 @@ svg#cloch:hover {
 svg#cloch:active {
   /* transform: translateY(8px); */
 }
+
+button {
+  padding: 10px 8px;
+  margin: 5px;
+  text-align: center;
+  min-width: 30px;
+}
