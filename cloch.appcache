@@ -1,0 +1,37 @@
+CACHE MANIFEST
+# Version 1
+
+CACHE:
+manifest.json
+glock.min.js
+style.min.css
+bower_components/Snap.svg/dist/snap.svg-min.js
+jscolor.min.js
+
+#FONTS
+font/Oswald-Bold.ttf
+font/Oswald-Regular.ttf
+
+#IMAGES
+img/favicon72.png
+img/favicon114.png
+img/favicon144.png
+img/favicon256.png
+img/texture.png
+
+  #howto
+img/howto/ht1.png
+img/howto/ht2.png
+img/howto/ht3.png
+img/howto/ht4.png
+img/howto/ht5.png
+
+#FALLBACK:
+# This will enable imagename4.png to be as a replacement for
+# all resources under the images dir when there is no network connectivity.
+#img/favicon images/favicon256.png
+
+
+#NETWORK:
+# This will prevent other network resources from being accessed.
+#images/imagename5.png
