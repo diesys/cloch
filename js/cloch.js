@@ -24,10 +24,11 @@ function changeColor(color, duration=.5) {
     //     colorpicker.style.backgroundColor = color;
 }
 
-function setHour(hour, style) {
-    var hourXY = hoursXY[hour % 6],
-        transl = "translate(" + hourXY[0] + 'px, ' + hourXY[1] + "px)",
-        duration = 1;
+function setHour(new_hour, style='fade') {
+    var hXY = hoursXY[new_hour % 6],
+        hour = {'value': new_hour, 'valueHex': new_hour % 6, 'X': hXY[0], 'Y': hXY[1]};
+        transl = "translate(" + hour['X'] + 'px, ' + hour['Y'] + "px)",
+        duration = 1,
         durationFade = .1;
 
     if(style == 'fade'){
@@ -60,63 +61,78 @@ function setHour(hour, style) {
         });
     }
 
-    config['hourXY'] = hourXY;
+    config['hour'] = hour;
+}
+
+function setMinute1(min, lazy = true) {
+    if (min < 61) {
+            // every minute is about 0.2, toFixed 1 decimal digits
+        var newMinIndex = ((min / 5) % 12).toFixed(1),
+            duration = 500;
+
+            //  separate floor (indicator pos.) from decimal (opacity lev.)
+            newMin = newMinIndex.toString().split('.');
+            newMinIndicator = minutes[newMin[0]];
+            newMinOpacity = minutesStateLazy[newMin[1]];
+        
+        TweenMax.to(newMinIndicator, duration, {
+            delay: 0,
+            ease: Power3.easeInOut,
+            opacity: newMinOpacity,
+            css: {fill: 'red'},
+        });
+        console.log(newMin);
+
+
+    } else console.log('error: minutes can be [0..60]');
 }
 
 function setMinute(min, lazy=true) {
-
-    // usare la parte intera per trovare l'indicatore giusto e la parte decimale per la trasparenza!
-
     if(min < 61) {
         // var minOpacity = lazy ? minutesStateLazy : minutesState;
         // console.log('lazy = ', lazy, '\nopacity levels:', minOpacity);
 
-        // every minute is about 0.2, toFixed gives 1 decimal digits prec.
-        var newMinIndex = ((min / 5) % 12).toFixed(1),
+        // a minute is about 0.2, toFixed gives 1 dec digit,tmp to string,separate dec from floor
+        var tmp = ((min / 5) % 12).toFixed(1).toString().split('.'),
         
-        // convert to string and separate decimal from floor
-        newMin = newMinIndex.toString().split('.');
-        newMin[1] /= 2;
+        // to int and normalize newMin[1] for index opacity ranges [0..3] levels
+        newMin = {'value' : min};
+        newMin['indicator_index'] = parseInt(tmp[0]);
+        newMin['opacity_index'] = tmp[1] / 2;
+        config['minute'] = newMin;
 
-        // uses the floor of newMin to get the indicator from the list
-        newMinIndicator = minutes[newMin[0]];
+        TweenMax.to(minutes[newMin['indicator_index']], 1000, {
+            delay: 0,
+            ease: Power3.easeInOut,
+            opacity: minutesState[newMin['opacity_index']],
+            css: {
+                fill: 'white',
+                // opacity: newMin['opacity_index']+'%'
+            },
+        });
 
         console.log(newMin);
         
-        // select the min opacity from the corresponding list
-        // if(lazy) {
-        //     var i = Math.floor(newMin[1] / 2); 
-        //     newMinOpacity = minutesStateLazy[i % 2]
-        //     console.log(i);
-        // }
-        // else {
-        //     var i = newMin[1] / 3; 
-        //     newMinOpacity = minutesState[i % 3];
-        // }
-
-        // console.log(newMin[0], newMin[1]);
-        // console.log(newMinOpacity);
-
-        // console.log(newMinDec, newMinInt, newMinIndex);
-
-        // minAng.forEach(element => {
-        //     pos = minAng.indexOf(element);
-        //     setTimeout(() => {
-        //         if (min == 0) {
-
-        //         } else if(min == 1) {
-
-        //         } else if(min == 2) {
-
-        //         } else if(min == 3) {
-
-        //         } else if(min == 4) {
-                    
-        //         };
-        //     }, 60000);        
-        // });
     }
     else console.log('error: minutes can be [0..60]');
+}
+
+function updateCloch(hour, minute) {
+    sunMoon[0].animate({
+        'opacity': '320'
+    }, {
+        step: function (now, fx) {
+            $(this).css({
+                "transform": "translate(0px, " + now + "px, 0px)"
+            });
+        },
+        duration: 10000,
+        easing: 'linear',
+        queue: false,
+        complete: function () {
+            alert('Animation is done');
+        }
+    }, 'linear');
 }
 
 // function toggle_colorpicker() {
@@ -157,7 +173,8 @@ window.onload = function () {
         // [1,2]: [A=90, M=30],
         // [3,4]: [A=30, M=90],
         // [5]: M=90, 
-    minutesStateLazy = new Array(90,30,0);
+    // minutesStateLazy = new Array(90,30,0);
+    minutesStateLazy = new Array(.9,.3,0);
     
     // Minutes opacity values 
        // es 5min, 2 'triangles' indicators (angle and middle) with 3 states 
@@ -167,7 +184,8 @@ window.onload = function () {
        // [3]: [A=70, M=30],
        // [4]: [A=30, M=70],
        // [5]: M=100,
-    minutesState = new Array(100,70,30,0);
+    // minutesState = new Array(100,70,30,0);
+    minutesState = new Array(1,.7,.3,0);
 
     config = getUrlVars();
     
@@ -185,15 +203,20 @@ window.onload = function () {
         config['color'] = '#aaa';
     changeColor(config['color'],0);
 
+    date = new Date();
+    config['hour'] = {'value': date.getHours()};
+    config['minute'] = {'value': date.getMinutes()};
+    // setHour(config['currHour'], 'fade');
+    
     setTimeout(function () {
         date = new Date();
-        setHour(date.getHours(), 'fade');
-        console.log('auto ora', date.getHours());
+        setHour(date.getHours());
+        setMinute(date.getMinutes());
+        console.log('AUTO cloch configuration: ', config);
     }, 1000);
     
-    date = new Date();
-    config['actHour'] = date.getHours();
-    // setHour(config['actHour'], 'fade');
+
+
 
     ////////// TO - DO //////////////////
     // divisione 10 minuti: (4) -> 2.5m ma con due semitrasp (6) -> 1.6m 
@@ -209,15 +232,15 @@ window.onload = function () {
     // far partire l'indicatore da trasparente (cosi non vedi che si aggiorna )
     // CREARE DIZIONARIO DI OPZIONI STANDARD COSI DA NON RIPETERLE TUTTE CAZZO
 
-    
+
 
     $('#prova').bind({
         click: function () {
             /// non funziona ma stic..
-            console.log(config['hourXY'],hoursXY.indexOf(config['actHour']), config['hourXY']);
-            ca = hoursXY.indexOf(config['hourXY']) + 1 % 6;
+            console.log(config['hour'],hoursXY.indexOf(config['currHour']), config['hour']);
+            ca = hoursXY.indexOf(config['hour']) + 1 % 6;
             setHour(ca, 'fade');
-            console.log(ca, hoursXY.indexOf(config['hourXY']));
+            console.log(ca, hoursXY.indexOf(config['hour']));
         },
     //     mouseover: function () {
     //         $("body").css("background-color", "#E9E9E4");
@@ -229,12 +252,28 @@ window.onload = function () {
     
     $('#provaa').bind({
         click: function () {
-            ca = hoursXY.indexOf(config['hourXY']) + 1 % 6;
+            ca = hours.indexOf(config['hour']) + 1 % 6;
             setHour(ca,'move');
         },
     });
     
-    $('#prova0').bind({click: function () {setHour(0, 'fade');}});
+    $('#prova0').bind({click: function () {
+        
+        TweenMax.to(minutes[0], 1000, {
+            delay: 0,
+            ease: Power3.easeInOut,
+            opacity: minutesState[2],
+            css: {
+                fill: 'white',
+                // opacity: newMin['opacity_index']+'%'
+            },
+        });
+        
+        // setMinute(20);
+        }
+    });
+    
+    // $('#prova0').bind({click: function () {setHour(0, 'fade');}});
     $('#prova1').bind({click: function () {setHour(1, 'fade');}});
     $('#prova2').bind({click: function () {setHour(2, 'fade');}});
     $('#prova3').bind({click: function () {setHour(3, 'fade');}});
@@ -248,25 +287,7 @@ window.onload = function () {
     $('#prova4a').bind({click: function () {setHour(4, 'move');}});
     $('#prova5a').bind({click: function () {setHour(5, 'move');}});
 
-
-    function updateCloch(hour, minute) {
-        sunMoon[0].animate({
-            'opacity': '320'
-            }, {
-                step: function (now, fx) {
-                    $(this).css({
-                        "transform": "translate(0px, " + now + "px, 0px)"
-                    });
-                },
-                duration: 10000,
-                easing: 'linear',
-                queue: false,
-                complete: function () {
-                    alert('Animation is done');
-                }
-            }, 'linear');
-    }
-
+    
 }
 
 
