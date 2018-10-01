@@ -105,11 +105,11 @@ function setMinute(min, lazy=true) {
         //     'fill': 'rgba(255,255,255,' + minutesState[newMin['opacity_index']] + ')',
         // })
         
-        TweenMax.to(minutes[newMin['indicator_index']], 1, {
         //     delay: 0,
         //     ease: Power3.easeInOut,
-            fill: 'rgba(255,255,255,' + minutesState[newMin['opacity_index']] + ')',
-        });
+        TweenMax.fromTo(minutes[newMin['indicator_index']], 1, 
+        {fill: 'rgba(255,255,255,0)'},
+        {fill: 'rgba(255,255,255,' + minutesState[newMin['opacity_index']] + ')'});
 
         console.log(newMin);
         
