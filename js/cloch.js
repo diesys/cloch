@@ -100,16 +100,24 @@ function setMinute(min, lazy=true) {
         newMin['indicator_index'] = parseInt(tmp[0]);
         newMin['opacity_index'] = tmp[1] / 2;
         config['minute'] = newMin;
-
-        // minutes[newMin['indicator_index']].css({
-        //     'fill': 'rgba(255,255,255,' + minutesState[newMin['opacity_index']] + ')',
-        // })
         
         //     delay: 0,
         //     ease: Power3.easeInOut,
         TweenMax.fromTo(minutes[newMin['indicator_index']], 1, 
-        {fill: 'rgba(255,255,255,0)'},
-        {fill: 'rgba(255,255,255,' + minutesState[newMin['opacity_index']] + ')'});
+        {fill: 'rgba(255,255,255,0)',
+            // strokeWidth: "0px",
+        },
+        {
+            fill: 'rgba(255,255,255,' + minutesState[newMin['opacity_index']] + ')',
+            // strokeWidth: ".5px",
+            // stroke: "rgba(255,255,255,.1)",
+        });
+
+
+        // remove bg from other indicators
+        for(i=0; i<12; i++)
+            if(i != newMin['indicator_index'])
+                minutes[i].css({'fill': ''})
 
         console.log(newMin);
         
@@ -248,25 +256,7 @@ window.onload = function () {
         },
     });
     
-    $('#prova0').bind({click: function () {
-        // minutes[0].css({
-        //     // 'opacity': ,
-        //     'fill': 'rgba(255,255,255,' + minutesState[2] + ')',
-        // })
-
-         TweenMax.to(minutes[0], 1, {
-             css: {
-                 fill: 'white',
-             },
-            //  fill: 'rgba(255,255,255,' + minutesState[newMin['opacity_index']] + ')',
-         });
-
-        
-        // setMinute(20);
-        }
-    });
-    
-    // $('#prova0').bind({click: function () {setHour(0, 'fade');}});
+    $('#prova0').bind({click: function () {setHour(0, 'fade');}});
     $('#prova1').bind({click: function () {setHour(1, 'fade');}});
     $('#prova2').bind({click: function () {setHour(2, 'fade');}});
     $('#prova3').bind({click: function () {setHour(3, 'fade');}});
@@ -279,6 +269,19 @@ window.onload = function () {
     $('#prova3a').bind({click: function () {setHour(3, 'move');}});
     $('#prova4a').bind({click: function () {setHour(4, 'move');}});
     $('#prova5a').bind({click: function () {setHour(5, 'move');}});
+  
+    $('#provaM0').bind({click: function () {setMinute(0, 'move');}});
+    $('#provaM05').bind({click: function () {setMinute(5, 'move');}});
+    $('#provaM1').bind({click: function () {setMinute(10, 'move');}});
+    $('#provaM15').bind({click: function () {setMinute(15, 'move');}});
+    $('#provaM2').bind({click: function () {setMinute(20, 'move');}});
+    $('#provaM25').bind({click: function () {setMinute(25, 'move');}});
+    $('#provaM3').bind({click: function () {setMinute(30, 'move');}});
+    $('#provaM35').bind({click: function () {setMinute(35, 'move');}});
+    $('#provaM4').bind({click: function () {setMinute(40, 'move');}});
+    $('#provaM45').bind({click: function () {setMinute(45, 'move');}});
+    $('#provaM5').bind({click: function () {setMinute(50, 'move');}});
+    $('#provaM55').bind({click: function () {setMinute(55, 'move');}});
 
     
 }
