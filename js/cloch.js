@@ -101,14 +101,14 @@ function setMinute(min, lazy=true) {
         newMin['opacity_index'] = tmp[1] / 2;
         config['minute'] = newMin;
 
-        TweenMax.to(minutes[newMin['indicator_index']], 1000, {
-            delay: 0,
-            ease: Power3.easeInOut,
-            opacity: minutesState[newMin['opacity_index']],
-            css: {
-                fill: 'white',
-                // opacity: newMin['opacity_index']+'%'
-            },
+        // minutes[newMin['indicator_index']].css({
+        //     'fill': 'rgba(255,255,255,' + minutesState[newMin['opacity_index']] + ')',
+        // })
+        
+        TweenMax.to(minutes[newMin['indicator_index']], 1, {
+        //     delay: 0,
+        //     ease: Power3.easeInOut,
+            fill: 'rgba(255,255,255,' + minutesState[newMin['opacity_index']] + ')',
         });
 
         console.log(newMin);
@@ -236,38 +236,31 @@ window.onload = function () {
 
     $('#prova').bind({
         click: function () {
-            /// non funziona ma stic..
-            console.log(config['hour'],hoursXY.indexOf(config['currHour']), config['hour']);
-            ca = hoursXY.indexOf(config['hour']) + 1 % 6;
-            setHour(ca, 'fade');
-            console.log(ca, hoursXY.indexOf(config['hour']));
+            console.log(config['hour'], config['minute']);
+            setHour(config['hour']['value'] + 1, 'fade');
         },
-    //     mouseover: function () {
-    //         $("body").css("background-color", "#E9E9E4");
-    //     },
-    //     mouseout: function () {
-    //         $("body").css("background-color", "#FFFFFF");
-    //     }
     });
-    
+
     $('#provaa').bind({
         click: function () {
-            ca = hours.indexOf(config['hour']) + 1 % 6;
-            setHour(ca,'move');
+            console.log(config['hour'], config['minute']);
+            ca = hours.indexOf(config['hour']['value']) + 1 % 6;
         },
     });
     
     $('#prova0').bind({click: function () {
-        
-        TweenMax.to(minutes[0], 1000, {
-            delay: 0,
-            ease: Power3.easeInOut,
-            opacity: minutesState[2],
-            css: {
-                fill: 'white',
-                // opacity: newMin['opacity_index']+'%'
-            },
-        });
+        // minutes[0].css({
+        //     // 'opacity': ,
+        //     'fill': 'rgba(255,255,255,' + minutesState[2] + ')',
+        // })
+
+         TweenMax.to(minutes[0], 1, {
+             css: {
+                 fill: 'white',
+             },
+            //  fill: 'rgba(255,255,255,' + minutesState[newMin['opacity_index']] + ')',
+         });
+
         
         // setMinute(20);
         }
