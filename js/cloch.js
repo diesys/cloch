@@ -81,88 +81,76 @@ function setHour(new_hour, style='fade') {
     config['hour'] = hour;
 }
 
-function setMinute1(min, lazy = true) {
-    if (min < 61) {
-            // every minute is about 0.2, toFixed 1 decimal digits
-        var newMinIndex = ((min / 5) % 12).toFixed(1),
-            duration = 500;
+function setMinute(min, lazy = true) {
+    if (min < 60) {
+        // var minOpacity = lazy ? minutesStateLazy : minutesState;
+        // console.log('lazy = ', lazy, '\nopacity levels:', minOpacity);
 
-            //  separate floor (indicator pos.) from decimal (opacity lev.)
-            newMin = newMinIndex.toString().split('.');
-            newMinIndicator = minutes[newMin[0]];
-            newMinOpacity = minutesStateLazy[newMin[1]];
-        
-        TweenMax.to(newMinIndicator, duration, {
-            delay: 0,
-            ease: Power3.easeInOut,
-            opacity: newMinOpacity,
-            css: {fill: 'red'},
-        });
-        console.log(newMin);
-
-
-    } else console.log('error: minutes can be [0..60]');
-}
-
-function setMinute(min, lazy=true) {
-    if(min < 61) {
         // a minute is about 0.2, toFixed gives 1 dec digit,tmp to string,separate dec from floor
         var tmp = ((min / 5) % 12).toFixed(1).toString().split('.'),
+
+            // to int and normalize newMin[1] for index opacity ranges [0..3] levels
+            newMin = {'value': min};
+            newMin['indicator_index'] = parseInt(tmp[0]);
+            newMin['opacity_index'] = tmp[1] / 2;
+            // console.log('minopacity:', newMin['opacity_index']);
+            config['minute'] = newMin;
         
-        // to int and normalize newMin[1] for index opacity ranges [0..3] levels
-        newMin = {'value' : min};
-        newMin['indicator_index'] = parseInt(tmp[0]);
-        newMin['opacity_index'] = tmp[1] / 2;
-        // console.log('minopacity:', newMin['opacity_index']);
-        config['minute'] = newMin;
-  
+        if (min == 0)
+            var prec = minutes[11];
+        else
+            var prec = minutes[(newMin['indicator_index'] - 1) % 12];
+
+        var first = minutes[newMin['indicator_index'] % 12],
+            second = minutes[(newMin['indicator_index'] + 1) % 12];
+
         // starts animation with fade-in consistent opacity level and leaves the indicator near the full opacity one in exact 10n and idle when in middle position(5n min)
 
-        var fill_newFirst = 'rgba(255,255,255,' + minutesState['first_start'][newMin['opacity_index']] + ')',
-            fill_newSecond = 'rgba(255,255,255,' + minutesState['second_start'][newMin['opacity_index']] + ')';
-
         if (newMin['value'] % 10 == 0) {
-            TweenMax.to(minutes[newMin['indicator_index'] - 1], 7 * durationFade, {
+            TweenMax.to(prec, 7 * durationFade, {
                 fill: 'rgba(255,255,255,0)',
             });
-            TweenMax.to(minutes[newMin['indicator_index'] + 1], 7 * durationFade, {
-                fill: 'rgba(0,0,0,.1)',
+            TweenMax.to(second, 7 * durationFade, {
+                fill: 'rgba(255,255,255,0)',
             });
             console.log('mod 10');
         } else if (newMin['value'] % 5 == 0 && newMin['value'] % 10 != 0) {
-            TweenMax.to(minutes[newMin['indicator_index'] - 1], 7 * durationFade, {
+            TweenMax.to(prec, 7 * durationFade, {
                 fill: 'rgba(0,0,0,.1)',
             });
-            TweenMax.to(minutes[newMin['indicator_index'] + 1], 7 * durationFade, {
-                fill: 'rgba(0,0,0,1)',
+            TweenMax.to(second, 7 * durationFade, {
+                fill: 'rgba(0,0,0,.1)',
             });
-            console.log('mod 5');
+            console.log('mod 5', second);
+        } else {
+            TweenMax.from(second, 7 * durationFade, {
+                fill: 'rgba(255,255,255,' + minutesState['second_start'][newMin['opacity_index']] + ')',
+            });
+            TweenMax.to(second, 7 * durationFade,{
+                fill: 'rgba(255,255,255,' + minutesState['second'][newMin['opacity_index']] + ')',
+                delay: 2 * durationFade,
+            });
         }
 
-        TweenMax.from(minutes[newMin['indicator_index']], 7 * durationFade, {
-            fill: fill_newFirst,
+        TweenMax.from(first, 7 * durationFade, {
+            fill: 'rgba(255,255,255,' + minutesState['first_start'][newMin['opacity_index']] + ')',
         });
-        TweenMax.from(minutes[(newMin['indicator_index'] + 1) % 12], 7 * durationFade, {
-            fill: fill_newSecond,
-        });
-        TweenMax.to(minutes[newMin['indicator_index']], 7 * durationFade, {
+        TweenMax.to(first, 7 * durationFade,{
             fill: 'rgba(255,255,255,' + minutesState['first'][newMin['opacity_index']] + ')',
-            delay: 2 * durationFade,
+            delay: 2 * durationFade,    
         });
-        TweenMax.to(minutes[(newMin['indicator_index'] + 1) % 12], 7 * durationFade, {
-            fill: 'rgba(255,255,255,' + minutesState['second'][newMin['opacity_index']] + ')',
-            delay: 2 * durationFade,
-        });
+
 
         // remove bg from other indicators
-        for(i=0; i<12; i++)
-            if(i != newMin['indicator_index'])
-                minutes[i].css({'fill': ''});
+        for (i = 0; i < 12; i++)
+            if (i != newMin['indicator_index'])
+                minutes[i].css({
+                    'fill': ''
+                });
 
         // console.log(newMin);
-        
-    }
-    else console.log('error: minutes can be [0..60]');
+
+    } else console.log('error: minutes can be [0..60]');
 }
 
 function updateCloch(hour, minute) {
@@ -259,28 +247,28 @@ window.onload = function () {
         date = new Date();
         setHour(date.getHours());
         setMinute(date.getMinutes());
-        console.log('first AUTO cloch configuration: ', config);
-        console.log('seconds2:', 60 - date.getSeconds());
+        // console.log('first AUTO cloch configuration: ', config);
+        // console.log('seconds2:', 60 - date.getSeconds());
     }, 0);
     
     setInterval(function () {
         date = new Date();
         h = date.getHours();
-        // m = date.getMinutes();
-        // m = date.getSeconds();
+        m = date.getMinutes();
+       // m = date.getSeconds();
         if (h != config['hour']['value'])
             setHour(h);
         if (m != config['minute']['value'])
             setMinute(m);
         
-        console.log('AUTO cloch configuration: ', config, 'seconds:', first_minute ? ((60 - date.getSeconds()) * 1000) : 60000);
+        // console.log('AUTO cloch configuration: ', config, 'seconds:', first_minute ? ((60 - date.getSeconds()) * 1000) : 60000);
     // }, 1000); //troppo poco??
-    }, 500); //troppo poco??
+    }, 1000);//500); //troppo poco??
     
     // }, first_minute ? ((60 - date.getSeconds()) * 1000) : 60000); // millisecondi sono i rimanenti rispetto al secondo attuale?
-    console.log('B', first_minute);
+    // console.log('B', first_minute);
     first_minute = false;
-    console.log('A', first_minute);
+    // console.log('A', first_minute);
 
     
 
@@ -309,7 +297,7 @@ window.onload = function () {
 
     $('#provaM').bind({
         click: function () {
-            console.log(config['hour'], config['minute']);
+            // console.log(config['hour'], config['minute']);
             setMinute((config['minute']['value'] + 1)%60);
         },
     });
@@ -320,7 +308,7 @@ window.onload = function () {
     //         ca = hours.indexOf(config['hour']['value']) + 1 % 6;
     //     },
     // });
-
+    
     // $('#prova2').bind({
     //     click: function () {
     //         console.log(config['hour'], config['minute']);
