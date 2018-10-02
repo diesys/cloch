@@ -121,3 +121,9 @@ fieldset {
   color: #fff;
   text-align: center;
 }
+#control_buttons {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 10px;
+}

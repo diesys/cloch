@@ -354,7 +354,7 @@ window.onload = function () {
             date = new Date();
             h = date.getHours();
             m = date.getMinutes();
-            //m = date.getSeconds();
+            // m = date.getSeconds();
             if (h != config['hour']['value'])
                 setHour(h);
             if (m != config['minute']['value'])
@@ -402,7 +402,6 @@ window.onload = function () {
                 setMinute(data.item.value)
             }
         });
-        stopCloch = true;
     });
 
 
@@ -418,6 +417,22 @@ window.onload = function () {
             // console.log(config['hour'], config['minute']);
             setMinute((config['minute']['value'] + 1)%60);
         },
+    });
+
+    $("#toggle_manual").click(function () {
+        $("fieldset").slideToggle();
+    }); $("fieldset").slideToggle();
+    
+    $("#startstop_cloch").click(function () {
+        if(stopCloch) {
+            var str = 'Stop';
+            stopCloch = false;
+        }
+        else {
+            var str = 'Start';
+            stopCloch = true;
+        }
+        $(this).html(str);
     });
     
     // $('#provaa').bind({
