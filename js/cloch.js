@@ -314,13 +314,13 @@ window.onload = function () {
         },
     });
     
-    $('#provaa').bind({
-        click: function () {
-            console.log(config['hour'], config['minute']);
-            ca = hours.indexOf(config['hour']['value']) + 1 % 6;
-        },
-    });
-    
+    // $('#provaa').bind({
+    //     click: function () {
+    //         console.log(config['hour'], config['minute']);
+    //         ca = hours.indexOf(config['hour']['value']) + 1 % 6;
+    //     },
+    // });
+
     // $('#prova2').bind({
     //     click: function () {
     //         console.log(config['hour'], config['minute']);
