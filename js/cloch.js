@@ -121,11 +121,35 @@ function setMinute(min, lazy=true) {
         
         //     delay: 0,
         //     ease: Power3.easeInOut,
+
+        // starts animation with fade-in consistent opacity level and leaves the indicator near the full opacity one in exact 10n and idle when in middle position(5n min)
+
+        var fill_newFirst = 'rgba(255,255,255,' + minutesState['first_start'][newMin['opacity_index']] + ')',
+            fill_newSecond = 'rgba(255,255,255,' + minutesState['second_start'][newMin['opacity_index']] + ')';
+
+        if (newMin['value'] % 10 == 0) {
+            TweenMax.to(minutes[newMin['indicator_index'] - 1], 7 * durationFade, {
+                fill: 'rgba(255,255,255,0)',
+            });
+            TweenMax.to(minutes[newMin['indicator_index'] + 1], 7 * durationFade, {
+                fill: 'rgba(0,0,0,.1)',
+            });
+            console.log('mod 10');
+        } else if (newMin['value'] % 5 == 0 && newMin['value'] % 10 != 0) {
+            TweenMax.to(minutes[newMin['indicator_index'] - 1], 7 * durationFade, {
+                fill: 'rgba(0,0,0,.1)',
+            });
+            TweenMax.to(minutes[newMin['indicator_index'] + 1], 7 * durationFade, {
+                fill: 'rgba(0,0,0,1)',
+            });
+            console.log('mod 5');
+        }
+
         TweenMax.from(minutes[newMin['indicator_index']], 7 * durationFade, {
-            fill: 'rgba(255,255,255,0)',
+            fill: fill_newFirst,
         });
         TweenMax.from(minutes[(newMin['indicator_index'] + 1) % 12], 7 * durationFade, {
-            fill: 'rgba(255,255,255,0)',
+            fill: fill_newSecond,
         });
         TweenMax.to(minutes[newMin['indicator_index']], 7 * durationFade, 
         // {
@@ -137,7 +161,7 @@ function setMinute(min, lazy=true) {
         {
             fill: 'rgba(255,255,255,' + minutesState['first'][newMin['opacity_index']] + ')',
             delay: 2 * durationFade,
-            ease: Bounce.easeOut,
+            // ease: Power2.easeOut,
             // strokeWidth: ".5px",
             // stroke: "rgba(255,255,255,.1)",
         });
@@ -151,7 +175,7 @@ function setMinute(min, lazy=true) {
         {
             fill: 'rgba(255,255,255,' + minutesState['second'][newMin['opacity_index']] + ')',
             delay: 2 * durationFade,
-            ease: Bounce.easeOut,
+            // ease: Power2.easeOut,
             // strokeWidth: ".5px",
             // stroke: "rgba(255,255,255,.1)",
         });
@@ -160,7 +184,7 @@ function setMinute(min, lazy=true) {
         // remove bg from other indicators
         for(i=0; i<12; i++)
             if(i != newMin['indicator_index'])
-                minutes[i].css({'fill': ''})
+                minutes[i].css({'fill': ''});
 
         // console.log(newMin);
         
@@ -234,7 +258,13 @@ window.onload = function () {
        // [3]: [A=40, M=70],
        // [4]: [A=40, M=100],
        // restart [5]: M=100, ...
-    minutesState = {'first': [1,1,.7,.4,.4], 'second': [0,.4,.4,.7,1]};
+    minutesState = {
+        'first': [1,1,.7,.4,.4], 
+        'second': [.1,.4,.4,.7,1],
+        // used for animation transition between minutes
+        'first_start': [1,1,1,.7,.4], 
+        'second_start': [0,0,.4,.4,.7]
+    };
     
     // general duration fade used for relative timing and delay
     durationFade = .1
@@ -249,6 +279,7 @@ window.onload = function () {
         x:-33.8, y:20,
         transformOrigin: "-33px 20px",
     });
+
 
     // prevent bad animation load page background color
     // TweenMax.set(cloch, {opacity:0,});   
@@ -278,11 +309,19 @@ window.onload = function () {
     
     setInterval(function () {
         date = new Date();
-        if (date.getHours() != config['hour']['value'])
+        h = date.getHours();
+        // m = date.getMinutes();
+        // m = date.getSeconds();
+        if (h != config['hour']['value'])
             setHour(h);
-        setMinute(date.getMinutes());
+        if (m != config['minute']['value'])
+            setMinute(m);
+        
         console.log('AUTO cloch configuration: ', config, 'seconds:', first_minute ? ((60 - date.getSeconds()) * 1000) : 60000);
-    }, first_minute ? ((60 - date.getSeconds()) * 1000) : 60000); // millisecondi sono i rimanenti rispetto al secondo attuale?
+    // }, 1000); //troppo poco??
+    }, 500); //troppo poco??
+    
+    // }, first_minute ? ((60 - date.getSeconds()) * 1000) : 60000); // millisecondi sono i rimanenti rispetto al secondo attuale?
     console.log('B', first_minute);
     first_minute = false;
     console.log('A', first_minute);
@@ -361,89 +400,3 @@ window.onload = function () {
 
     
 }
-
-
-
-
-
-
-
-    /////// ANIMATIONS ///////
-  
-    // MAYBE ANOTHER JS FOR ANIMATIONS??
-
-    //// BOX
-    // var clochCenter = TweenMax.set(cloch, {
-    //     x: 450,
-    //     y: 150,
-    // });
-
-
-    // var quadrantFall = TweenMax.from(quadrant, .5, {
-    //     delay: .5,
-    //     yPercent: -20,
-    //     scale: .8,
-    //     opacity: 0,
-    //     ease: 'Power3.easeOut',
-    //     transformOrigin: "50% 50%",
-    // });
- 
-    // // BOX
-    // var boxFall = TweenMax.from(box, .5, {
-    //     delay: 1,
-    //     yPercent: -300,
-    //     scale: .5,
-    //     opacity: 0,
-    //     ease: 'Bounce.easeOut',
-    //     transformOrigin: "50% 50%",
-    // });
-
-    // //// LETTERS
-    // // stripes
-    // var stripesLetterMask_rise = TweenMax.from(stripe_letter_mask, 4, {
-    //     delay: 1,
-    //     yPercent: 150,
-    //     ease: Power4.easeOut,
-    //     transformOrigin: "50% 50%",
-    // });
-
-
-    // // logos
-    // var logosAppearing = TweenMax.staggerFrom(logos, 1, {
-    //     delay: 3.5,
-    //     scale: 0,
-    //     ease: Elastic.easeOut,
-    //     transformOrigin: "50% 50%",
-    // }, .2);
-
-    // // FRAME
-    // var circleFrame = TweenMax.from(circle_frame, 1.5, {
-    //     delay: 7,
-    //     scale: .8,
-    //     ease: Elastic.easeOut,
-    //     transformOrigin: "50% 50%",
-    // });
-
-    // var circleFrame = TweenMax.to(circle_frame, 2.4, {
-    //     delay: 7,
-    //     opacity: 1,
-    // });
-
-    // // AFTER
-    // var wobblyLetters = TweenMax.staggerTo(letters, .7, {
-    //     delay: 4.5,
-    //     rotation: 2.5,
-    //     yPercent: -5,
-    //     repeat: 3,
-    //     ease: SlowMo.easeOut,
-    //     yoyo: true,
-    //     transformOrigin: "50% 50%",
-    // }, .25);
-
-    // var smoothscrollAnim = TweenMax.to(smoothscroll, .5, {
-    //     delay: 6,
-    //     opacity: 1,
-    //     transformOrigin: "50% 50%",
-    // });
-
-// })
