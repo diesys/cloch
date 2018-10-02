@@ -81,7 +81,7 @@ function setHour(new_hour, style='fade') {
     config['hour'] = hour;
 }
 
-function setMinute(min, lazy = true) {
+function setMinute2(min, lazy = true) {
     if (min < 60) {
         // var minOpacity = lazy ? minutesStateLazy : minutesState;
         // console.log('lazy = ', lazy, '\nopacity levels:', minOpacity);
@@ -121,8 +121,11 @@ function setMinute(min, lazy = true) {
             TweenMax.to(second, 7 * durationFade, {
                 fill: 'rgba(0,0,0,.1)',
             });
-            console.log('mod 5', second);
+            console.log('mod 5');
         } else {
+            // TweenMax.from(prec, 7 * durationFade, {
+            //     fill: 'rgba(255,255,255,' + minutesState['first_start'][newMin['opacity_index']] + ')',
+            // });
             TweenMax.from(second, 7 * durationFade, {
                 fill: 'rgba(255,255,255,' + minutesState['second_start'][newMin['opacity_index']] + ')',
             });
@@ -139,19 +142,111 @@ function setMinute(min, lazy = true) {
             fill: 'rgba(255,255,255,' + minutesState['first'][newMin['opacity_index']] + ')',
             delay: 2 * durationFade,    
         });
-
-
+        
+        
         // remove bg from other indicators
         for (i = 0; i < 12; i++)
-            if (i != newMin['indicator_index'])
-                minutes[i].css({
-                    'fill': ''
+        if (i != newMin['indicator_index'])
+            if(i % 2 == 0) {
+                TweenMax.to(minutes[i], 10 * durationFade,{
+                    fill: 'rgba(0,0,0,.1)',
+                    delay: 0,
                 });
+            }
+            else {
+                TweenMax.to(minutes[i], 10 * durationFade,{
+                    delay: 0,
+                    fill: 'rgba(0,0,0,.05)',
+                });
+            }
+        // minutes[i].css({
+                //     'fill': 'red'
+                // });
+                
 
         // console.log(newMin);
 
     } else console.log('error: minutes can be [0..60]');
 }
+
+
+function setMinute(min, lazy = true) {
+    // sembra che sia trasparente il successivo(second) al primo passo del nuovo first DA RIVEDERE
+
+    if (min < 60) {
+        // var minOpacity = lazy ? minutesStateLazy : minutesState;
+        // console.log('lazy = ', lazy, '\nopacity levels:', minOpacity);
+
+        // a minute is about 0.2, toFixed gives 1 dec digit,tmp to string,separate dec from floor
+        var tmp = ((min / 5) % 12).toFixed(1).toString().split('.'),
+
+            // to int and normalize newMin[1] for index opacity ranges [0..3] levels
+            newMin = {
+                'value': min,
+                'indicator_index': parseInt(tmp[0]),
+                'opacity_index': tmp[1] / 2
+            };
+        
+        config['minute'] = newMin;
+
+        if (min == 0)
+            var prec = minutes[11];
+        else
+            var prec = minutes[(newMin['indicator_index'] - 1) % 12];
+
+        var first = minutes[newMin['indicator_index'] % 12],
+            second = minutes[(newMin['indicator_index'] + 1) % 12];
+
+        TweenMax.set(first, {
+            fill: 'blue',
+        });
+        TweenMax.set(second, {
+            fill: 'blue',
+        });
+        
+        TweenMax.fromTo(first, 7 * durationFade, {
+                fill: 'rgba(255,255,255,' + minutesState['first_start'][newMin['opacity_index']] + ')',
+                delay: 2 * durationFade,
+            },{
+                fill: 'rgba(255,255,255,' + minutesState['first'][newMin['opacity_index']] + ')',
+                delay: 2 * durationFade,
+            });
+            TweenMax.fromTo(second, 7 * durationFade, {
+                fill: 'rgba(255,255,255,' + minutesState['second_start'][newMin['opacity_index']] + ')',
+                delay: 2 * durationFade,
+            }, {
+                fill: 'rgba(255,255,255,' + minutesState['second'][newMin['opacity_index']] + ')',
+                delay: 2 * durationFade,
+        });
+        
+
+
+        // remove bg from other indicators
+        for (i = 0; i < 12; i++)
+            if (i != newMin['indicator_index'])
+                if (i % 2 == 0) {
+                    TweenMax.to(minutes[i], 10 * durationFade, {
+                        fill: 'rgba(0,0,0,.1)',
+                        delay: 0,
+                    });
+                }
+        else {
+            TweenMax.to(minutes[i], 10 * durationFade, {
+                delay: 0,
+                fill: 'rgba(0,0,0,.05)',
+            });
+        }
+        // minutes[i].css({
+        //     'fill': 'red'
+        // });
+
+
+        // console.log(newMin);
+
+    } else console.log('error: minutes can be [0..60]');
+}
+
+
 
 function updateCloch(hour, minute) {
     sunMoon[0].animate({
@@ -219,7 +314,10 @@ window.onload = function () {
     };
     
     // general duration fade used for relative timing and delay
-    durationFade = .1
+    durationFade = .1,
+    
+    // global variable for start/stopping the clock for manual select
+    stopCloch = false;
 
     config = getUrlVars();
     
@@ -252,18 +350,21 @@ window.onload = function () {
     }, 0);
     
     setInterval(function () {
-        date = new Date();
-        h = date.getHours();
-        m = date.getMinutes();
-       // m = date.getSeconds();
-        if (h != config['hour']['value'])
-            setHour(h);
-        if (m != config['minute']['value'])
-            setMinute(m);
-        
-        // console.log('AUTO cloch configuration: ', config, 'seconds:', first_minute ? ((60 - date.getSeconds()) * 1000) : 60000);
-    // }, 1000); //troppo poco??
-    }, 1000);//500); //troppo poco??
+        if(!stopCloch) {
+            date = new Date();
+            h = date.getHours();
+            m = date.getMinutes();
+            //m = date.getSeconds();
+            if (h != config['hour']['value'])
+                setHour(h);
+            if (m != config['minute']['value'])
+                setMinute(m);
+            
+        }
+            // console.log('AUTO cloch configuration: ', config, 'seconds:', first_minute ? ((60 - date.getSeconds()) * 1000) : 60000);
+        // }, 1000); //troppo poco??
+        }, 500);//500); //troppo poco??
+
     
     // }, first_minute ? ((60 - date.getSeconds()) * 1000) : 60000); // millisecondi sono i rimanenti rispetto al secondo attuale?
     // console.log('B', first_minute);
@@ -286,6 +387,23 @@ window.onload = function () {
 
     // fare bottoncino show/hide delle info (da disegnare) tipo sulle ore, e sui minuti cosi da renderlo piu comprensibile all'inizio
 
+
+
+    /// SELECT MANUALLY HOUR AND MINUTE
+    $(function () {
+        $("#sel_hour").selectmenu({
+            change: function (event, data) {
+                setHour(data.item.value)
+            }
+        });
+
+        $("#sel_minute").selectmenu({
+            change: function (event, data) {
+                setMinute(data.item.value)
+            }
+        });
+        stopCloch = true;
+    });
 
 
     $('#prova').bind({

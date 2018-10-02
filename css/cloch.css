@@ -116,6 +116,8 @@ button {
   min-height: 0px;
 }
 
-#quadranthx_container > p {
-
+fieldset {
+  border: none;
+  color: #fff;
+  text-align: center;
 }
