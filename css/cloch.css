@@ -109,8 +109,13 @@ svg#cloch:active {
 }
 
 button {
-  padding: 10px 8px;
-  margin: 5px;
+  padding: 2px 4px;
+  margin: 0px;
   text-align: center;
-  min-width: 30px;
+  min-width: 0px;
+  min-height: 0px;
+}
+
+#quadranthx_container > p {
+
 }
