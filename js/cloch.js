@@ -25,23 +25,32 @@ function changeColor(color, duration=.5) {
 }
 
 function setHour(new_hour, style='fade') {
+    new_hour = new_hour % 24;
     var hXY = hoursXY[new_hour % 6],
         hour = {'value': new_hour, 'valueHex': new_hour % 6, 'X': hXY[0], 'Y': hXY[1]};
         transl = "translate(" + hour['X'] + 'px, ' + hour['Y'] + "px)",
         duration = 1,
         // durationFade = .1,
-        mask_opacity = 0;
+        mask_opacity = '';
 
     // 0-5 half moon, 6-11 full sun, 12-17 half sun, 18-23 full moon
-    if(new_hour > 0 && new_hour <=5)
-        mask_opacity = .65;
-    else if(new_hour > 6 && new_hour <=11)
-        opacity = 1;
-    else if(new_hour > 11 && new_hour <=17)
-        mask_opacity = .65;
-    else
+    if(new_hour >= 0 && new_hour <= 5) {
+        mask_opacity = .6;
+        console.log('1');
+        }
+    else if(new_hour >= 6 && new_hour <= 11) {
+        opacity = 0;
+        console.log('2');
+        }
+    else if(new_hour >= 12 && new_hour <= 17) {
+        mask_opacity = .4;
+        console.log('3');
+    }
+    else if(new_hour >= 18 && new_hour <=23) {
         mask_opacity = 1;
-
+        console.log('4');
+    }    
+    
     if(style == 'fade'){
         // TweenMax.set(sunMoon[2], {opacity: 0, });
         TweenMax.to(sunMoon[0], 2 * durationFade, {
@@ -58,10 +67,10 @@ function setHour(new_hour, style='fade') {
             delay: 4 * durationFade,
             ease: Bounce.easeOut,
         });
-        TweenMax.to(sunMoon[2], 4 * durationFade, {
-            delay: 4 * durationFade,
+        TweenMax.to(sunMoon[2], 40 * durationFade, {
+            delay: 0,
             opacity: mask_opacity,
-            ease: Bounce.easeOut,
+            ease: Power2.easeOut,
         });
     } else 
         if(style == 'move') {
@@ -172,14 +181,14 @@ function updateCloch(hour, minute) {
 
 window.onload = function () {
     cloch = $('#cloch'),
+    // shows the cloch
+    cloch.css({'opacity': '1'});
+    
     quadrant = $('#quadranthx'),
     background = $('#backgroundhx'),
-    // MINUTES ANGLE: IN POSITIONS H%6 = 0, like - if they were extact - 0, 10, 20, 30, 50, 60m in clockwise order
-    minAng = [$('#minAng_top'), $('#minAng_topR'), $('#minAng_bottomR'), $('#minAng_bottom'), $('#minAng_bottomL'), $('#minAng_topL')],
-    // // MINUTES MIDDLE: IN MIDDLE POSITIONS, like - if they were extact - 5, 15, 25, 35, 45, 55 in clockwise order
-    minMid = [$('#minMid_rightT'), $('#minMid_right'), $('#minMid_rightB'), $('#minMid_leftB'), $('#minMid_left'), $('#minMid_leftT')],
     
-    // all minutes indicator clockwise
+    // MINUTES ANGLE: 0, 10, 20, 30, 50, 60  in clockwise order
+    // MINUTES MIDDLE: 5, 15, 25, 35, 45, 55 in clockwise order
     minutes = [$('#minAng_top'), $('#minMid_rightT'), $('#minAng_topR'), $('#minMid_right'), $('#minAng_bottomR'), $('#minMid_rightB'), $('#minAng_bottom'), $('#minMid_leftB'), $('#minAng_bottomL'), $('#minMid_left'), $('#minAng_topL'), $('#minMid_leftT')],
     
     // indicator, sun and moon mask. sunMoon[2].opacity=0 -> sun; sunMoon[2].opacity=0 -> moon
@@ -220,19 +229,22 @@ window.onload = function () {
     
     // main
     
-    // sets sun in the center for initial animation
+    // sets sun in the center
     TweenMax.set(sunMoon[0], {
-        x:-33.8, y:20, opacity:0,
-        // css: { transfom: "scale(1px)"},
+        x:-33.8, y:20,
         transformOrigin: "-33px 20px",
     });
-    TweenMax.fromTo(sunMoon[0], 1,
-        {opacity:0},
-        {opacity:1, delay: 3 * durationFade},
-    );
-      
+
+    // prevent bad animation load page background color
+    // TweenMax.set(cloch, {opacity:0,});   
+    // TweenMax.to(cloch, 1 * durationFade, {
+    //         opacity:1, 
+    //         delay: 2 * durationFade,
+    //         ease: Power3.easeOut,
+    // });
+        
     if (!config['color'])
-        config['color'] = '#aaa';
+        config['color'] = '#a4a';
     changeColor(config['color'],0);
 
     date = new Date();
