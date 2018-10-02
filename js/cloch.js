@@ -36,19 +36,15 @@ function setHour(new_hour, style='fade') {
     // 0-5 half moon, 6-11 full sun, 12-17 half sun, 18-23 full moon
     if(new_hour >= 0 && new_hour <= 5) {
         mask_opacity = .6;
-        console.log('1');
         }
     else if(new_hour >= 6 && new_hour <= 11) {
         opacity = 0;
-        console.log('2');
         }
     else if(new_hour >= 12 && new_hour <= 17) {
         mask_opacity = .4;
-        console.log('3');
     }
     else if(new_hour >= 18 && new_hour <=23) {
         mask_opacity = 1;
-        console.log('4');
     }    
     
     if(style == 'fade'){
@@ -120,19 +116,40 @@ function setMinute(min, lazy=true) {
         newMin = {'value' : min};
         newMin['indicator_index'] = parseInt(tmp[0]);
         newMin['opacity_index'] = tmp[1] / 2;
+        console.log('minopacity:', newMin['opacity_index']);
         config['minute'] = newMin;
         
         //     delay: 0,
         //     ease: Power3.easeInOut,
-        TweenMax.fromTo(minutes[newMin['indicator_index']], 7 * durationFade, 
-        {
+        TweenMax.from(minutes[newMin['indicator_index']], 7 * durationFade, {
             fill: 'rgba(255,255,255,0)',
-            delay: 7 * durationFade,
-            ease: Bounce.easeOut,
-            // strokeWidth: "0px",
-        },
+        });
+        TweenMax.from(minutes[(newMin['indicator_index'] + 1) % 12], 7 * durationFade, {
+            fill: 'rgba(255,255,255,0)',
+        });
+        TweenMax.to(minutes[newMin['indicator_index']], 7 * durationFade, 
+        // {
+        //     fill: 'rgba(255,255,255,0)',
+        //     delay: 7 * durationFade,
+        //     ease: Bounce.easeOut,
+        //     // strokeWidth: "0px",
+        // },
         {
-            fill: 'rgba(255,255,255,' + minutesState[newMin['opacity_index']] + ')',
+            fill: 'rgba(255,255,255,' + minutesState['first'][newMin['opacity_index']] + ')',
+            delay: 2 * durationFade,
+            ease: Bounce.easeOut,
+            // strokeWidth: ".5px",
+            // stroke: "rgba(255,255,255,.1)",
+        });
+        TweenMax.to(minutes[(newMin['indicator_index'] + 1) % 12], 7 * durationFade, 
+        // {
+        //     fill: 'rgba(255,255,255,0)',
+        //     delay: 7 * durationFade,
+        //     ease: Bounce.easeOut,
+        //     // strokeWidth: "0px",
+        // },
+        {
+            fill: 'rgba(255,255,255,' + minutesState['second'][newMin['opacity_index']] + ')',
             delay: 2 * durationFade,
             ease: Bounce.easeOut,
             // strokeWidth: ".5px",
@@ -207,19 +224,17 @@ window.onload = function () {
         // [1,2]: [A=90, M=30],
         // [3,4]: [A=30, M=90],
         // [5]: M=90, 
-    // minutesStateLazy = new Array(90,30,0);
-    minutesStateLazy = new Array(.9,.3,0);
+    // minutesStateLazy = new Array(.9,.3,0);
     
     // Minutes opacity values 
        // es 5min, 2 'triangles' indicators (angle and middle) with 3 states 
        // [0]: A=100, 
-       // [1]: [A=100, M=30],
-       // [2]: [A=100, M=70],
-       // [3]: [A=70, M=30],
-       // [4]: [A=30, M=70],
-       // [5]: M=100,
-    // minutesState = new Array(100,70,30,0);
-    minutesState = new Array(1,.7,.3,0);
+       // [1]: [A=100, M=40],
+       // [2]: [A=70, M=40],
+       // [3]: [A=40, M=70],
+       // [4]: [A=40, M=100],
+       // restart [5]: M=100, ...
+    minutesState = {'first': [1,1,.7,.4,.4], 'second': [0,.4,.4,.7,1]};
     
     // general duration fade used for relative timing and delay
     durationFade = .1
@@ -284,6 +299,13 @@ window.onload = function () {
         click: function () {
             console.log(config['hour'], config['minute']);
             setHour(config['hour']['value'] + 1, 'fade');
+        },
+    });
+    
+    $('#provaM').bind({
+        click: function () {
+            console.log(config['hour'], config['minute']);
+            setMinute((config['minute']['value'] + 1)%60);
         },
     });
 
