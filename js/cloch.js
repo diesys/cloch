@@ -116,7 +116,7 @@ function setMinute(min, lazy=true) {
         newMin = {'value' : min};
         newMin['indicator_index'] = parseInt(tmp[0]);
         newMin['opacity_index'] = tmp[1] / 2;
-        console.log('minopacity:', newMin['opacity_index']);
+        // console.log('minopacity:', newMin['opacity_index']);
         config['minute'] = newMin;
         
         //     delay: 0,
@@ -162,7 +162,7 @@ function setMinute(min, lazy=true) {
             if(i != newMin['indicator_index'])
                 minutes[i].css({'fill': ''})
 
-        console.log(newMin);
+        // console.log(newMin);
         
     }
     else console.log('error: minutes can be [0..60]');
@@ -259,7 +259,7 @@ window.onload = function () {
     // });
         
     if (!config['color'])
-        config['color'] = '#a4a';
+        config['color'] = '#ff3c6d';
     changeColor(config['color'],0);
 
     date = new Date();
@@ -267,29 +267,39 @@ window.onload = function () {
     config['minute'] = {'value': date.getMinutes()};
     // setHour(config['currHour'], 'fade');
     
+    first_minute = true;
     setTimeout(function () {
         date = new Date();
         setHour(date.getHours());
         setMinute(date.getMinutes());
-        console.log('AUTO cloch configuration: ', config);
+        console.log('first AUTO cloch configuration: ', config);
+        console.log('seconds2:', 60 - date.getSeconds());
     }, 0);
+    
+    setInterval(function () {
+        date = new Date();
+        if (date.getHours() != config['hour']['value'])
+            setHour(h);
+        setMinute(date.getMinutes());
+        console.log('AUTO cloch configuration: ', config, 'seconds:', first_minute ? ((60 - date.getSeconds()) * 1000) : 60000);
+    }, first_minute ? ((60 - date.getSeconds()) * 1000) : 60000); // millisecondi sono i rimanenti rispetto al secondo attuale?
+    console.log('B', first_minute);
+    first_minute = false;
+    console.log('A', first_minute);
+
     
 
 
 
     ////////// TO - DO //////////////////
-    // divisione 10 minuti: (4) -> 2.5m ma con due semitrasp (6) -> 1.6m 
-    // sun/moon anche semitrasparente 0-6 semitr, 6-12 sole, 12-18 semitr, 18-0 luna
-
-    /// AGGIUNGERE PIENA - ST .55, PIENA - ST .3 DIVENTANO 7 :(
-    // lancetta minuti piena (L1 es. min 00) 1.0, L1 semitrasp .6 - L2 SemiTrasp .3, L2 piena, L2 ST - L3 semi; poi ricomincia L3 piena  
 
     // menu per scegliere l'ora, cosi la si impara pure (magari integrata con l'url :Q )
 
     // bg esagonale, colori piatti, o al massimo tipo cartone come il quadrante
 
-    // far partire l'indicatore da trasparente (cosi non vedi che si aggiorna )
     // CREARE DIZIONARIO DI OPZIONI STANDARD COSI DA NON RIPETERLE TUTTE CAZZO
+
+    // animazione piu' fluida al cambio dei minuti
 
     // fare bottoncino show/hide delle info (da disegnare) tipo sulle ore, e sui minuti cosi da renderlo piu comprensibile all'inizio
 
@@ -299,6 +309,12 @@ window.onload = function () {
         click: function () {
             console.log(config['hour'], config['minute']);
             setHour(config['hour']['value'] + 1, 'fade');
+        },
+    });
+    $('#prova2').bind({
+        click: function () {
+            console.log(config['hour'], config['minute']);
+            setHour(config['hour']['value'] + 1, 'move');
         },
     });
     
