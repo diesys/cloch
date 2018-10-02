@@ -29,17 +29,24 @@ function setHour(new_hour, style='fade') {
         hour = {'value': new_hour, 'valueHex': new_hour % 6, 'X': hXY[0], 'Y': hXY[1]};
         transl = "translate(" + hour['X'] + 'px, ' + hour['Y'] + "px)",
         duration = 1,
-        durationFade = .1;
+        // durationFade = .1,
+        mask_opacity = 0;
+
+    // 0-5 half moon, 6-11 full sun, 12-17 half sun, 18-23 full moon
+    if(new_hour > 0 && new_hour <=5)
+        mask_opacity = .65;
+    else if(new_hour > 6 && new_hour <=11)
+        opacity = 1;
+    else if(new_hour > 11 && new_hour <=17)
+        mask_opacity = .65;
+    else
+        mask_opacity = 1;
 
     if(style == 'fade'){
-        // TweenMax.from(sunMoon[0], 4 * durationFade, {
-        //     // css: { scale: 2 },
-        //     transformOrigin: "0% 0%",
-        //     delay: 0,
-        // });
+        // TweenMax.set(sunMoon[2], {opacity: 0, });
         TweenMax.to(sunMoon[0], 2 * durationFade, {
             delay: 0,
-            opacity: 0,
+            opacity: 0, 
         });
         TweenMax.to(sunMoon[0], 0, {
             delay: 3 * durationFade,
@@ -47,18 +54,23 @@ function setHour(new_hour, style='fade') {
             css: {transform: transl},
         });
         TweenMax.to(sunMoon[0], 4 * durationFade, {
-            delay: 4 * durationFade,
             opacity: 1,
+            delay: 4 * durationFade,
+            ease: Bounce.easeOut,
+        });
+        TweenMax.to(sunMoon[2], 4 * durationFade, {
+            delay: 4 * durationFade,
+            opacity: mask_opacity,
             ease: Bounce.easeOut,
         });
     } else 
-    if(style == 'move') {
-        TweenMax.to(sunMoon[0], duration, {
-            delay: 0,
-            transformOrigin: "50% 50%",
-            ease: Power3.easeInOut,
-            css: {transform: transl},
-        });
+        if(style == 'move') {
+            TweenMax.to(sunMoon[0], duration, {
+                delay: 0,
+                transformOrigin: "50% 50%",
+                ease: Power3.easeInOut,
+                css: {transform: transl},
+            });
     }
 
     config['hour'] = hour;
@@ -103,12 +115,17 @@ function setMinute(min, lazy=true) {
         
         //     delay: 0,
         //     ease: Power3.easeInOut,
-        TweenMax.fromTo(minutes[newMin['indicator_index']], 1, 
-        {fill: 'rgba(255,255,255,0)',
+        TweenMax.fromTo(minutes[newMin['indicator_index']], 7 * durationFade, 
+        {
+            fill: 'rgba(255,255,255,0)',
+            delay: 7 * durationFade,
+            ease: Bounce.easeOut,
             // strokeWidth: "0px",
         },
         {
             fill: 'rgba(255,255,255,' + minutesState[newMin['opacity_index']] + ')',
+            delay: 2 * durationFade,
+            ease: Bounce.easeOut,
             // strokeWidth: ".5px",
             // stroke: "rgba(255,255,255,.1)",
         });
@@ -194,6 +211,9 @@ window.onload = function () {
        // [5]: M=100,
     // minutesState = new Array(100,70,30,0);
     minutesState = new Array(1,.7,.3,0);
+    
+    // general duration fade used for relative timing and delay
+    durationFade = .1
 
     config = getUrlVars();
     
@@ -202,10 +222,14 @@ window.onload = function () {
     
     // sets sun in the center for initial animation
     TweenMax.set(sunMoon[0], {
-        x:-33.8, y:20, opacity:1,
+        x:-33.8, y:20, opacity:0,
         // css: { transfom: "scale(1px)"},
         transformOrigin: "-33px 20px",
     });
+    TweenMax.fromTo(sunMoon[0], 1,
+        {opacity:0},
+        {opacity:1, delay: 3 * durationFade},
+    );
       
     if (!config['color'])
         config['color'] = '#aaa';
@@ -221,7 +245,7 @@ window.onload = function () {
         setHour(date.getHours());
         setMinute(date.getMinutes());
         console.log('AUTO cloch configuration: ', config);
-    }, 1000);
+    }, 0);
     
 
 
@@ -239,6 +263,8 @@ window.onload = function () {
 
     // far partire l'indicatore da trasparente (cosi non vedi che si aggiorna )
     // CREARE DIZIONARIO DI OPZIONI STANDARD COSI DA NON RIPETERLE TUTTE CAZZO
+
+    // fare bottoncino show/hide delle info (da disegnare) tipo sulle ore, e sui minuti cosi da renderlo piu comprensibile all'inizio
 
 
 
