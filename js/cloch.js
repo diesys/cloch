@@ -434,7 +434,7 @@ window.onload = function () {
             stopCloch = true;
         }
         $("#startstop_cloch").html(str);
-    }); $("fieldset").slideToggle();
+    }); $("fieldset").hide();
     
     $("#startstop_cloch").click(function () {
         if(stopCloch) {
@@ -445,6 +445,7 @@ window.onload = function () {
             var str = 'Start';
             stopCloch = true;
         }
+        $("fieldset").slideUp();
         $(this).html(str);
     });
     
