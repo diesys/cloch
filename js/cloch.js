@@ -377,15 +377,19 @@ window.onload = function () {
 
     ////////// TO - DO //////////////////
 
-    // menu per scegliere l'ora, cosi la si impara pure (magari integrata con l'url :Q )
+    // x / menu per scegliere l'ora, cosi la si impara pure (magari integrata con l'url :Q )
 
     // bg esagonale, colori piatti, o al massimo tipo cartone come il quadrante
 
-    // CREARE DIZIONARIO DI OPZIONI STANDARD COSI DA NON RIPETERLE TUTTE CAZZO
-
-    // animazione piu' fluida al cambio dei minuti
-
-    // fare bottoncino show/hide delle info (da disegnare) tipo sulle ore, e sui minuti cosi da renderlo piu comprensibile all'inizio
+    // fare bottoncino show/hide delle info (da disegnare) tipo sulle ore, e sui minuti cosi da renderlo piu comprensibile all'inizio, tipo: numeri minuti e ore su cubo di cloch, fatte con div testo html font rubik e con tweenmax rotazione 3d. animazione sui numeri? creazione tracciato (drawsvg plugin?)? 
+    
+    // aumentare differenza opacità maschera sole intermedi. 
+    
+    // menu html5up liquid morph con: colore, opzioni, display cifre, sfondo etc
+    
+    //nell 'howto mettere il compare approssimato sui minuti tra orlogio e cloch
+    
+    //rivedere funzione aggiorna ora che cancella le altre allo stato iniziale se non servono
 
 
 
@@ -421,6 +425,15 @@ window.onload = function () {
 
     $("#toggle_manual").click(function () {
         $("fieldset").slideToggle();
+        if (stopCloch) {
+            var str = 'Stop';
+            stopCloch = false;
+        }
+        else {
+            var str = 'Start';
+            stopCloch = true;
+        }
+        $("#startstop_cloch").html(str);
     }); $("fieldset").slideToggle();
     
     $("#startstop_cloch").click(function () {
