@@ -46,6 +46,10 @@ function changeColor(color, duration=.5) {
     //     colorpicker = $("colorpicker");
     //     colorpicker.value = color.replace('#', '');
     //     colorpicker.style.backgroundColor = color;
+    
+    if(config['debug']) {
+        console.log("new color", color);
+    }
 }
 
 function setHour(new_hour, style='fade') {
@@ -56,6 +60,9 @@ function setHour(new_hour, style='fade') {
         duration = 1,
         // durationFade = .1,
         mask_opacity = '';
+
+    // adding hour to the conf
+    config['hour'] = hour;
 
     // 0-5 half moon, 6-11 full sun, 12-17 half sun, 18-23 full moon
     if(new_hour >= 0 && new_hour <= 5) {
@@ -72,7 +79,6 @@ function setHour(new_hour, style='fade') {
     }    
     
     if(style == 'fade'){
-        // TweenMax.set(sunMoon[2], {opacity: 0, });
         TweenMax.to(sunMoon[0], 2 * durationFade, {
             delay: 0,
             opacity: 0, 
@@ -102,19 +108,18 @@ function setHour(new_hour, style='fade') {
             });
     }
 
-    config['hour'] = hour;
+    if (config['debug']) {
+        console.log("new hour set: ", hour);
+    }
 }
 
 function setMinute(min, lazy = true) {
-    // sembra che sia trasparente il successivo(second) al primo passo del nuovo first DA RIVEDERE
-
     if (min < 60) {
         // var minOpacity = lazy ? minutesStateLazy : minutesState;
         // console.log('lazy = ', lazy, '\nopacity levels:', minOpacity);
 
         // a minute is about 0.2, toFixed gives 1 dec digit,tmp to string,separate dec from floor
         var tmp = ((min / 5) % 12).toFixed(1).toString().split('.'),
-
             // to int and normalize newMin[1] for index opacity ranges [0..3] levels
             newMin = {
                 'value': min,
@@ -125,17 +130,18 @@ function setMinute(min, lazy = true) {
         // adding the minute to the conf
         config['minute'] = newMin;
 
-        // 
+        // cloch indicators in a thorus previous indicator, fix
         if (min == 0)
             var prec = minutes[11];
         else
             var prec = minutes[(newMin['indicator_index'] - 1) % 12];
 
+        // the base indicator and its next one
         var first = minutes[newMin['indicator_index'] % 12],
             second = minutes[(newMin['indicator_index'] + 1) % 12];
-       
 
         // indicators' animations
+        // base indicator
         TweenMax.fromTo(first, 8 * durationFade, {
                 fill: minutesColors['first_start'][newMin['opacity_index']],
                 delay: 2 * durationFade,
@@ -143,7 +149,7 @@ function setMinute(min, lazy = true) {
                 fill: minutesColors['first'][newMin['opacity_index']],
                 delay: 2 * durationFade,
         });
-
+        // next indicator
         TweenMax.fromTo(second, 8 * durationFade, {
                 fill: minutesColors['second_start'][newMin['opacity_index']],
                 delay: 2 * durationFade,
@@ -169,8 +175,10 @@ function setMinute(min, lazy = true) {
             });
         }
        
-        // console.log(newMin);
-
+        if (config['debug']) {
+            console.log("new minute: ", min);
+        }
+        
     } else console.log('error: minutes can be [0..60]');
 }
 
@@ -240,7 +248,11 @@ window.onload = function () {
     setTimeout(function () {
         setHour(date.getHours());
         setMinute(date.getMinutes());
-        // console.log('first AUTO cloch configuration: ', config);
+        
+        if (config['debug']) {
+            console.log("AUTO time set: ", config['hour'], ":", config['minute']);
+        }
+    
     }, 0);
     
     // checks if there's any hour and minute in the url
@@ -254,7 +266,9 @@ window.onload = function () {
             if (m != config['minute']['value'])
                 setMinute(m);
         }
-        // console.log('AUTO cloch configuration: ', config, 'seconds:', first_minute ? ((60 - date.getSeconds()) * 1000) : 60000);
+        if (config['debug']) {
+            console.log("AUTO update time: ", h, ":", m);
+        }
     }, 500);
 
 
@@ -304,6 +318,10 @@ window.onload = function () {
             stopCloch = true;
         }
         $("#startstop_cloch").html(str);
+         
+        if (config['debug']) {
+            console.log("manual timing toggle");
+        }
     });
     
     $("#startstop_cloch").click(function () {
@@ -317,6 +335,10 @@ window.onload = function () {
         }
         $("fieldset").slideUp();
         $(this).html(str);
+
+        if (config['debug']) {
+            console.log("start/stop toggled");
+        }
     });
     
 
