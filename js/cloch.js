@@ -1,4 +1,28 @@
-// document.addEventListener('DOMContentLoaded', function() {
+  ////////// TO - DO //////////////////
+
+  // x / menu per scegliere l'ora, cosi la si impara pure (magari integrata con l'url :Q )
+
+  // bg esagonale, colori piatti, o al massimo tipo cartone come il quadrante
+
+  // fare bottoncino show/hide delle info (da disegnare) tipo sulle ore, e sui minuti cosi da renderlo piu comprensibile all'inizio, tipo: numeri minuti e ore su cubo di cloch, fatte con div testo html font rubik e con tweenmax rotazione 3d. animazione sui numeri? creazione tracciato (drawsvg plugin?)? 
+
+  // aumentare differenza opacità maschera sole intermedi. 
+
+  // menu html5up liquid morph con: colore, opzioni, display cifre, sfondo etc
+
+  //nell 'howto mettere il compare approssimato sui minuti tra orlogio e cloch
+
+  //rivedere funzione aggiorna ora che cancella le altre allo stato iniziale se non servono
+
+  // ora manuale, nelle select, automaticamente settata su quella attuale
+
+  // implementare ora nell'url
+
+
+
+
+/////// CLOCH API //////////////////////
+
 function getUrlVars() {
     var vars = {};
     var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
@@ -234,27 +258,6 @@ window.onload = function () {
     }, 500);
 
 
-    ////////// TO - DO //////////////////
-
-    // x / menu per scegliere l'ora, cosi la si impara pure (magari integrata con l'url :Q )
-
-    // bg esagonale, colori piatti, o al massimo tipo cartone come il quadrante
-
-    // fare bottoncino show/hide delle info (da disegnare) tipo sulle ore, e sui minuti cosi da renderlo piu comprensibile all'inizio, tipo: numeri minuti e ore su cubo di cloch, fatte con div testo html font rubik e con tweenmax rotazione 3d. animazione sui numeri? creazione tracciato (drawsvg plugin?)? 
-    
-    // aumentare differenza opacità maschera sole intermedi. 
-    
-    // menu html5up liquid morph con: colore, opzioni, display cifre, sfondo etc
-    
-    //nell 'howto mettere il compare approssimato sui minuti tra orlogio e cloch
-    
-    //rivedere funzione aggiorna ora che cancella le altre allo stato iniziale se non servono
-
-    // ora manuale, nelle select, automaticamente settata su quella attuale
-
-    // implementare ora nell'url
-
-    
 
     //// UI /////////////////////////////////////////////
 
@@ -291,8 +294,6 @@ window.onload = function () {
     $("fieldset").hide();
     $("#toggle_manual").click(function () {
         $("fieldset").slideToggle();
-        $("#sel_hour-button").html();
-        $("#sel_hour-button").html();
 
         if (stopCloch) {
             var str = 'Stop';
@@ -318,6 +319,10 @@ window.onload = function () {
         $(this).html(str);
     });
     
+
+
+    /// TEST //////
+
     // $('#provaa').bind({
     //     click: function () {
     //         console.log(config['hour'], config['minute']);
