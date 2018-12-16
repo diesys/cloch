@@ -14,6 +14,9 @@ body {
   width: 100%;
   height: 100%;
   max-height: 100%;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
 }
 
 body.light {
@@ -53,11 +56,6 @@ a:hover {
   color: #222;
 } */
 
-html, body {
-  padding: 0;
-  margin: 0;
-  overflow: hidden;
-}
 
 /* TOOLBAR */
 
@@ -68,16 +66,39 @@ html, body {
   overflow: hidden;
   margin: 0;
   padding: 10px 20px;
-  background: red;
+  background: rgba(0, 0, 0, .1);
   bottom: 0;
   min-height: 40px;
   vertical-align: middle;
+  text-align: center;
 }
 
 #toolbar i.fa {
-  color: #fff;
+  color: rgba(255, 255, 255, .55);
   font-size: 32px;
   padding: 4px;
+  margin: 0 10px;
+  transition: all .3s .1s;
+  cursor: pointer;
+}
+#toolbar i.fa:hover {
+  color: rgba(255, 255, 255, .9);
+  transition: all .3s;
+}
+
+#toolbar .time_indicator {
+  display: inline-block;
+  font-size: 32px;
+  color: #ddd;
+  z-index: -1;
+}
+#toolbar #digital_clock {
+  font-family: 'oswald';
+  /* margin-left: 10px; */
+}
+#toolbar .time_indicator.hidden {
+  /* width: 0px; */
+  opacity: 0;
 }
 
 #grad {

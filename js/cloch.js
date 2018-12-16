@@ -158,6 +158,12 @@ function setMinute(min, lazy = true) {
                 delay: 2 * durationFade,
         });
 
+        // change digital time in toolbar
+        temp_min = config['minute']['value'];
+        tmp_min = temp_min < 10 ? '0' + temp_min : temp_min;
+        new_digital_time = config['hour']['value'] + ':' + tmp_min;
+        $("#digital_clock").html(new_digital_time);
+
 
         // remove bg from other indicators
         for (i = 0; i < 12; i++)
@@ -318,6 +324,8 @@ window.onload = function () {
     // $("fieldset").hide();
     $("#toggle_manual").click(function () {
         pauseClochToggle();
+        $("#digital_clock").toggleClass('hidden');
+        $("#digital_clock").show();
          
         if (config['debug']) {
             console.log("manual timing toggle");
