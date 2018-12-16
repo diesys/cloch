@@ -3,7 +3,7 @@
 
 <head>
   <title>Cloch</title>
-  <!-- Version: 0.5 !-->
+  <!-- Version: 0.5 -->
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,11 +20,14 @@
   
   <script src="jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
   
+  <!-- manifest -->
   <script src="js/cloch.js"></script>
   <link rel="manifest" href="manifest.json">
 
   <!-- STYLE -->
   <link rel="stylesheet" href="css/cloch.css">
+ 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
 
   <!-- Mobile Specifics -->
   <meta name="HandheldFriendly" content="true" />
@@ -44,7 +47,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-  Favicon
+  <!-- Favicon -->
   <link rel="icon" href="img/favicon.png" type="image/x-icon">
   <link rel="shortcut icon" href="#">
 
@@ -52,12 +55,6 @@
   <link rel="icon" sizes="72x72" href="img/favicon72.png" type="image/x-icon">
   <link rel="icon" sizes="144x144" href="img/favicon144.png" type="image/x-icon">
   <link rel="icon" sizes="256x256" href="img/favicon256.png" type="image/x-icon">
-
-  <!-- Apple favicon -->
-  <!-- <link rel="apple-touch-icon" sizes="114x114" href="img/favicon114.png" type="image/x-icon">
-  <link rel="apple-touch-icon" sizes="72x72" href="img/favicon72.png" type="image/x-icon">
-  <link rel="apple-touch-icon" sizes="144x144" href="img/favicon144.png" type="image/x-icon">
-  <link rel="apple-touch-icon" sizes="256x256" href="img/favicon256.png" type="image/x-icon"> -->
 
 </head>
 <div id="grad"></div>
@@ -131,24 +128,17 @@
           </g>
         </g>
       </svg>
+    </div>
 
-<!-- <p style="color: white; text-align:center;">
-  <button id="prova">next hour (fade)</button>
-  <button id="prova2">next hour move</button>
-  <button id="prova0">0</button>
-    <button id="prova1">1</button>
-    <button id="prova2">2</button>
-    <button id="prova3">3</button>
-    <button id="prova4">4</button>
-    <button id="prova5">5</button>
-  </p> -->
+    <div id="toolbar">
+      <div id="control_buttons">
+        <i id="toggle_manual" class="fa fa-pen"></i>
+        <i id="startstop_cloch" class="fa fa-pause"></i>
+      </div>
+    </div>
+
   
-  <div id="control_buttons">
-    <button id="toggle_manual">Manual time</button>
-    <button id="startstop_cloch">Stop</button>
-  </div>
-  
-  <p id="manual_control" style="color: white; text-align:center;">
+  <!-- <p id="manual_control" style="color: white; text-align:center;">
     <fieldset>
       <select name="sel_hour" id="sel_hour">
         <option value="auto">hour</option>
@@ -242,7 +232,8 @@
         <option value="59">59</option>
       </select>
 
-    </fieldset>
+    </fieldset> 
+  </p> -->
   <!-- <button id="provaM">next minute</button> -->
   <!-- <button id="provaM0">0</button>
   <button id="provaM05">5</button>
@@ -256,8 +247,7 @@
   <button id="provaM45">45</button>
   <button id="provaM5">50</button>
   <button id="provaM55">55</button> -->
-</p>
-</div>
+
 <!-- <p style="color: white; text-align:center;">move
         <button id="provaa">next hour</button>
         <button id="prova0a">0</button>

@@ -10,9 +10,9 @@
 
   // menu html5up liquid morph con: colore, opzioni, display cifre, sfondo etc
 
-  //nell 'howto mettere il compare approssimato sui minuti tra orlogio e cloch
+  // nell 'howto mettere il compare approssimato sui minuti tra orlogio e cloch
 
-  //rivedere funzione aggiorna ora che cancella le altre allo stato iniziale se non servono
+  // rivedere funzione aggiorna ora che cancella le altre allo stato iniziale se non servono
 
   // ora manuale, nelle select, automaticamente settata su quella attuale
 
@@ -254,6 +254,16 @@ window.onload = function () {
         }
     
     }, 0);
+
+    function pauseClochToggle() {
+        if (stopCloch) {
+            $("#startstop_cloch").attr('class', 'fa fa-pause');
+            stopCloch = false;
+        } else {
+            $("#startstop_cloch").attr('class', 'fa fa-play');
+            stopCloch = true;
+        }
+    }
     
     // checks if there's any hour and minute in the url
     setInterval(function () {
@@ -305,19 +315,9 @@ window.onload = function () {
         },
     });
 
-    $("fieldset").hide();
+    // $("fieldset").hide();
     $("#toggle_manual").click(function () {
-        $("fieldset").slideToggle();
-
-        if (stopCloch) {
-            var str = 'Stop';
-            stopCloch = false;
-        }
-        else {
-            var str = 'Start';
-            stopCloch = true;
-        }
-        $("#startstop_cloch").html(str);
+        pauseClochToggle();
          
         if (config['debug']) {
             console.log("manual timing toggle");
@@ -325,16 +325,7 @@ window.onload = function () {
     });
     
     $("#startstop_cloch").click(function () {
-        if(stopCloch) {
-            var str = 'Stop';
-            stopCloch = false;
-        }
-        else {
-            var str = 'Start';
-            stopCloch = true;
-        }
-        $("fieldset").slideUp();
-        $(this).html(str);
+        pauseClochToggle();
 
         if (config['debug']) {
             console.log("start/stop toggled");
