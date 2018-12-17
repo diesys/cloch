@@ -65,7 +65,7 @@ a:hover {
   max-width: 100%;
   overflow: hidden;
   margin: 0;
-  padding: 10px 20px;
+  /* padding: 10px 20px; */
   background: rgba(0, 0, 0, .1);
   bottom: 0;
   min-height: 40px;
@@ -77,7 +77,7 @@ a:hover {
   color: rgba(255, 255, 255, .55);
   font-size: 32px;
   padding: 4px;
-  margin: 0 10px;
+  margin: 10px 10px;
   transition: all .3s .1s;
   cursor: pointer;
 }
@@ -95,10 +95,16 @@ a:hover {
 #toolbar #digital_clock {
   font-family: 'oswald';
   /* margin-left: 10px; */
+  margin: 0;
+  display: inline-block;
 }
-#toolbar .time_indicator.hidden {
+#toolbar #control_buttons {
+  display: inline-block;
+}
+#toolbar #control_buttons .hidden {
   /* width: 0px; */
-  opacity: 0;
+  /* display: none; */
+  /* opacity: 0; */
 }
 
 #grad {

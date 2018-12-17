@@ -18,6 +18,8 @@
 
   // implementare ora nell'url
 
+  // settare bene il pausa/play alla modifica manuale
+
 
 
 
@@ -261,7 +263,7 @@ window.onload = function () {
     
     }, 0);
 
-    function pauseClochToggle() {
+    function clochToggle() {
         if (stopCloch) {
             $("#startstop_cloch").attr('class', 'fa fa-pause');
             stopCloch = false;
@@ -290,6 +292,12 @@ window.onload = function () {
 
 
     //// UI /////////////////////////////////////////////
+    $("#control_buttons").hide();
+    $("#toolbarToggle").bind({
+        click: function () {
+            $("#control_buttons").fadeToggle();
+        },
+    });
 
     /// SELECT MANUALLY HOUR AND MINUTE
     $(function () {
@@ -321,19 +329,23 @@ window.onload = function () {
         },
     });
 
+    $("#toggle_manual").hide();
+    $("#digital_clock").hide();
     // $("fieldset").hide();
-    $("#toggle_manual").click(function () {
-        pauseClochToggle();
-        $("#digital_clock").toggleClass('hidden');
-        $("#digital_clock").show();
-         
+    $("#toggle_show").click(function () {
+        clochToggle();
+        // $("#digital_clock").toggleClass('hidden');
+        $("#digital_clock").fadeToggle();
+        // $("#toggle_manual").toggleClass('hidden');
+        $("#toggle_manual").fadeToggle();
+
         if (config['debug']) {
             console.log("manual timing toggle");
         }
     });
     
     $("#startstop_cloch").click(function () {
-        pauseClochToggle();
+        clochToggle();
 
         if (config['debug']) {
             console.log("start/stop toggled");
