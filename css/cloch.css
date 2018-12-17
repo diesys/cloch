@@ -66,7 +66,7 @@ a:hover {
   overflow: hidden;
   margin: 0;
   /* padding: 10px 20px; */
-  background: rgba(0, 0, 0, .1);
+  /* background: rgba(0, 0, 0, .1); */
   bottom: 0;
   min-height: 40px;
   vertical-align: middle;
@@ -85,6 +85,16 @@ a:hover {
   color: rgba(255, 255, 255, .9);
   transition: all .3s;
 }
+
+/* #toolbar #toolbarToggle {
+  position: relative;
+  left: 0;
+}
+
+#toolbar #toggle_help {
+  position: relative;
+  right: 0;
+} */
 
 #toolbar .time_indicator {
   display: inline-block;
