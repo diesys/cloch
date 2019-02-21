@@ -352,6 +352,15 @@ window.onload = function () {
         }
     });
     
+    // var tpSpinbox = new tui.TimePicker('#timepicker-spinbox', {
+    //     initialHour: 15,
+    //     initialMinute: 33,
+    //     disabledHours: [1, 2, 13, 14],
+    //     inputType: 'spinbox',
+    //     showMeridiem: true
+    // });
+
+
 
 
     /// TEST //////

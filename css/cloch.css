@@ -1,4 +1,4 @@
-@font-face {
+/* @font-face {
   font-family: 'Oswald';
   src: url('font/Oswald-Regular.ttf') format('truetype');
 }
@@ -6,7 +6,7 @@
 @font-face {
   font-family: 'OswaldBold';
   src: url('font/Oswald-Bold.ttf') format('truetype');
-}
+} */
 
 html,
 body {
@@ -150,7 +150,7 @@ svg#cloch {
   -webkit-transition: .2s ease;
   /* Safari */
   transition: .2s ease;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
 svg#cloch:hover {
