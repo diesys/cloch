@@ -236,6 +236,11 @@ const pickr = new Pickr({
     }
 });
 
+$('div.pcr-app').css({
+    'top': '0',
+    'bottom': '50px',
+});
+
 window.onload = function () {
     // main cloch elements
     cloch = $('#cloch'),
