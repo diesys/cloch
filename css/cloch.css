@@ -57,6 +57,9 @@ a:hover {
 } */
 
 
+.hidden {
+  display: none;
+}
 /* TOOLBAR */
 
 #toolbar {
@@ -89,17 +92,8 @@ a:hover {
   position: absolute;
   left: 0;
   bottom: -2px;
+  transition: none;
 }
-
-/* #toolbar #toolbarToggle {
-  position: relative;
-  left: 0;
-}
-
-#toolbar #toggle_help {
-  position: relative;
-  right: 0;
-} */
 
 #toolbar .time_indicator {
   display: inline-block;
@@ -111,10 +105,11 @@ a:hover {
   font-family: 'oswald';
   /* margin-left: 10px; */
   margin: 0;
-  display: inline-block;
+  /* display: inline-block; */
 }
-#toolbar #control_buttons {
-  display: inline-block;
+#toolbar #control_buttons,
+#toggle_stop_menu {
+  display: inline;
 }
 #toolbar #control_buttons .hidden {
   /* width: 0px; */
@@ -173,6 +168,7 @@ svg#cloch:active {
 .pcr-button, .pickr {
   display: inline-block;
   bottom: -2px;
+  margin-right: 5px;
 }
 .pickr .pcr-button {
   border-radius: 100px;

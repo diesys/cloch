@@ -333,13 +333,12 @@ window.onload = function () {
 
 
     //// UI /////////////////////////////////////////////
-    $("#control_buttons").hide();
+    // $("#control_buttons").hide();  debug
     $("#toolbarToggle").bind({
         click: function () {
             $("#control_buttons").fadeToggle();
         },
     });
-
     /// SELECT MANUALLY HOUR AND MINUTE
     $(function () {
         $("#sel_hour").selectmenu({
@@ -356,29 +355,28 @@ window.onload = function () {
     });
 
 
-    $('#prova').bind({
-        click: function () {
-            console.log(config['hour'], config['minute']);
-            setHour(config['hour']['value'] + 1, 'fade');
-        },
-    });
+    // $('#prova').bind({
+    //     click: function () {
+    //         console.log(config['hour'], config['minute']);
+    //         setHour(config['hour']['value'] + 1, 'fade');
+    //     },
+    // });
 
-    $('#provaM').bind({
-        click: function () {
-            // console.log(config['hour'], config['minute']);
-            setMinute((config['minute']['value'] + 1)%60);
-        },
-    });
+    // $('#provaM').bind({
+    //     click: function () {
+    //         // console.log(config['hour'], config['minute']);
+    //         setMinute((config['minute']['value'] + 1)%60);
+    //     },
+    // });
 
     $("#toggle_manual").hide();
     $("#digital_clock").hide();
+    $("#startstop_cloch").hide();
     // $("fieldset").hide();
     $("#toggle_show").click(function () {
-        clochToggle();
-        // $("#digital_clock").toggleClass('hidden');
         $("#digital_clock").fadeToggle();
-        // $("#toggle_manual").toggleClass('hidden');
         $("#toggle_manual").fadeToggle();
+        $("#startstop_cloch").fadeToggle();
 
         if (config['debug']) {
             console.log("manual timing toggle");
@@ -391,61 +389,5 @@ window.onload = function () {
         if (config['debug']) {
             console.log("start/stop toggled");
         }
-    });
-    
-    // var tpSpinbox = new tui.TimePicker('#timepicker-spinbox', {
-    //     initialHour: 15,
-    //     initialMinute: 33,
-    //     disabledHours: [1, 2, 13, 14],
-    //     inputType: 'spinbox',
-    //     showMeridiem: true
-    // });
-
-
-
-
-    /// TEST //////
-
-    // $('#provaa').bind({
-    //     click: function () {
-    //         console.log(config['hour'], config['minute']);
-    //         ca = hours.indexOf(config['hour']['value']) + 1 % 6;
-    //     },
-    // });
-    
-    // $('#prova2').bind({
-    //     click: function () {
-    //         console.log(config['hour'], config['minute']);
-    //         setHour(config['hour']['value'] + 1, 'move');
-    //     },
-    // });
-    
-    // $('#prova0').bind({click: function () {setHour(0, 'fade');}});
-    // $('#prova1').bind({click: function () {setHour(1, 'fade');}});
-    // $('#prova2').bind({click: function () {setHour(2, 'fade');}});
-    // $('#prova3').bind({click: function () {setHour(3, 'fade');}});
-    // $('#prova4').bind({click: function () {setHour(4, 'fade');}});
-    // $('#prova5').bind({click: function () {setHour(5, 'fade');}});
-    
-    // $('#prova0a').bind({click: function () {setHour(0, 'move');}});
-    // $('#prova1a').bind({click: function () {setHour(1, 'move');}});
-    // $('#prova2a').bind({click: function () {setHour(2, 'move');}});
-    // $('#prova3a').bind({click: function () {setHour(3, 'move');}});
-    // $('#prova4a').bind({click: function () {setHour(4, 'move');}});
-    // $('#prova5a').bind({click: function () {setHour(5, 'move');}});
-  
-    // $('#provaM0').bind({click: function () {setMinute(0, 'move');}});
-    // $('#provaM05').bind({click: function () {setMinute(5, 'move');}});
-    // $('#provaM1').bind({click: function () {setMinute(10, 'move');}});
-    // $('#provaM15').bind({click: function () {setMinute(15, 'move');}});
-    // $('#provaM2').bind({click: function () {setMinute(20, 'move');}});
-    // $('#provaM25').bind({click: function () {setMinute(25, 'move');}});
-    // $('#provaM3').bind({click: function () {setMinute(30, 'move');}});
-    // $('#provaM35').bind({click: function () {setMinute(35, 'move');}});
-    // $('#provaM4').bind({click: function () {setMinute(40, 'move');}});
-    // $('#provaM45').bind({click: function () {setMinute(45, 'move');}});
-    // $('#provaM5').bind({click: function () {setMinute(50, 'move');}});
-    // $('#provaM55').bind({click: function () {setMinute(55, 'move');}});
-
-    
+    });    
 }
