@@ -27,11 +27,9 @@
 <script src="js/tui.time-picker-production/dist/tui-time-picker.min.js"></script>
   
   <!-- manifest -->
-  <script src="js/cloch.js"></script>
   <link rel="manifest" href="manifest.json">
 
   <!-- STYLE -->
-  <link rel="stylesheet" href="css/cloch.css">
  	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
 
@@ -139,8 +137,8 @@
     <div id="toolbar">
       <i id="toolbarToggle" class="fa fa-ellipsis-v"></i>
       <div id="control_buttons">
-        <i id="colorpicker" class="fa fa-palette"></i>
         <i id="startstop_cloch" class="fa fa-pause"></i>
+        <i id="colorpicker" class="fa fa-palette color-picker"></i>
         <!-- <i id="startstop_cloch" class="fa fa-layer-group"></i> -->
         <i id="toggle_manual" class="time_indicator fa fa-pen"></i>
         <i id="toggle_show" class="fa fa-clock"></i>
@@ -150,230 +148,19 @@
         <div id="timepicker-spinbox"></div>
       </div>
     </div>
-
-  
-  <!-- <p id="manual_control" style="color: white; text-align:center;">
-    <fieldset>
-      <select name="sel_hour" id="sel_hour">
-        <option value="auto">hour</option>
-        <option value="00">00</option>
-        <option value="01">01</option>
-        <option value="02">02</option>
-        <option value="03">03</option>
-        <option value="04">04</option>
-        <option value="05">05</option>
-        <option value="06">06</option>
-        <option value="07">07</option>
-        <option value="08">08</option>
-        <option value="09">09</option>
-        <option value="10">10</option>
-        <option value="11">11</option>
-        <option value="12">12</option>
-        <option value="13">13</option>
-        <option value="14">14</option>
-        <option value="15">15</option>
-        <option value="16">16</option>
-        <option value="17">17</option>
-        <option value="18">18</option>
-        <option value="19">19</option>
-        <option value="20">20</option>
-        <option value="21">21</option>
-        <option value="22">22</option>
-        <option value="23">23</option>
-      </select>
-      
-      <select name="sel_minute" id="sel_minute">
-        <option value="auto">minute</option>
-        <option value="00">00</option>
-        <option value="01">01</option>
-        <option value="02">02</option>
-        <option value="03">03</option>
-        <option value="04">04</option>
-        <option value="05">05</option>
-        <option value="06">06</option>
-        <option value="07">07</option>
-        <option value="08">08</option>
-        <option value="09">09</option>
-        <option value="10">10</option>
-        <option value="11">11</option>
-        <option value="12">12</option>
-        <option value="13">13</option>
-        <option value="14">14</option>
-        <option value="15">15</option>
-        <option value="16">16</option>
-        <option value="17">17</option>
-        <option value="18">18</option>
-        <option value="19">19</option>
-        <option value="20">20</option>
-        <option value="21">21</option>
-        <option value="22">22</option>
-        <option value="23">23</option>
-        <option value="24">24</option>
-        <option value="25">25</option>
-        <option value="26">26</option>
-        <option value="27">27</option>
-        <option value="28">28</option>
-        <option value="29">29</option>
-        <option value="30">30</option>
-        <option value="31">31</option>
-        <option value="32">32</option>
-        <option value="33">33</option>
-        <option value="34">34</option>
-        <option value="35">35</option>
-        <option value="36">36</option>
-        <option value="37">37</option>
-        <option value="38">38</option>
-        <option value="39">39</option>
-        <option value="40">40</option>
-        <option value="41">41</option>
-        <option value="42">42</option>
-        <option value="43">43</option>
-        <option value="44">44</option>
-        <option value="45">45</option>
-        <option value="46">46</option>
-        <option value="47">47</option>
-        <option value="48">48</option>
-        <option value="49">49</option>
-        <option value="50">50</option>
-        <option value="51">51</option>
-        <option value="52">52</option>
-        <option value="53">53</option>
-        <option value="54">54</option>
-        <option value="55">55</option>
-        <option value="56">56</option>
-        <option value="57">57</option>
-        <option value="58">58</option>
-        <option value="59">59</option>
-      </select>
-
-    </fieldset> 
-  </p> -->
-  <!-- <button id="provaM">next minute</button> -->
-  <!-- <button id="provaM0">0</button>
-  <button id="provaM05">5</button>
-  <button id="provaM1">10</button>
-  <button id="provaM15">15</button>
-  <button id="provaM2">20</button>
-  <button id="provaM25">25</button>
-  <button id="provaM3">30</button>
-  <button id="provaM35">35</button>
-  <button id="provaM4">40</button>
-  <button id="provaM45">45</button>
-  <button id="provaM5">50</button>
-  <button id="provaM55">55</button> -->
-
-<!-- <p style="color: white; text-align:center;">move
-        <button id="provaa">next hour</button>
-        <button id="prova0a">0</button>
-        <button id="prova1a">1</button>
-        <button id="prova2a">2</button>
-        <button id="prova3a">3</button>
-        <button id="prova4a">4</button>
-        <button id="prova5a">5</button>
-      </p>
-    </div> -->
-<!-- <p style="color: white; text-align:center;">move
-        <button id="provaa">next hour</button>
-        <button id="prova0a">0</button>
-        <button id="prova1a">1</button>
-        <button id="prova2a">2</button>
-        <button id="prova3a">3</button>
-        <button id="prova4a">4</button>
-        <button id="prova5a">5</button>
-      </p>
-    </div> -->
-  
-  
-  
-  
-  <!-- <a class="button howto semitransp" onclick="HowTo(1)" href="#">Glock</a>
-  <a id="credits_button" class="button credits semitransp" onclick="show_credits()" href="#">Credits</a>
-  <div id="credits" class="HowTo inactive">
-    <img src="img/howto/ht1.png" alt="glock logo" />
-    <h1>Credits</h1>
-    <p>Glock è stato realizzato usando HTML5, CSS3, JavaScript, <a href="http://snapsvg.io/">Snap.svg</a>, <a href="http://jscolor.com">jscolor</a>.
-      <br />Ideato e realizzato da <a href="http://flowin.space">Diego Turtulici</a>.<br /> Rilasciato sotto
-      <a href="https://www.gnu.org/licenses/gpl-3.0.html">licenza GPLv3</a>. <br /><a href="glock.zip">Scarica il
-        pacchetto.</a></p>
-    <br><br>
-    <a class="button closeHowTo" onclick="close_credits()">chiudi</a>
-  </div>
-
-  <div id="HT5" class="HowTo inactive">
-    <img src="img/howto/ht5.png" alt="HowTo" />
-    <h1>Personalizzalo!</h1>
-    <p>Hai provato a cliccare sul quadrante? Ti si aprirà un menù dove visualizzerai il colore attuale in esadecimale
-      (o notazione HTML), ne hai trovato uno che ti piace? Questo sito non utilizza cookie quindi puoi salvare quel
-      valore e metterlo come
-      suffisso nella barra degli indirizzi. Così puoi aggiungere ai preferiti il link con il colore che preferisci!<br>Prova
-      a cliccare <a href="http://glock.flowin.space?c=#00AFAF">qui</a> e guarda la barra degli indirizzi.<br><br> Ci
-      sono altre
-      opzioni che puoi utilizzare con le variabili nell'indirizzo:<br> c=... accetta ogni colore CSS (esadecimale:
-      #000000, RGB: rgb(0,0,0), etc.), <a href="http://glock.flowin.space/?c=#00AFAF">provalo!</a><br> o=... il numero
-      di ore di cui traslare
-      l'orologio (ad es. fusi orari), <a href="http://glock.flowin.space/?o=3">provalo!</a><br> h=..., m=..., s=... per
-      indicare un'ora ben precisa rispettivamente <a href="http://glock.flowin.space/?h=21F">ora</a>, <a href="http://glock.flowin.space/?m=10F">minuto</a>,
-      <a href="http://glock.flowin.space/?s=40F">secondo</a>, prova a vedere le <a href="http://glock.flowin.space/?c=#00F0AF&o=10&h=23&m=45">23:45!</a><br>
-      <br>Ricorda che le variabili nell'URL vanno inserite dopo il punto interrogativo (che ne determina l'inizio) e
-      ogni coppia <i>variabile=valore</i> va divisa dall'altra con un &amp. <a href="http://glock.flowin.space/?c=#00F0AF&o=10&h=21&m=10&s=10">Provale
-        tutte!</a>
-    </p>
-    <br><br>
-    <a class="button closeHowTo" onclick="HowTo('close')" href="#">chiudi</a>
-    <a class="button HowTo next" onclick="HowTo('close')" href="#">&#62;</a>
-    <a class="button HowTo prev" onclick="HowTo(4)" href="#">&#60;</a>
-  </div>
-  <div id="HT4" class="HowTo inactive">
-    <img src="img/howto/ht4.png" alt="HowTo" />
-    <h1>I minuti</h1>
-    <p>Esattamente come per le ore i minuti vanno al doppio della velocità. Anziché essere 60 in un giro completo sono
-      30. Questa volta la figura è un triangolo che ruota, avrai così il primo minuto e la mezz'ora con il vertice in
-      alto e 15 e 45 minuti
-      con il vertice in basso. In tutti i minuti multipli di 5 il triangolo è orientato con uno dei vertici in alto o
-      in basso.</p>
-    <br><br>
-    <a class="button closeHowTo" onclick="HowTo('close')" href="#">chiudi</a>
-    <a class="button HowTo next" onclick="HowTo(5)" href="#">&#62;</a>
-    <a class="button HowTo prev" onclick="HowTo(3)" href="#">&#60;</a>
-  </div>
-  <div id="HT3" class="HowTo inactive">
-    <img src="img/howto/ht3.png" alt="HowTo" />
-    <h1>Le ore</h1>
-    <p>Immagina di far andare la lancetta dell'ora a velocità doppia, quando sono le 3 o le 9, anziché essere nei
-      quarti del quadrante, l'ora sarà indicata nel vertice in basso; se invece sono le 6 o le 12 in quello in alto. Un
-      orologio «solare» che
-      anziché dirti AM o PM ti dice se che usa il sole per farti capire se le 18 (<i>tramonto</i>) sono già passate
-      così da poterti orientare con l'ausilio della luce solare.</p>
-    <br><br>
-    <a class="button closeHowTo" onclick="HowTo('close')" href="#">chiudi</a>
-    <a class="button HowTo next" onclick="HowTo(4)" href="#">&#62;</a>
-    <a class="button HowTo prev" onclick="HowTo(2)" href="#">&#60;</a>
-  </div>
-  <div id="HT2" class="HowTo inactive">
-    <img src="img/howto/ht2.png" alt="HowTo" />
-    <h1>Gli indicatori</h1>
-    <p>Glock non ha lancette ma indicatori. Il funzionamento è quasi identico, ce ne sono di due tipi: l'indicatore
-      delle ore è mobile e passa tra i vertici dell'esagono, quello dei minuti sta su un vertice fisso del triangolo
-      che fa una rotazione ad
-      ogni minuto. Entrambi gli indicatori hanno due possibili stati che indicano se ha già compiuto il primo giro.</p>
-    <br><br>
-    <a class="button closeHowTo" onclick="HowTo('close')" href="#">chiudi</a>
-    <a class="button HowTo next" onclick="HowTo(3)" href="#">&#62;</a>
-    <a class="button HowTo prev" onclick="HowTo(1)" href="#">&#60;</a>
-  </div>
-  <div id="HT1" class="HowTo inactive">
-    <img src="img/howto/ht1.png" alt="HowTo" />
-    <h1>Colpo d'occhio</h1>
-    <p>Glock è un'orologio grafico che cerca un altro approccio nello scandire il tempo, è fatto per essere visto e non
-      letto.<br /> Una volta compreso il funzionamento anche vedendolo a distanza o di sfuggita sarà facile capire
-      l'ora indicata e ancora
-      più immediato, con una precisione dell'ordine di 5 minuti.</p>
-    <br><br>
-    <a class="button HowTo next" onclick="HowTo(2)" href="#">&#62;</a>
-    <a class="button closeHowTo" onclick="HowTo('close')" href="#">chiudi</a>
-  </div> -->
   
   <script type="text/javascript" src="js/TweenMax.min.js"></script>
+  
+  <!-- palette color picker (https://github.com/Simonwep/pickr) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>
+  
+  <!-- main css -->
+  <link rel="stylesheet" href="css/cloch.css">
+
+  <!-- main js -->
+  <script src="js/cloch.js"></script>
+
 </body>
 
 </html>
