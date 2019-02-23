@@ -48,6 +48,7 @@ body.dark {
   min-height: 40px;
   vertical-align: middle;
   text-align: center;
+  z-index: 10;
 }
 
 #toolbar i.fa {
@@ -61,6 +62,25 @@ body.dark {
 #toolbar i.fa:hover {
   color: rgba(255, 255, 255, .9);
   transition: all .3s;
+}
+
+#toolbar #toolbarToggle {
+  opacity: .6;
+}
+#toolbar #toolbarToggle:hover,
+#toolbar #toolbarToggle:active {
+  opacity: 1;
+}
+
+#toolbar #toggle_help {
+  position: absolute;
+  right: 0;
+  opacity: .4;
+  z-index: 0;
+}
+#toolbar #toggle_help:hover,
+#toolbar #toggle_help:active {
+  opacity: 1;
 }
 
 #toolbar .time_indicator {
