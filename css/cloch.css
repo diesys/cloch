@@ -168,7 +168,7 @@ svg#cloch:active {
 .pcr-button, .pickr {
   display: inline-block;
   bottom: -2px;
-  margin-right: 5px;
+  margin: 0 5px;
 }
 .pickr .pcr-button {
   border-radius: 100px;
