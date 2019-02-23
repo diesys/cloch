@@ -66,6 +66,8 @@ body.dark {
 
 #toolbar #toolbarToggle {
   opacity: .6;
+  font-size: 24px;
+  transform: translateY(-2px);
 }
 #toolbar #toolbarToggle:hover,
 #toolbar #toolbarToggle:active {
