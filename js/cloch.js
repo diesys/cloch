@@ -297,6 +297,8 @@ window.onload = function () {
             $('div.pcr-button').css({
                 'background': newCol,
             })
+            $('#browserColor').attr('content', newCol);
+            $('#browserColorwp').attr('content', newCol);
             // console.log('#' + hsva.toHEX(hsva).join(''));
         },
     });
