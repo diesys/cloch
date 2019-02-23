@@ -1,20 +1,12 @@
   ////////// TO - DO //////////////////
 
-  // x / menu per scegliere l'ora, cosi la si impara pure (magari integrata con l'url :Q )
-
   // bg esagonale, colori piatti, o al massimo tipo cartone come il quadrante
 
   // fare bottoncino show/hide delle info (da disegnare) tipo sulle ore, e sui minuti cosi da renderlo piu comprensibile all'inizio, tipo: numeri minuti e ore su cubo di cloch, fatte con div testo html font rubik e con tweenmax rotazione 3d. animazione sui numeri? creazione tracciato (drawsvg plugin?)? 
 
-  // aumentare differenza opacità maschera sole intermedi. 
-
-  // menu html5up liquid morph con: colore, opzioni, display cifre, sfondo etc
-
   // nell 'howto mettere il compare approssimato sui minuti tra orlogio e cloch
 
   // rivedere funzione aggiorna ora che cancella le altre allo stato iniziale se non servono
-
-  // ora manuale, nelle select, automaticamente settata su quella attuale
 
   // implementare ora nell'url
 
@@ -22,6 +14,9 @@
 
   // lampeggio su cloch in pausa
 
+  // fare lightmode per colori chiari di sfondo (grigio scurissimissimo al posto del bianco)
+
+  // ripulire file in API/main da poter essere riutilizzato
 
 /////// CLOCH API //////////////////////
 
