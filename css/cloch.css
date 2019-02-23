@@ -69,8 +69,7 @@ body.dark {
   font-size: 24px;
   transform: translateY(-2px);
 }
-#toolbar #toolbarToggle:hover,
-#toolbar #toolbarToggle:active {
+#toolbar #toolbarToggle:hover{
   opacity: 1;
 }
 
@@ -80,8 +79,7 @@ body.dark {
   opacity: .4;
   z-index: 0;
 }
-#toolbar #toggle_help:hover,
-#toolbar #toggle_help:active {
+#toolbar #toggle_help:hover {
   opacity: 1;
 }
 

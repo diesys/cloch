@@ -16,6 +16,10 @@
 
   // fare lightmode per colori chiari di sfondo (grigio scurissimissimo al posto del bianco)
 
+  // fare darkmode
+
+  // fare versione con minuti relativi (minuto 0 parte da dove sta l'indicatore ore), Va mostrato che la modalita' e' diversa
+
   // ripulire file in API/main da poter essere riutilizzato
 
 /////// CLOCH API //////////////////////
@@ -39,6 +43,7 @@ function setHour(new_hour, style='fade') {
 
     // adding hour to the conf
     config['hour'] = hour;
+    config['theme'] = 'dark';
 
     // 0-5 half moon, 6-11 full sun, 12-17 half sun, 18-23 full moon
     if(new_hour >= 0 && new_hour <= 5) {
@@ -89,7 +94,7 @@ function setHour(new_hour, style='fade') {
     }
 }
 
-function setMinute(min, lazy = true) {
+function setMinute(min, theme='light') {
     if (min < 60) {
         // var minOpacity = lazy ? minutesStateLazy : minutesState;
         // console.log('lazy = ', lazy, '\nopacity levels:', minOpacity);
@@ -117,22 +122,73 @@ function setMinute(min, lazy = true) {
             second = minutes[(newMin['indicator_index'] + 1) % 12];
 
         // indicators' animations
-        // base indicator
-        TweenMax.fromTo(first, 8 * durationFade, {
-                fill: minutesColors['first_start'][newMin['opacity_index']],
-                delay: 2 * durationFade,
-            }, {
-                fill: minutesColors['first'][newMin['opacity_index']],
-                delay: 2 * durationFade,
-        });
-        // next indicator
-        TweenMax.fromTo(second, 8 * durationFade, {
-                fill: minutesColors['second_start'][newMin['opacity_index']],
-                delay: 2 * durationFade,
-            }, {
-                fill: minutesColors['second'][newMin['opacity_index']],
-                delay: 2 * durationFade,
-        });
+        if(theme == 'light') {
+            // LIGHT MODE base indicator
+            TweenMax.fromTo(first, 8 * durationFade, {
+                    fill: minutesColors['first_start'][newMin['opacity_index']],
+                    delay: 2 * durationFade,
+                }, {
+                    fill: minutesColors['first'][newMin['opacity_index']],
+                    delay: 2 * durationFade,
+            });
+            // next indicator
+            TweenMax.fromTo(second, 8 * durationFade, {
+                    fill: minutesColors['second_start'][newMin['opacity_index']],
+                    delay: 2 * durationFade,
+                }, {
+                    fill: minutesColors['second'][newMin['opacity_index']],
+                    delay: 2 * durationFade,
+            });
+
+            // remove bg from other indicators
+            for (i = 0; i < 12; i++)
+                if (i != newMin['indicator_index'])
+                    if (i % 2 == 0) {
+                        TweenMax.to(minutes[i], 8 * durationFade, {
+                            fill: 'rgba(0,0,0,.1)',
+                            delay: 0,
+                        });
+                    }
+            else {
+                TweenMax.to(minutes[i], 8 * durationFade, {
+                    delay: 0,
+                    fill: 'rgba(0,0,0,.05)',
+                });
+            }
+        } else if(theme == 'dark') {
+            // DARK MODE base indicator
+            TweenMax.fromTo(first, 8 * durationFade, {
+                    fill: minutesColorsDark['first_start'][newMin['opacity_index']],
+                    delay: 2 * durationFade,
+                }, {
+                    fill: minutesColorsDark['first'][newMin['opacity_index']],
+                    delay: 2 * durationFade,
+            });
+            // next indicator
+            TweenMax.fromTo(second, 8 * durationFade, {
+                    fill: minutesColorsDark['second_start'][newMin['opacity_index']],
+                    delay: 2 * durationFade,
+                }, {
+                    fill: minutesColorsDark['second'][newMin['opacity_index']],
+                    delay: 2 * durationFade,
+            });
+
+            // remove bg from other indicators
+            for (i = 0; i < 12; i++)
+                if (i != newMin['indicator_index'])
+                    if (i % 2 == 0) {
+                        TweenMax.to(minutes[i], 8 * durationFade, {
+                            fill: 'rgba(255,255,255,.1)',
+                            delay: 0,
+                        });
+                    }
+            else {
+                TweenMax.to(minutes[i], 8 * durationFade, {
+                    delay: 0,
+                    fill: 'rgba(255,255,255,.05)',
+                });
+            }
+        }
 
         // change digital time in toolbar
         temp_min = config['minute']['value'];
@@ -140,22 +196,6 @@ function setMinute(min, lazy = true) {
         new_digital_time = config['hour']['value'] + ':' + tmp_min;
         $("#digital_clock").html(new_digital_time);
 
-
-        // remove bg from other indicators
-        for (i = 0; i < 12; i++)
-            if (i != newMin['indicator_index'])
-                if (i % 2 == 0) {
-                    TweenMax.to(minutes[i], 8 * durationFade, {
-                        fill: 'rgba(0,0,0,.1)',
-                        delay: 0,
-                    });
-                }
-        else {
-            TweenMax.to(minutes[i], 8 * durationFade, {
-                delay: 0,
-                fill: 'rgba(0,0,0,.05)',
-            });
-        }
        
         if (config['debug']) {
             console.log("new minute: ", min);
@@ -163,7 +203,6 @@ function setMinute(min, lazy = true) {
         
     } else console.log('error: minutes can be [0..60]');
 }
-
 
 window.onload = function () {
     // main cloch elements
@@ -194,7 +233,17 @@ window.onload = function () {
     // global variable for start/stopping the clock for manual select
     stopCloch = false;
 
-    // Minutes indicator color values 
+    // Minutes indicator color values (DARK)
+    minutesColorsDark = {
+        // from < animation
+        'first_start': ['rgba(5,5,5,1)', 'rgba(5,5,5,1)', 'rgba(5,5,5,1)', 'rgba(5,5,5,.7)', 'rgba(5,5,5,.4)'],
+        'second_start': ['rgba(0,0,0,.1)', 'rgba(5,5,5,.1)', 'rgba(5,5,5,.4)', 'rgba(5,5,5,.4)', 'rgba(5,5,5,.7)'],
+
+        // to > animation
+        'first': ['rgba(5,5,5,1)', 'rgba(5,5,5,1)', 'rgba(5,5,5,.7)', 'rgba(5,5,5,.4)', 'rgba(5,5,5,.4)'],
+        'second': ['rgba(0,0,0,.1)', 'rgba(5,5,5,.4)', 'rgba(5,5,5,.4)', 'rgba(5,5,5,.7)', 'rgba(5,5,5,1)'],
+    };
+    // light Minutes indicator color values 
     minutesColors = {
         // from < animation
         'first_start': ['rgba(255,255,255,1)', 'rgba(255,255,255,1)', 'rgba(255,255,255,1)', 'rgba(255, 255, 255, .7)', 'rgba(255, 255, 255, .4)'], 
@@ -227,6 +276,30 @@ window.onload = function () {
         }
     
     }, 0);
+
+changeTheme = function changeTheme(theme) {
+        config['theme'] = theme;
+
+        // minutes
+        if(theme == 'dark') {
+            setMinute(config['minute']['value'], 'dark');
+            // hours
+            TweenMax.to(sunMoon[1], .5 , {
+                fill: '#040404',
+                ease: Power2.easeOut,
+            });
+        }
+        else if(theme == 'light') {
+            setMinute(config['minute']['value'], 'light');
+            // hours
+            TweenMax.to(sunMoon[1], .5 , {
+                fill: '#ffffff',
+                ease: Power2.easeOut,
+            });
+        }
+
+        
+    }
 
     function changeColor(color, duration = .8) {
         var backgroundColorChange = TweenMax.to(background, duration, {
@@ -322,7 +395,7 @@ window.onload = function () {
             if (h != config['hour']['value'])
                 setHour(h);
             if (m != config['minute']['value'])
-                setMinute(m);
+                setMinute(m, config['theme']);
         }
         if (config['debug']) {
             console.log("AUTO update time: ", h, ":", m);
@@ -338,12 +411,9 @@ window.onload = function () {
             setTimeout(function () {
                 // button
                 if ($("#control_buttons").is(":hidden"))
-                    // $("#toolbarToggle").attr('class', 'fa fa-chevron-circle-down');
-                    $("#toolbarToggle").css('transform', 'rotate(180deg');
-                // else($("#control_buttons").is(":hidden"))
+                    $("#toolbarToggle").css('transform', 'rotate(0deg');
                 else
-                    // $("#toolbarToggle").attr('class', 'fa fa-chevron-circle-up');
-                    $("#toolbarToggle").css('transform', 'rotate(0deg)');
+                    $("#toolbarToggle").css('transform', 'rotate(180deg)');
             }, 600);
         },
     });
@@ -362,29 +432,11 @@ window.onload = function () {
         });
     });
 
-
-    // $('#prova').bind({
-    //     click: function () {
-    //         console.log(config['hour'], config['minute']);
-    //         setHour(config['hour']['value'] + 1, 'fade');
-    //     },
-    // });
-
-    // $('#provaM').bind({
-    //     click: function () {
-    //         // console.log(config['hour'], config['minute']);
-    //         setMinute((config['minute']['value'] + 1)%60);
-    //     },
-    // });
-
-    $("#toggle_manual").hide();
-    $("#digital_clock").hide();
-    $("#startstop_cloch").hide();
-    // $("fieldset").hide();
     $("#toggle_show").click(function () {
-        $("#digital_clock").fadeToggle();
-        $("#toggle_manual").fadeToggle();
-        $("#startstop_cloch").fadeToggle();
+        // $("#digital_clock").fadeToggle();
+        // $("#toggle_manual").fadeToggle();
+        // $("#startstop_cloch").fadeToggle();
+        $('#toggle_stop_menu').fadeToggle()
 
         if (config['debug']) {
             console.log("manual timing toggle");
@@ -398,4 +450,9 @@ window.onload = function () {
             console.log("start/stop toggled");
         }
     });
+
+
+    // setup before start
+    $('#toggle_stop_menu').hide()
+    $('#control_buttons').hide()
 }
