@@ -30,32 +30,6 @@ body.dark {
   background-color: #1f1f1f;
   margin: 0;
 }
-/* 
-h1 {
-  font-family: OswaldBold;
-  font-size: 2em;
-  font-style: normal;
-  font-variant: normal;
-  text-transform: uppercase;
-}
-
-p {
-  font-family: Oswald;
-  font-size: 1.15em;
-  font-style: normal;
-  font-variant: normal;
-  font-weight: normal;
-  text-align: justify;
-}
-
-a {
-  color: #555;
-}
-
-a:hover {
-  color: #222;
-} */
-
 
 .hidden {
   display: none;
@@ -87,12 +61,6 @@ a:hover {
 #toolbar i.fa:hover {
   color: rgba(255, 255, 255, .9);
   transition: all .3s;
-}
-#toolbar #toolbarToggle {
-  /* position: absolute; */
-  /* left: 0; */
-  /* bottom: -2px; */
-  /* transition: none; */
 }
 
 #toolbar .time_indicator {
@@ -191,33 +159,26 @@ svg#cloch:active {
   border-radius: 6px;
   box-shadow: 0 2px 20px -3px rgba(0, 0, 0, .7);
   background: rgba(0, 0, 0, .9);
-
-}
-/* save btn */
-.pcr-app .pcr-interaction .pcr-save {
-  left: 50%;
-  position: relative;
-  transform: translate(-50%, -4px);
-  background: #333;
-  padding: 5px 10px;
-}
-
-/* button {
-  padding: 2px 4px;
-  margin: 0px;
-  text-align: center;
-  min-width: 0px;
-  min-height: 0px;
-}
-
-fieldset {
-  border: none;
-  color: #fff;
-  text-align: center;
-}
-#control_buttons {
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  margin-bottom: 10px;
-} */
+  /* left: 50%; */
+  transform: translateX(-38%);
+}
+
+/* sfondo sotto i colori */
+.pcr-app .swatches>div:before {
+  background: none;
+}
+
+/* palette colori */
+.pcr-app .swatches>div {
+  width: 30px;
+  height: 25px;
+}
+
+@media screen and (max-device-width: 500px) {
+  .pcr-app .swatches>div {
+    /* width: 28px; */
+    /* height: 28px; */
+  }
+
+}
