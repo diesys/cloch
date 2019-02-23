@@ -335,19 +335,22 @@ window.onload = function () {
         }
     }, 500);
 
-
-
-    //// UI /////////////////////////////////////////////
+        //// UI /////////////////////////////////////////////
     // $("#control_buttons").hide();  debug
     $("#toolbarToggle").bind({
         click: function () {
             $("#control_buttons").fadeToggle();
             
-            // button
-            if ($("#control_buttons").css('display') == 'none')
-                $("#toolbarToggle").attr('class', 'fa fa-chevron-circle-down');
-            else
-                $("#toolbarToggle").attr('class', 'fa fa-chevron-circle-up');
+            setTimeout(function () {
+                // button
+                if ($("#control_buttons").is(":hidden"))
+                    // $("#toolbarToggle").attr('class', 'fa fa-chevron-circle-down');
+                    $("#toolbarToggle").css('transform', 'rotate(180deg');
+                // else($("#control_buttons").is(":hidden"))
+                else
+                    // $("#toolbarToggle").attr('class', 'fa fa-chevron-circle-up');
+                    $("#toolbarToggle").css('transform', 'rotate(0deg)');
+            }, 600);
         },
     });
     /// SELECT MANUALLY HOUR AND MINUTE
