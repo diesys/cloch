@@ -33,27 +33,6 @@ function getUrlVars() {
     return vars;
 }
 
-function changeColor(color, duration=.5) {
-    var backgroundColorChange = TweenMax.to(background, duration, {
-        delay: 0,
-        transformOrigin: "50% 50%",
-        css: {fill: color},
-    });
-    var maskColorChange = TweenMax.to(sunMoon[2], duration, {
-        delay: 0,
-        transformOrigin: "50% 50%",
-        css: {fill: color},
-    });
-
-    //     colorpicker = $("colorpicker");
-    //     colorpicker.value = color.replace('#', '');
-    //     colorpicker.style.backgroundColor = color;
-    
-    if(config['debug']) {
-        console.log("new color", color);
-    }
-}
-
 function setHour(new_hour, style='fade') {
     new_hour = new_hour % 24;
     var hXY = hoursXY[new_hour % 6],
@@ -190,56 +169,6 @@ function setMinute(min, lazy = true) {
     } else console.log('error: minutes can be [0..60]');
 }
 
-// function toggle_colorpicker() {
-//     picker = $("colorpicker");
-//     if (picker.className == "jscolor active") {
-//         picker.className = "jscolor inactive"
-//     } else {
-//         picker.className = "jscolor active";
-//     }
-//     delete picker;
-// }
-
-// color picker (pickr)
-
-const pickr = new Pickr({
-    el: '.color-picker',
-    // useAsButton: false,
-
-    default: '#ff3c6d',
-
-    swatches: [
-        '#F44336',
-        '#E91E63',
-        '#9C27B0',
-        '#673AB7',
-        '#3F51B5',
-        '#2196F3',
-        '#03A9F4',
-        '#00BCD4',
-        '#009688',
-        '#4CAF50',
-        '#8BC34A',
-        '#CDDC39',
-        '#FFEB3B',
-        '#FFC107'
-    ],
-
-    components: {
-
-        // preview: false,
-
-        interaction: {
-            input: false,
-            save: true,
-        }
-    }
-});
-
-$('div.pcr-app').css({
-    'top': '0',
-    'bottom': '50px',
-});
 
 window.onload = function () {
     // main cloch elements
@@ -304,6 +233,82 @@ window.onload = function () {
     
     }, 0);
 
+    function changeColor(color, duration = .8) {
+        var backgroundColorChange = TweenMax.to(background, duration, {
+            delay: 0,
+            transformOrigin: "50% 50%",
+            css: {
+                fill: color
+            },
+        });
+        var maskColorChange = TweenMax.to(sunMoon[2], duration, {
+            delay: 0,
+            transformOrigin: "50% 50%",
+            css: {
+                fill: color
+            },
+        });
+
+        //     colorpicker = $("colorpicker");
+        //     colorpicker.value = color.replace('#', '');
+        //     colorpicker.style.backgroundColor = color;
+
+        if (config['debug']) {
+            console.log("new color", color);
+        }
+        config['color'] = color;
+    }
+
+    // color picker (pickr)
+    const pickr = new Pickr({
+        el: '.color-picker',
+        // useAsButton: false,
+
+        default: '#ff3c6d',
+
+        swatches: [
+            '#F44336',
+            '#E91E63',
+            '#9C27B0',
+            '#673AB7',
+            '#3F51B5',
+            '#2196F3',
+            '#03A9F4',
+            '#00BCD4',
+            '#009688',
+            '#4CAF50',
+            '#8BC34A',
+            '#CDDC39',
+            '#FFEB3B',
+            '#FFC107'
+        ],
+
+        components: {
+
+            // preview: false,
+
+            interaction: {
+                input: false,
+                save: false,
+            }
+        },
+
+        // User clicked the save button
+        onChange(hsva, instance) {
+            newCol = '#' + hsva.toHEX(hsva).join('');
+            changeColor('#' + hsva.toHEX(hsva).join(''));
+            $('div.pcr-button').css({
+                'background': newCol,
+            })
+            // console.log('#' + hsva.toHEX(hsva).join(''));
+        },
+    });
+
+    $('div.pcr-app').css({
+        'top': '0',
+        'bottom': '50px',
+    });
+
     function clochToggle() {
         if (stopCloch) {
             $("#startstop_cloch").attr('class', 'fa fa-pause');
@@ -337,6 +342,12 @@ window.onload = function () {
     $("#toolbarToggle").bind({
         click: function () {
             $("#control_buttons").fadeToggle();
+            
+            // button
+            if ($("#control_buttons").css('display') == 'none')
+                $("#toolbarToggle").attr('class', 'fa fa-chevron-circle-down');
+            else
+                $("#toolbarToggle").attr('class', 'fa fa-chevron-circle-up');
         },
     });
     /// SELECT MANUALLY HOUR AND MINUTE
@@ -389,5 +400,5 @@ window.onload = function () {
         if (config['debug']) {
             console.log("start/stop toggled");
         }
-    });    
+    });
 }
