@@ -184,6 +184,10 @@ svg#cloch:active {
   transform: translateX(-38%);
 }
 
+.pcr-app .swatches>button:after {
+  border: none;
+}
+
 /* sfondo sotto i colori */
 .pcr-app .swatches>div:before {
   background: none;

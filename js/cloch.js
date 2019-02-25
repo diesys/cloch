@@ -321,7 +321,7 @@
       }
 
 
-      function changeColor(color, duration = .8) {
+     function changeColor(color, duration = .8) {
           var backgroundColorChange = TweenMax.to(background, duration, {
               delay: 0,
               transformOrigin: "50% 50%",
@@ -346,11 +346,11 @@
           }
           config['color'] = color;
       }
-
+      a=changeColor;
       // color picker (pickr)
       const pickr = new Pickr({
-          el: '.color-picker',
-          // useAsButton: false,
+          el: '#colorpicker',
+        //   useAsButton: true,
 
           default: '#ff3c6d',
 
@@ -374,19 +374,19 @@
 
               interaction: {
                   input: false,
-                  save: false,
+                  save: true,
               }
           },
 
-          // User clicked the save button
-          onChange(hsva, instance) {
+          // User clicked on a color
+          onChange: function(hsva, instance) {
+              console.log(newCol);
               newCol = '#' + hsva.toHEX(hsva).join('');
-              changeColor('#' + hsva.toHEX(hsva).join(''));
-              $('div.pcr-button').css({
-                  'background': newCol,
-              })
+              changeColor(newCol);
+              $('div.pcr-button').css({'background': newCol})
               $('#browserColor').attr('content', newCol);
               $('#browserColorwp').attr('content', newCol);
+              $('#browserColorap').attr('content', newCol);
           },
       });
 
@@ -488,6 +488,13 @@
     
     
     
+    $('div.swatches>button').click(function (e) {
+        var color = $(e.target).css('color');
+        changeColor(color);
+    });
+
+
+
     // setup before start
     $('#toggle_stop_menu').hide()
     $('#control_buttons').hide()
