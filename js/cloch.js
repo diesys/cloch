@@ -1,7 +1,7 @@
   ////////// TO - DO //////////////////
 
   // ***** ripulire file in API/main da poter essere riutilizzato
-  // ***** non usare pickr, fare i bottoni html con flex e usare la funzione di binding in fondo
+  // ***** non usare pickr, fare i bottoni html con flex e usare la funzione di binding in fondo (cosi da usare bottone tavolozza sempre)
   
   // bg esagonale, colori piatti, o al massimo tipo cartone come il quadrante
 
@@ -357,7 +357,7 @@
       // color picker (pickr)
       const pickr = new Pickr({
           el: '#colorpicker',
-        //   useAsButton: true,
+          useAsButton: true,
 
           default: '#ff3c6d',
 
