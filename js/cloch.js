@@ -334,17 +334,19 @@
                   fill: color
               },
           });
-
-          //     colorpicker = $("colorpicker");
-          //     colorpicker.value = color.replace('#', '');
-          //     colorpicker.style.backgroundColor = color;
+        
+         // changes browser and button color
+         $('div.pcr-button').css({ 'background': color})
+         $('#browserColor').attr('content', color);
+         $('#browserColorwp').attr('content', color);
+         $('#browserColorap').attr('content', color);
 
           if (config['debug']) {
               console.log("new color", color);
           }
           config['color'] = color;
       }
-      a=changeColor;
+      
       // color picker (pickr)
       const pickr = new Pickr({
           el: '#colorpicker',
@@ -377,15 +379,15 @@
           },
 
           // User clicked on a color
-          onChange: function(hsva, instance) {
-              console.log(newCol);
-              newCol = '#' + hsva.toHEX(hsva).join('');
-              changeColor(newCol);
-              $('div.pcr-button').css({'background': newCol})
-              $('#browserColor').attr('content', newCol);
-              $('#browserColorwp').attr('content', newCol);
-              $('#browserColorap').attr('content', newCol);
-          },
+        //   onChange: function(hsva, instance) {
+        //       console.log(newCol);
+        //       newCol = '#' + hsva.toHEX(hsva).join('');
+        //       changeColor(newCol);
+        //     //   $('div.pcr-button').css({'background': newCol})
+        //     //   $('#browserColor').attr('content', newCol);
+        //     //   $('#browserColorwp').attr('content', newCol);
+        //     //   $('#browserColorap').attr('content', newCol);
+        //   },
       });
 
       $('div.pcr-app').css({
