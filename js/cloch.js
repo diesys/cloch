@@ -377,17 +377,6 @@
                 //   save: true,
               }
           },
-
-          // User clicked on a color
-        //   onChange: function(hsva, instance) {
-        //       console.log(newCol);
-        //       newCol = '#' + hsva.toHEX(hsva).join('');
-        //       changeColor(newCol);
-        //     //   $('div.pcr-button').css({'background': newCol})
-        //     //   $('#browserColor').attr('content', newCol);
-        //     //   $('#browserColorwp').attr('content', newCol);
-        //     //   $('#browserColorap').attr('content', newCol);
-        //   },
       });
 
       $('div.pcr-app').css({
@@ -453,10 +442,7 @@
       });
 
       $("#toggle_show").click(function () {
-          // $("#digital_clock").fadeToggle();
-          // $("#toggle_manual").fadeToggle();
-          // $("#startstop_cloch").fadeToggle();
-          $('#toggle_stop_menu').fadeToggle()
+           $('#toggle_stop_menu').fadeToggle()
 
           if (config['debug']) {
               console.log("manual timing toggle");
@@ -498,6 +484,6 @@
     $('#toggle_stop_menu').hide()
     $('#control_buttons').hide()
     $('#theme_toggle').hide()
-    // changeTheme(config['theme']);
+    
     setMinute(config['minute']['value'], config['theme']);
   }
