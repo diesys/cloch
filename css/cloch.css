@@ -171,6 +171,12 @@ svg#cloch:active {
   /* transform: translateY(8px); */
 }
 
+/* palette */
+#palette li {
+  /* display: inline-block; */
+}
+
+
 /* color picker (pickr) */
 .pcr-button, .pickr {
   display: inline-block;

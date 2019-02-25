@@ -357,36 +357,36 @@
       }
       
       // color picker (pickr)
-      const pickr = new Pickr({
-          el: '#colorpicker',
-        //   useAsButton: true,
+    //   const pickr = new Pickr({
+    //       el: '#colorpicker',
+    //     //   useAsButton: true,
 
-          default: '#ff3c6d',
+    //       default: '#ff3c6d',
 
-          swatches: [
-              '#F44336',
-              '#E91E63',
-              '#9C27B0',
-              '#673AB7',
-              '#3F51B5',
-              '#2196F3',
-              '#4CAF50',
-              '#8BC34A',
-              '#CDDC39',
-              '#FFEB3B',
-              '#FFC107'
-          ],
+    //       swatches: [
+    //           '#F44336',
+    //           '#E91E63',
+    //           '#9C27B0',
+    //           '#673AB7',
+    //           '#3F51B5',
+    //           '#2196F3',
+    //           '#4CAF50',
+    //           '#8BC34A',
+    //           '#CDDC39',
+    //           '#edd611',
+    //           '#FFC107'
+    //       ],
 
-          components: {
+    //       components: {
 
-              // preview: false,
+    //           // preview: false,
 
-              interaction: {
-                  input: false,
-                //   save: true,
-              }
-          },
-      });
+    //           interaction: {
+    //               input: false,
+    //             //   save: true,
+    //           }
+    //       },
+    //   });
 
       $('div.pcr-app').css({
           'top': '0',
@@ -476,6 +476,16 @@
         }
     });
     
+    // newpalette
+    $('#colorpicker').click(function () {
+        $('#palette').show();
+        console.log("palette toggle");
+        
+        if (config['debug']) {
+            console.log("palette toggle");
+        }
+    });
+    
     //   picker/theme selector toggle binding
     $('#theme_toggle').click(function () {
         config['theme'] == 'light' ? changeTheme('dark') : changeTheme('light');
@@ -483,9 +493,10 @@
     
     
     // binds clicking pickr not working DAMN - magari rifare il selettore semplice cosi?
-    $('div.swatches>button').click(function (e) {
-        var color = $(e.target).css('color');
+    $('ol#palette>li').click(function (e) {
+        var color = $(e.target).css('background');
         changeColor(color);
+        console.log(color);
     });
 
 
