@@ -20,12 +20,14 @@ body {
 }
 
 body.dark {
-  background: url('img/texture_light.png');
+  /* background: url('img/texture_light.png'); */
+  background: url('img/hex_light.png');
   background-color: #d6d6d6;
 }
 
 body.light {
-  background-image: url('img/texture.png');
+  /* background-image: url('img/texture.png'); */
+  background-image: url('img/hex.png');
   background-color: #1f1f1f;
 }
 
@@ -102,18 +104,11 @@ body.light {
 }
 #toolbar #digital_clock {
   font-family: 'oswald';
-  /* margin-left: 10px; */
   margin: 0;
-  /* display: inline-block; */
 }
 #toolbar #control_buttons,
 #toggle_stop_menu {
   display: inline;
-}
-#toolbar #control_buttons .hidden {
-  /* width: 0px; */
-  /* display: none; */
-  /* opacity: 0; */
 }
 
 #grad {
@@ -221,12 +216,4 @@ svg#cloch:active {
 .pcr-app .swatches>div {
   width: 30px;
   height: 25px;
-}
-
-@media screen and (max-device-width: 500px) {
-  .pcr-app .swatches>div {
-    /* width: 28px; */
-    /* height: 28px; */
-  }
-
 }

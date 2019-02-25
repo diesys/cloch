@@ -1,7 +1,9 @@
   ////////// TO - DO //////////////////
 
-  // ***** ripulire file in API/main da poter essere riutilizzato
+  // ***** ripulire file in API/main da poter essere riutilizzato (fare min e gzipped)
   // ***** non usare pickr, fare i bottoni html con flex e usare la funzione di binding in fondo (cosi da usare bottone tavolozza sempre)
+
+  // ** far apparire la UI in ritardo cosi' da non avere artifici a caricamento pagina vuota (magari fare dopo la pulizia del codice)
   
   // bg esagonale, colori piatti, o al massimo tipo cartone come il quadrante
 
@@ -357,7 +359,7 @@
       // color picker (pickr)
       const pickr = new Pickr({
           el: '#colorpicker',
-          useAsButton: true,
+        //   useAsButton: true,
 
           default: '#ff3c6d',
 
