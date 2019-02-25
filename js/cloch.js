@@ -1,8 +1,11 @@
   ////////// TO - DO //////////////////
 
+  // ***** ripulire file in API/main da poter essere riutilizzato
+  // ***** non usare pickr, fare i bottoni html con flex e usare la funzione di binding in fondo
+  
   // bg esagonale, colori piatti, o al massimo tipo cartone come il quadrante
 
-  // fare bottoncino show/hide delle info (da disegnare) tipo sulle ore, e sui minuti cosi da renderlo piu comprensibile all'inizio, tipo: numeri minuti e ore su cubo di cloch, fatte con div testo html font rubik e con tweenmax rotazione 3d. animazione sui numeri? creazione tracciato (drawsvg plugin?)? 
+  // show/hide delle info da disegnare sulle ore, e sui minuti cosi da renderlo piu comprensibile all'inizio, tipo: numeri minuti e ore su cubo di cloch, fatte con div testo html font rubik e con tweenmax rotazione 3d. animazione sui numeri? creazione tracciato (drawsvg plugin?)? 
 
   // nell 'howto mettere il compare approssimato sui minuti tra orlogio e cloch
 
@@ -10,17 +13,12 @@
 
   // implementare ora nell'url
 
-  // settare bene il pausa/play alla modifica manuale
-
   // lampeggio su cloch in pausa
 
-  // fare lightmode per colori chiari di sfondo (grigio scurissimissimo al posto del bianco)
-
-  // fare darkmode
+  // fare lightmode automatico per colori chiari di sfondo
 
   // fare versione con minuti relativi (minuto 0 parte da dove sta l'indicatore ore), Va mostrato che la modalita' e' diversa
 
-  // ripulire file in API/main da poter essere riutilizzato
 
   /////// CLOCH API //////////////////////
 
@@ -374,7 +372,7 @@
 
               interaction: {
                   input: false,
-                  save: true,
+                //   save: true,
               }
           },
 
@@ -487,18 +485,17 @@
     });
     
     
-    
+    // binds clicking pickr not working DAMN - magari rifare il selettore semplice cosi?
     $('div.swatches>button').click(function (e) {
         var color = $(e.target).css('color');
         changeColor(color);
     });
 
 
-
     // setup before start
     $('#toggle_stop_menu').hide()
     $('#control_buttons').hide()
     $('#theme_toggle').hide()
-      // changeTheme(config['theme']);
-      setMinute(config['minute']['value'], config['theme']);
+    // changeTheme(config['theme']);
+    setMinute(config['minute']['value'], config['theme']);
   }
