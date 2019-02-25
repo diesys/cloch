@@ -149,14 +149,14 @@
                   if (i != newMin['indicator_index'])
                       if (i % 2 == 0) {
                           TweenMax.to(minutes[i], 8 * durationFade, {
-                              fill: 'rgba(0,0,0,.1)',
+                              fill: 'rgba(0,0,0,.07)',
                               delay: 0,
                           });
                       }
               else {
                   TweenMax.to(minutes[i], 8 * durationFade, {
                       delay: 0,
-                      fill: 'rgba(0,0,0,.05)',
+                      fill: 'rgba(0,0,0,.04)',
                   });
               }
           } else if (theme == 'dark') {
@@ -182,14 +182,14 @@
                   if (i != newMin['indicator_index'])
                       if (i % 2 == 0) {
                           TweenMax.to(minutes[i], 8 * durationFade, {
-                              fill: 'rgba(255,255,255,.1)',
+                              fill: 'rgba(0,0,0,.05)',
                               delay: 0,
                           });
                       }
               else {
                   TweenMax.to(minutes[i], 8 * durationFade, {
                       delay: 0,
-                      fill: 'rgba(255,255,255,.05)',
+                      fill: 'rgba(0,0,0,.02)',
                   });
               }
           }
@@ -287,8 +287,9 @@
 
       }, 0);
 
-      changeTheme = function changeTheme(theme) {
-          config['theme'] = theme;
+      changeTheme = function changeTheme(theme) {        
+          $('body').attr('class', theme);
+          $('#grad').attr('class', theme);
 
           // minutes
           if (theme == 'dark') {
@@ -300,9 +301,12 @@
               });
               for(i=0; i<3; i++)
                 TweenMax.to(cubex[i], .5, {
-                    fill: '#ffffff',
+                    fill: 'rgba(0,0,0,.75)',
                     ease: Power2.easeOut,
                 });
+            
+            $('#toolbar i.fa').switchClass("light", "dark", 1000, "easeInOutQuad");
+
             } else if (theme == 'light') {
                 setMinute(config['minute']['value'], 'light');
                 // hours
@@ -310,12 +314,15 @@
                     fill: '#ffffff',
                     ease: Power2.easeOut,
                 });
-                for(i=0; i<3; i++)
-                  TweenMax.to(cubex[i], .5, {
-                      fill: '#000000',
-                      ease: Power2.easeOut,
-                  });
+            for(i=0; i<3; i++)
+                TweenMax.to(cubex[i], .5, {
+                    fill: '#000000',
+                    ease: Power2.easeOut,
+                });
+
+            $('#toolbar i.fa').switchClass("dark", "light", 1000, "easeInOutQuad");
           }
+          config['theme'] = theme;
       }
 
 
@@ -484,6 +491,11 @@
     $('#toggle_stop_menu').hide()
     $('#control_buttons').hide()
     $('#theme_toggle').hide()
-    
+
+    // sets transition for background body and gradient after page loading
+    $('body').css('transition', 'background .8s');
+    // $('#grad').css('transition', 'background 1s');
+    // $('#grad').css('transition-delay', '1s');
+
     setMinute(config['minute']['value'], config['theme']);
   }
