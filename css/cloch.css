@@ -8,6 +8,17 @@
   src: url('font/Oswald-Bold.ttf') format('truetype');
 } */
 
+/* animazioni */
+@keyframes startsHidden {
+  from {
+    display: none;
+  }
+
+  to {
+    display: block;
+  }
+}
+
 html,
 body {
   position: absolute;
@@ -20,13 +31,11 @@ body {
 }
 
 body.dark {
-  /* background: url('img/texture_light.png'); */
   background: url('img/hex_light.png');
   background-color: #d6d6d6;
 }
 
 body.light {
-  /* background-image: url('img/texture.png'); */
   background-image: url('img/hex.png');
   background-color: #1f1f1f;
 }
@@ -34,8 +43,8 @@ body.light {
 .hidden {
   display: none;
 }
-/* TOOLBAR */
 
+/* TOOLBAR */
 #toolbar {
   position: absolute;
   width: 100%;
@@ -190,16 +199,13 @@ ol#palette {
     bottom: 40px;
     padding: 8px 10px 5px 10px;
     box-shadow: 0 2px 20px -3px rgba(0, 0, 0, .7);
-    width: 90%;
-    min-width: 300px;
+    width: 100%;
+    min-width: 150px;
   }
 
   #palette li {
     height: 35px;
     width: 35px;
-    list-style: none;
-    cursor: pointer;
     margin: 1px 0px;
-    border-radius: 10px;
   }
 }

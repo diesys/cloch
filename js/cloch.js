@@ -432,6 +432,7 @@
     // newpalette
     $('#colorpicker').click(function () {
         $('#palette').fadeToggle();
+        $('#theme_toggle').fadeToggle();
         console.log("palette toggle");
         
         if (config['debug']) {
