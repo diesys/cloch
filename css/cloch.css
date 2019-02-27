@@ -191,16 +191,15 @@ ol#palette {
     padding: 8px 10px 5px 10px;
     box-shadow: 0 2px 20px -3px rgba(0, 0, 0, .7);
     width: 90%;
-    min-width: 90%;
+    min-width: 300px;
   }
 
   #palette li {
-    display: inline-block;
-    height: 30px;
-    width: 30px;
+    height: 35px;
+    width: 35px;
     list-style: none;
     cursor: pointer;
-    margin: 2px;
+    margin: 1px 0px;
     border-radius: 10px;
   }
 }
