@@ -1,7 +1,7 @@
   ////////// TO - DO //////////////////
 
   // ***** ripulire file in API/main da poter essere riutilizzato (fare min e gzipped)
-  // ***** non usare pickr, fare i bottoni html con flex e usare la funzione di binding in fondo (cosi da usare bottone tavolozza sempre)
+  // ***** color palette: usare flex 
 
   // ** far apparire la UI in ritardo cosi' da non avere artifici a caricamento pagina vuota (magari fare dopo la pulizia del codice)
   
@@ -328,7 +328,7 @@
       }
 
 
-     function changeColor(color, duration = .8) {
+    function changeColor(color, duration = .8) {
           var backgroundColorChange = TweenMax.to(background, duration, {
               delay: 0,
               transformOrigin: "50% 50%",
@@ -354,45 +354,8 @@
               console.log("new color", color);
           }
           config['color'] = color;
-      }
-      
-      // color picker (pickr)
-    //   const pickr = new Pickr({
-    //       el: '#colorpicker',
-    //     //   useAsButton: true,
-
-    //       default: '#ff3c6d',
-
-    //       swatches: [
-    //           '#F44336',
-    //           '#E91E63',
-    //           '#9C27B0',
-    //           '#673AB7',
-    //           '#3F51B5',
-    //           '#2196F3',
-    //           '#4CAF50',
-    //           '#8BC34A',
-    //           '#CDDC39',
-    //           '#edd611',
-    //           '#FFC107'
-    //       ],
-
-    //       components: {
-
-    //           // preview: false,
-
-    //           interaction: {
-    //               input: false,
-    //             //   save: true,
-    //           }
-    //       },
-    //   });
-
-      $('div.pcr-app').css({
-          'top': '0',
-          'bottom': '50px',
-      });
-
+    }
+    
       function clochToggle() {
           if (stopCloch) {
               $("#startstop_cloch").attr('class', 'fa fa-pause');
@@ -465,20 +428,10 @@
               console.log("start/stop toggled");
           }
       });
-
-    //   picker/theme selector toggle show
-    $('.pcr-button').click(function () {
-        if ($('.pcr-app').is(":visible"))
-            $('#theme_toggle').fadeToggle();
-        
-        if (config['debug']) {
-            console.log("theme toggle");
-        }
-    });
     
     // newpalette
     $('#colorpicker').click(function () {
-        $('#palette').show();
+        $('#palette').fadeToggle();
         console.log("palette toggle");
         
         if (config['debug']) {
@@ -494,9 +447,12 @@
     
     // binds clicking pickr not working DAMN - magari rifare il selettore semplice cosi?
     $('ol#palette>li').click(function (e) {
-        var color = $(e.target).css('background');
+        var color = $(e.target).css('background-color');
         changeColor(color);
-        console.log(color);
+        
+        if (config['debug']) {
+            console.log("palette color chaged to:", color);
+        }
     });
 
 
