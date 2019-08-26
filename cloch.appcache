@@ -3,10 +3,12 @@ CACHE MANIFEST
 
 CACHE:
 manifest.json
-glock.min.js
-style.min.css
-bower_components/Snap.svg/dist/snap.svg-min.js
-jscolor.min.js
+cloch.min.js
+cloch.min.css
+js/jquery.min.js
+js/jquery-ui-1.12.1.custom/jquery-ui.min.js
+js/jquery-ui-1.12.1.custom/jquery-ui.min.css
+  
 
 #FONTS
 font/Oswald-Bold.ttf
@@ -20,11 +22,11 @@ img/favicon256.png
 img/texture.png
 
   #howto
-img/howto/ht1.png
-img/howto/ht2.png
-img/howto/ht3.png
-img/howto/ht4.png
-img/howto/ht5.png
+#img/howto/ht1.png
+#img/howto/ht2.png
+#img/howto/ht3.png
+#img/howto/ht4.png
+#img/howto/ht5.png
 
 #FALLBACK:
 # This will enable imagename4.png to be as a replacement for
