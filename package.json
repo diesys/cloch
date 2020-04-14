@@ -1,34 +1,8 @@
 {
-  "name"    : "cloch",
-  "version" : "0.8.0",
-  "main"    : "app.js",
-  "bin"     : "./app.js",
-  "man"     : "",
-  "script"  : {
-    "start" : "electron,"
-  },
-   "repository": {
-    "type"  : "git",
-    "url"   : ".git/"
-  },
-  "keywords": [
-    "graphical",
-    "clock",
-    "exagon",
-    "snap.svg",
-    "svg",
-    "hour",
-    "minute",
-    "second",
-    "time"
-  ],
-  "author"  : "Diego Turtulici <me@flowin.space>",
-  "url"     : "http://flowin.space",
-  "license" : "GPL-3.0",
-  "dependencies" :
-    {
-    "snap"    : "file:dist/snap.svg-min.js",
-    "jscolor" : "file:jscolor.js",
-    "glock"   : "file:glock.js"
-    }
+  "name": "Cloch",
+  "version": "0.1.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  }
 }
