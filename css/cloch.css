@@ -28,6 +28,7 @@ body {
   padding: 0;
   margin: 0;
   overflow: hidden;
+  font-family: 'Baloo Tamma 2', Arial, cursive;
 }
 
 body.dark {
@@ -97,9 +98,11 @@ body.light {
 
 #toolbar #toggle_help {
   position: absolute;
-  right: 0;
+  /* right: 0; */
+  left: 0;
   opacity: .4;
   z-index: 0;
+  bottom: 0;
 }
 #toolbar #toggle_help:hover {
   opacity: 1;
@@ -208,4 +211,27 @@ ol#palette {
     width: 35px;
     margin: 1px 0px;
   }
+}
+
+
+#help {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  background: #000000d0;
+  color: #fff;
+  z-index: 7;
+  padding: 5% 10%;
+  padding-bottom: 3em;
+  overflow-y: auto;
+  text-align: justify;
+  line-height: 1.2em;
+}
+#help h3,
+#help h4 {
+  text-transform: uppercase;
+}
+#help a {
+  color: #ddddddf0;
 }

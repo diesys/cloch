@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="it" manifest="app/cloch.appcache">
+<!-- <html lang="it" manifest="app/cloch.appcache"> -->
+<html lang="it">
 
 <head>
   <title>Cloch</title>
@@ -51,6 +52,9 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="#040404" id="browserColorap">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   
+  <!-- main css -->
+  <link rel="stylesheet" href="css/cloch.min.css" defer>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+Tamma+2&display=swap" rel="stylesheet" defer>
 
   <!-- Favicon -->
   <link rel="icon" href="img/favicon.png" type="image/x-icon">
@@ -140,15 +144,17 @@
       <div id="control_buttons" class="hidden">
         <i id="colorpicker" class="light fa fa-palette"></i>
           <ol id="palette" class="hidden">
-            <li style='background:#F44336'></li>
+            <li style='background:#d41818'></li>
+            <li style='background:#e6582d'></li>
             <li style='background:#E91E63'></li>
             <li style='background:#9C27B0'></li>
             <!-- <li style='background:#673AB7'></li> -->
             <li style='background:#3F51B5'></li>
             <li style='background:#2196F3'></li>
+            <li style='background:#28b98e'></li>
             <li style='background:#4CAF50'></li>
-            <li style='background:#8BC34A'></li>
-            <li style='background:#CDDC39'></li>
+            <li style='background:#81c731'></li>
+            <li style='background:#c3d618'></li>
             <!-- <li style='background:#edd611'></li> -->
             <li style='background:#FFC107'></li>
           </ol>
@@ -158,22 +164,49 @@
         <div id="toggle_stop_menu">
           <i id="startstop_cloch" class="light fa fa-pause"></i>
           <p class="time_indicator" id="digital_clock"></p>
-          <i id="toggle_manual" class="time_indicator fa fa-pen"></i>
+          <!-- <i id="toggle_manual" class="time_indicator fa fa-pen"></i> -->
         </div>   
-        <i id="toggle_help" class="light fa fa-question-circle"></i>
         <div id="timepicker-spinbox"></div>
       </div>
+      <i id="toggle_help" class="light fa fa-question-circle"></i>
     </div>
-  
+
+    <div id="help" class="help hidden">
+      <h1>Cos'è Cloch?</h1>
+
+      <p>Cloch è un'orologio grafico che cerca un approccio diverso nello scandire il tempo, è fatto per essere visto e non letto. Una volta capito sarà facile capire l'ora anche vedendolo a distanza o di sfuggita.</p>
+      
+      <h3>GLI INDICATORI</h3>
+      <p>Cloch al posto delle lancette usa degli indicatori ma il funzionamento è quasi identico. È anche un orologio «solare», cioè: anziché AM/PM usa l'alba (~6) e il tramonto (~18).</p>
+
+      <h4>Minuti</h4>
+      <p>Gli indicatori sono 12 e sono metà sui vertici (min 0, 10, 20, 30..) e metà sui lati (min 5, 15, 25, 35..) e il funzionamento è molto semplice: indicatore più illuminato è quello più vicino al minuto attuale, l'eventuale indicatore più chiaro a fianco (prima o dopo) indica di quanti minuti prima o dopo si è rispetto al principale. Vi basterà capire la "zona" illuminata per avere subito un'ottima approssimazione del minuto!</p>
+
+      <h4>Ore</h4>
+      <p>Il simbolino sole/luna che si sposta tra i vertici dell'esagono indica l'ora (quindi fa 4 giri ogni 24 ore!). Ha quattro possibili stati: ½ luna e sole (0-5), sole (6-11), ½ sole e luna (12-17), luna (18-23). <br/>
+        Immagina, quindi, di far andare la lancetta dell'ora a velocità doppia: alle 6 e 12 (AM/PM) l'indicatore sta in alto; invece alle 3 e le 9 (AM/PM), anziché essere nei quarti del quadrante, l'ora sarà indicata nel vertice in basso. <br/>
+        Tutte le altre ore vengono di conseguenza, ogni vertice è +1 (in senso orario!).
+      </p>
+      
+      <!-- <h3>Personalizzalo</h3>
+      <p>Hai provato a cliccare sul menu in basso? Ti si aprirà un menù con una tavolozza (o
+      notazione HTML), ne hai trovato uno che ti piace? Questo sito non utilizza cookie quindi puoi salvare quel valore e
+      metterlo come suffisso nella barra degli indirizzi. Così puoi aggiungere ai preferiti il link con il colore che
+      preferisci!
+                
+      Ricorda che le variabili nell'URL vanno inserite dopo il punto interrogativo (che ne determina l'inizio) e ogni coppia
+      variabile=valore va divisa dall'altra con un &!</p> -->
+      <p>Cloch è una rivisitazione di un mio vecchio prototipo <a href="https://flowin.space/glock/"><i>Glock</i></a>.</p>
+
+      <p>Glock è stato realizzato usando HTML5, CSS3, JavaScript e JQuery. <br />Ideato e realizzato da <a href="http://flowin.space">Diego Turtulici</a>.<br /> <a href="https://git.eigenlab.org/sbiego/cloch">Codice sorgente</a> rilasciato sotto <a href="https://www.gnu.org/licenses/gpl-3.0.html">licenza GPLv3</a>.</p>
+    </div>
+
   <script type="text/javascript" src="js/TweenMax.min.js"></script>
   
   <!-- palette color picker (https://github.com/Simonwep/pickr) -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.css"/>
-  <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.css"/> -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script> -->
   
-  <!-- main css -->
-  <link rel="stylesheet" href="css/cloch.min.css">
-
   <!-- main js -->
   <script src="js/cloch.min.js"></script>
 

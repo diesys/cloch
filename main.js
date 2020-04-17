@@ -13,15 +13,17 @@ function createWindow () {
     frame: false,
     transparent: false,
     webPreferences: {
-        nodeIntegrationInWorker: true
-    }
+        // nodeIntegrationInWorker: true
+    },
+    icon: require('path').join('img/favicon256.png')
   })
     
+
   // and load the index.html of the app.
   win.loadFile('index.html')
 
   // Open the DevTools.
-  // win.webContents.openDevTools()
+  // win.webContents.openDevTools('dark')
 }
 
 // This method will be called when Electron has finished

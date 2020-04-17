@@ -212,6 +212,157 @@ function setMinute(min, theme = 'light') {
     } else console.log('error: minutes can be [0..60]');
 }
 
+
+function changeTheme(theme) {
+    $('body').attr('class', theme);
+    $('#grad').attr('class', theme);
+
+    // minutes
+    if (theme == 'dark') {
+        setMinute(config['minute']['value'], 'dark');
+        // hours
+        TweenMax.to(sunMoon[1], .5, {
+            fill: '#040404',
+            ease: Power2.easeOut,
+        });
+        for (i = 0; i < 3; i++)
+            TweenMax.to(cubex[i], .5, {
+                fill: 'rgba(0,0,0,.75)',
+                ease: Power2.easeOut,
+            });
+
+        $('#toolbar i.fa').switchClass("light", "dark", 1000, "easeInOutQuad");
+
+    } else if (theme == 'light') {
+        setMinute(config['minute']['value'], 'light');
+        // hours
+        TweenMax.to(sunMoon[1], .5, {
+            fill: '#ffffff',
+            ease: Power2.easeOut,
+        });
+        //cubhex
+        for (i = 0; i < 3; i++)
+            TweenMax.to(cubex[i], .5, {
+                fill: '#000000',
+                ease: Power2.easeOut,
+            });
+        $('#toolbar i.fa').switchClass("dark", "light", 1000, "easeInOutQuad");
+    } config['theme'] = theme;
+}
+
+function changeColor(color, duration = .8) {
+    var backgroundColorChange = TweenMax.to(background, duration, {
+        delay: 0,
+        transformOrigin: "50% 50%",
+        css: {
+            fill: color
+        },
+    });
+    var maskColorChange = TweenMax.to(sunMoon[2], duration, {
+        delay: 0,
+        transformOrigin: "50% 50%",
+        css: {
+            fill: color
+        },
+    });
+
+    // changes browser and button color
+    $('div.pcr-button').css({ 'background': color })
+    $('#browserColor').attr('content', color);
+    $('#browserColorwp').attr('content', color);
+    $('#browserColorap').attr('content', color);
+    
+    if (config['debug']) {
+        console.log("new color", color);
+    }
+    
+    config['color'] = color;
+    // location.href = addParameterToURL('color='+encodeURI(config['color']));
+    // location.href += location.href.split('?')[0] ? encodeURI('?color=' + config['color']) : '#';
+}
+
+// function addParameterToURL(param) {
+//     _url = location.href;
+//     // _url += (_url.split('?color')[1] ? '&' : '?') + param;
+//     _url = _url.split('?')[0] + '?' + param;
+//     return _url;
+// }
+
+function clochToggle() {
+    if (stopCloch) {
+        $("#startstop_cloch").attr('class', 'fa fa-pause');
+        stopCloch = false;
+    } else {
+        $("#startstop_cloch").attr('class', 'fa fa-play');
+        stopCloch = true;
+    }
+}
+
+function exampleMins(time = 500) {
+    stopCloch = true; j = 0;
+    setInterval(function () {
+        if (j < 60) {
+            setMinute(j);
+            j++
+        }
+    }, time)
+}
+
+function exampleHours(time = 1300) {
+    stopCloch = true; i=0;
+    setInterval(function () {
+        if(i<24) {
+            setHour(i)
+            i++
+        }
+    }, time*2)
+    // console.log(i,j)
+}
+
+
+// CONFIGS
+// MINUTES ANGLE: 0, 10, 20, 30, 50, 60  in clockwise order
+// MINUTES MIDDLE: 5, 15, 25, 35, 45, 55 in clockwise order
+minutes = [$('#minAng_top'), $('#minMid_rightT'), $('#minAng_topR'), $('#minMid_right'), $('#minAng_bottomR'), $('#minMid_rightB'), $('#minAng_bottom'), $('#minMid_leftB'), $('#minAng_bottomL'), $('#minMid_left'), $('#minAng_topL'), $('#minMid_leftT')],
+
+    // indicator, sun and moon mask. sunMoon[2].opacity=0 -> sun; sunMoon[2].opacity=0 -> moon
+    sunMoon = [$('#sunmoon_indicator'), $('#sun'), $('#moon_mask')],
+
+    // sort of a false perspective cube on the center of the quadrant
+    cubex = [$('#cubex_top'), $('#cubex_left'), $('#cubex_right')];
+
+// Hours traslation coordinates
+hoursXY = new Array([-33.8, -19], [0, 0], [0, 40], [-33.8, 58], [-67, 38], [-67, 0]);
+
+// general duration fade used for relative timing and delay
+durationFade = .1,
+
+    // global variable for start/stopping the clock for manual select
+    stopCloch = false;
+
+// Minutes indicator color values (DARK)
+minutesColorsDark = {
+    // from < animation
+    'first_start': ['rgba(5,5,5,1)', 'rgba(5,5,5,1)', 'rgba(5,5,5,1)', 'rgba(5,5,5,.7)', 'rgba(5,5,5,.4)'],
+    'second_start': ['rgba(0,0,0,.1)', 'rgba(5,5,5,.1)', 'rgba(5,5,5,.4)', 'rgba(5,5,5,.4)', 'rgba(5,5,5,.7)'],
+
+    // to > animation
+    'first': ['rgba(5,5,5,1)', 'rgba(5,5,5,1)', 'rgba(5,5,5,.7)', 'rgba(5,5,5,.4)', 'rgba(5,5,5,.4)'],
+    'second': ['rgba(0,0,0,.1)', 'rgba(5,5,5,.4)', 'rgba(5,5,5,.4)', 'rgba(5,5,5,.7)', 'rgba(5,5,5,1)'],
+};
+// light Minutes indicator color values 
+minutesColors = {
+    // from < animation
+    'first_start': ['rgba(255,255,255,1)', 'rgba(255,255,255,1)', 'rgba(255,255,255,1)', 'rgba(255, 255, 255, .7)', 'rgba(255, 255, 255, .4)'],
+    'second_start': ['rgba(0,0,0,.1)', 'rgba(255,255,255,.1)', 'rgba(255,255,255,.4)', 'rgba(255, 255, 255, .4)', 'rgba(255, 255, 255, .7)'],
+
+    // to > animation
+    'first': ['rgba(255,255,255,1)', 'rgba(255,255,255,1)', 'rgba(255,255,255,.7)', 'rgba(255, 255, 255, .4)', 'rgba(255, 255, 255, .4)'],
+    'second': ['rgba(0,0,0,.1)', 'rgba(255,255,255,.4)', 'rgba(255,255,255,.4)', 'rgba(255, 255, 255, .7)', 'rgba(255, 255, 255, 1)'],
+};
+
+
+
 window.onload = function () {
     // main cloch elements
     cloch = $('#cloch'),
@@ -222,47 +373,6 @@ window.onload = function () {
     cloch.css({
         'opacity': '1'
     });
-
-
-    // MINUTES ANGLE: 0, 10, 20, 30, 50, 60  in clockwise order
-    // MINUTES MIDDLE: 5, 15, 25, 35, 45, 55 in clockwise order
-    minutes = [$('#minAng_top'), $('#minMid_rightT'), $('#minAng_topR'), $('#minMid_right'), $('#minAng_bottomR'), $('#minMid_rightB'), $('#minAng_bottom'), $('#minMid_leftB'), $('#minAng_bottomL'), $('#minMid_left'), $('#minAng_topL'), $('#minMid_leftT')],
-
-    // indicator, sun and moon mask. sunMoon[2].opacity=0 -> sun; sunMoon[2].opacity=0 -> moon
-    sunMoon = [$('#sunmoon_indicator'), $('#sun'), $('#moon_mask')],
-
-    // sort of a false perspective cube on the center of the quadrant
-    cubex = [$('#cubex_top'), $('#cubex_left'), $('#cubex_right')];
-
-    // Hours traslation coordinates
-    hoursXY = new Array([-33.8, -19], [0, 0], [0, 40], [-33.8, 58], [-67, 38], [-67, 0]);
-
-    // general duration fade used for relative timing and delay
-    durationFade = .1,
-
-    // global variable for start/stopping the clock for manual select
-    stopCloch = false;
-
-    // Minutes indicator color values (DARK)
-    minutesColorsDark = {
-        // from < animation
-        'first_start': ['rgba(5,5,5,1)', 'rgba(5,5,5,1)', 'rgba(5,5,5,1)', 'rgba(5,5,5,.7)', 'rgba(5,5,5,.4)'],
-        'second_start': ['rgba(0,0,0,.1)', 'rgba(5,5,5,.1)', 'rgba(5,5,5,.4)', 'rgba(5,5,5,.4)', 'rgba(5,5,5,.7)'],
-
-        // to > animation
-        'first': ['rgba(5,5,5,1)', 'rgba(5,5,5,1)', 'rgba(5,5,5,.7)', 'rgba(5,5,5,.4)', 'rgba(5,5,5,.4)'],
-        'second': ['rgba(0,0,0,.1)', 'rgba(5,5,5,.4)', 'rgba(5,5,5,.4)', 'rgba(5,5,5,.7)', 'rgba(5,5,5,1)'],
-    };
-    // light Minutes indicator color values 
-    minutesColors = {
-        // from < animation
-        'first_start': ['rgba(255,255,255,1)', 'rgba(255,255,255,1)', 'rgba(255,255,255,1)', 'rgba(255, 255, 255, .7)', 'rgba(255, 255, 255, .4)'],
-        'second_start': ['rgba(0,0,0,.1)', 'rgba(255,255,255,.1)', 'rgba(255,255,255,.4)', 'rgba(255, 255, 255, .4)', 'rgba(255, 255, 255, .7)'],
-
-        // to > animation
-        'first': ['rgba(255,255,255,1)', 'rgba(255,255,255,1)', 'rgba(255,255,255,.7)', 'rgba(255, 255, 255, .4)', 'rgba(255, 255, 255, .4)'],
-        'second': ['rgba(0,0,0,.1)', 'rgba(255,255,255,.4)', 'rgba(255,255,255,.4)', 'rgba(255, 255, 255, .7)', 'rgba(255, 255, 255, 1)'],
-    };
 
 
     ////// MAIN ///////////   
@@ -291,80 +401,6 @@ window.onload = function () {
 
     }, 0);
 
-    function changeTheme(theme) {        
-        $('body').attr('class', theme);
-        $('#grad').attr('class', theme);
-
-        // minutes
-        if (theme == 'dark') {
-            setMinute(config['minute']['value'], 'dark');
-            // hours
-            TweenMax.to(sunMoon[1], .5, {
-                fill: '#040404',
-                ease: Power2.easeOut,
-            });
-            for(i=0; i<3; i++)
-            TweenMax.to(cubex[i], .5, {
-                fill: 'rgba(0,0,0,.75)',
-                ease: Power2.easeOut,
-            });
-        
-        $('#toolbar i.fa').switchClass("light", "dark", 1000, "easeInOutQuad");
-
-        } else if (theme == 'light') {
-            setMinute(config['minute']['value'], 'light');
-            // hours
-            TweenMax.to(sunMoon[1], .5, {
-                fill: '#ffffff',
-                ease: Power2.easeOut,
-            });
-            //cubhex
-            for(i=0; i<3; i++)
-                TweenMax.to(cubex[i], .5, {
-                    fill: '#000000',
-                    ease: Power2.easeOut,
-                });
-        $('#toolbar i.fa').switchClass("dark", "light", 1000, "easeInOutQuad");
-        } config['theme'] = theme;
-    }
-
-    function changeColor(color, duration = .8) {
-          var backgroundColorChange = TweenMax.to(background, duration, {
-              delay: 0,
-              transformOrigin: "50% 50%",
-              css: {
-                  fill: color
-              },
-          });
-          var maskColorChange = TweenMax.to(sunMoon[2], duration, {
-              delay: 0,
-              transformOrigin: "50% 50%",
-              css: {
-                  fill: color
-              },
-          });
-        
-         // changes browser and button color
-         $('div.pcr-button').css({ 'background': color})
-         $('#browserColor').attr('content', color);
-         $('#browserColorwp').attr('content', color);
-         $('#browserColorap').attr('content', color);
-
-          if (config['debug']) {
-              console.log("new color", color);
-          }
-          config['color'] = color;
-    }
-    
-    function clochToggle() {
-        if (stopCloch) {
-            $("#startstop_cloch").attr('class', 'fa fa-pause');
-            stopCloch = false;
-        } else {
-            $("#startstop_cloch").attr('class', 'fa fa-play');
-            stopCloch = true;
-        }
-    }
 
     // checks if there's any hour and minute in the url
     setInterval(function () {
@@ -433,7 +469,6 @@ window.onload = function () {
     $('#colorpicker').click(function () {
         $('#palette').fadeToggle();
         $('#theme_toggle').fadeToggle();
-        console.log("palette toggle");
         
         if (config['debug']) {
             console.log("palette toggle");
@@ -454,6 +489,14 @@ window.onload = function () {
         if (config['debug']) {
             console.log("palette color chaged to:", color);
         }
+    });
+
+    // help toggle
+    $('#toggle_help').click(function () {
+        $('#help').fadeToggle()
+        $('#toolbarToggle').fadeToggle()
+        $('#colorpicker').fadeToggle()
+        $('#toggle_show').fadeToggle()
     });
 
 
