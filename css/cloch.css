@@ -103,6 +103,7 @@ body.light {
   transition: all .4s ease;
   animation: fadeInBlur 1s;
   text-shadow: 0 1px 4px #00000020;
+  pointer-events: none;
 }
 
 .dark #digital_clock {
@@ -259,6 +260,7 @@ svg#cloch {
   z-index: 101;
   -webkit-transition: .2s ease;
   transition: .2s ease;
+  pointer-events: none;
 }
 
 

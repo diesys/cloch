@@ -214,8 +214,11 @@ function setMinute(min, theme = 'light') {
 
 
 function changeTheme(theme) {
-    $('body').attr('class', theme);
-    $('#grad').attr('class', theme);
+    // preserves the blur and just toggles body and gradient
+    $('body').toggleClass('dark')
+    $('body').toggleClass('light')
+    $('#grad').toggleClass('dark')
+    $('#grad').toggleClass('light')
 
     // minutes
     if (theme == 'dark') {
