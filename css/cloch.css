@@ -178,15 +178,16 @@ ol#palette {
   left: 50%;
   transform: translateX(-50%);
   z-index: 1000;
-  padding: 8px 10px 5px 10px;
-  border-radius: 6px;
+  border-radius: 10px;
   box-shadow: 0 2px 20px -3px rgba(0, 0, 0, .7);
   background: rgba(0, 0, 0, .9);
   width: auto;
-  min-width: 425px;
+  display: flex;
+  justify-content: space-evenly;
+  align-content: center;
+  padding: 4px 6px;
 }
 #palette li {
-  display: inline-block;
   height: 30px;
   width: 30px;
   list-style: none;
@@ -199,11 +200,11 @@ ol#palette {
 @media screen and (max-width: 500px) {
   /* palette */
   ol#palette {
-    bottom: 40px;
-    padding: 8px 10px 5px 10px;
+    /* bottom: 40px; */
+    /* padding: 8px 10px 5px 10px; */
     box-shadow: 0 2px 20px -3px rgba(0, 0, 0, .7);
     width: 100%;
-    min-width: 150px;
+    /* min-width: 150px; */
   }
 
   #palette li {
@@ -212,7 +213,6 @@ ol#palette {
     margin: 1px 0px;
   }
 }
-
 
 #help {
   position: fixed;

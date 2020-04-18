@@ -247,7 +247,8 @@ function changeTheme(theme) {
                 ease: Power2.easeOut,
             });
         $('#toolbar i.fa').switchClass("dark", "light", 1000, "easeInOutQuad");
-    } config['theme'] = theme;
+    }
+    config['theme'] = theme;
 }
 
 function changeColor(color, duration = .8) {
@@ -267,26 +268,41 @@ function changeColor(color, duration = .8) {
     });
 
     // changes browser and button color
-    $('div.pcr-button').css({ 'background': color })
+    $('div.pcr-button').css({
+        'background': color
+    })
     $('#browserColor').attr('content', color);
     $('#browserColorwp').attr('content', color);
     $('#browserColorap').attr('content', color);
-    
+
     if (config['debug']) {
         console.log("new color", color);
     }
-    
-    config['color'] = color;
-    // location.href = addParameterToURL('color='+encodeURI(config['color']));
-    // location.href += location.href.split('?')[0] ? encodeURI('?color=' + config['color']) : '#';
+
+    config['color'] = color.replace(/\s/g, '');
+    addClrToURL()
+    // addToURL({'color': config['color']})
 }
 
-// function addParameterToURL(param) {
-//     _url = location.href;
-//     // _url += (_url.split('?color')[1] ? '&' : '?') + param;
-//     _url = _url.split('?')[0] + '?' + param;
-//     return _url;
+// function addToURL(parameters) {
+//     if (window.history.replaceState) {
+//         for (var key in parameters)
+//             if (parameters.hasOwnProperty(key))
+//                 // window.history.replaceState({
+//                 window.history.pushState({
+//                     key: parameters[key]
+//                 }, key+'_'+parameters[key], '?'+key+'=' + parameters[key]);
+//     }
 // }
+
+function addClrToURL() {
+    if (window.history.replaceState) {
+        //prevents browser from storing history with each change:
+        window.history.replaceState({
+            'color': config['color']
+        }, 'newcolor', '?color=' + config['color']);
+    }
+}
 
 function clochToggle() {
     if (stopCloch) {
@@ -299,7 +315,8 @@ function clochToggle() {
 }
 
 function exampleMins(time = 500) {
-    stopCloch = true; j = 0;
+    stopCloch = true;
+    j = 0;
     setInterval(function () {
         if (j < 60) {
             setMinute(j);
@@ -309,13 +326,14 @@ function exampleMins(time = 500) {
 }
 
 function exampleHours(time = 1300) {
-    stopCloch = true; i=0;
+    stopCloch = true;
+    i = 0;
     setInterval(function () {
-        if(i<24) {
+        if (i < 24) {
             setHour(i)
             i++
         }
-    }, time*2)
+    }, time * 2)
     // console.log(i,j)
 }
 
@@ -325,11 +343,11 @@ function exampleHours(time = 1300) {
 // MINUTES MIDDLE: 5, 15, 25, 35, 45, 55 in clockwise order
 minutes = [$('#minAng_top'), $('#minMid_rightT'), $('#minAng_topR'), $('#minMid_right'), $('#minAng_bottomR'), $('#minMid_rightB'), $('#minAng_bottom'), $('#minMid_leftB'), $('#minAng_bottomL'), $('#minMid_left'), $('#minAng_topL'), $('#minMid_leftT')],
 
-    // indicator, sun and moon mask. sunMoon[2].opacity=0 -> sun; sunMoon[2].opacity=0 -> moon
-    sunMoon = [$('#sunmoon_indicator'), $('#sun'), $('#moon_mask')],
+// indicator, sun and moon mask. sunMoon[2].opacity=0 -> sun; sunMoon[2].opacity=0 -> moon
+sunMoon = [$('#sunmoon_indicator'), $('#sun'), $('#moon_mask')],
 
-    // sort of a false perspective cube on the center of the quadrant
-    cubex = [$('#cubex_top'), $('#cubex_left'), $('#cubex_right')];
+// sort of a false perspective cube on the center of the quadrant
+cubex = [$('#cubex_top'), $('#cubex_left'), $('#cubex_right')];
 
 // Hours traslation coordinates
 hoursXY = new Array([-33.8, -19], [0, 0], [0, 40], [-33.8, 58], [-67, 38], [-67, 0]);
@@ -337,8 +355,8 @@ hoursXY = new Array([-33.8, -19], [0, 0], [0, 40], [-33.8, 58], [-67, 38], [-67,
 // general duration fade used for relative timing and delay
 durationFade = .1,
 
-    // global variable for start/stopping the clock for manual select
-    stopCloch = false;
+// global variable for start/stopping the clock for manual select
+stopCloch = false;
 
 // Minutes indicator color values (DARK)
 minutesColorsDark = {
@@ -464,28 +482,28 @@ window.onload = function () {
             console.log("start/stop toggled");
         }
     });
-    
+
     // newpalette
     $('#colorpicker').click(function () {
         $('#palette').fadeToggle();
-        $('#theme_toggle').fadeToggle();
-        
+        // $('#theme_toggle').fadeToggle();
+
         if (config['debug']) {
             console.log("palette toggle");
         }
     });
-    
+
     //   picker/theme selector toggle binding
     $('#theme_toggle').click(function () {
         config['theme'] == 'light' ? changeTheme('dark') : changeTheme('light');
     });
-    
-    
+
+
     // binds clicking pickr not working DAMN - magari rifare il selettore semplice cosi?
     $('ol#palette>li').click(function (e) {
         var color = $(e.target).css('background-color');
         changeColor(color);
-        
+
         if (config['debug']) {
             console.log("palette color chaged to:", color);
         }
@@ -503,7 +521,8 @@ window.onload = function () {
     // setup before start
     $('#toggle_stop_menu').hide()
     $('#control_buttons').hide()
-    $('#theme_toggle').hide()
+    $('#palette').hide()
+    // $('#theme_toggle').hide()
 
     // sets transition for background body and gradient after page loading
     $('body').css('transition', 'background .8s');
@@ -511,4 +530,4 @@ window.onload = function () {
     // $('#grad').css('transition-delay', '1s');
 
     setMinute(config['minute']['value'], config['theme']);
-  }
+}
