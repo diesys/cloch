@@ -243,7 +243,7 @@ body.light {
 }
 
 body.inactive>#quadranthx_container {
-  filter: blur(4px);
+  filter: blur(5px);
 }
 
 svg#cloch {
@@ -317,7 +317,7 @@ ol#palette.rsquared {
   width: 100%;
   z-index: 8;
   box-sizing: border-box;
-  background: #000000d0;
+  background: #000000b0;
   color: #fff;
   /* z-index: 12; */
   padding: 5% 10%;
@@ -329,7 +329,7 @@ ol#palette.rsquared {
 }
 .dark #help {
   color: #222;
-  background: #ddddddd0;
+  background: #eeeeeeb0;
 }
 #help h3,
 #help h4 {
