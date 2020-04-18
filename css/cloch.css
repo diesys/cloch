@@ -123,8 +123,13 @@ body.light {
   text-align: center;
   z-index: 10;
   user-select: none;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.9), transparent)
   /* overflow-x: hidden; */
 }
+.dark #toolbar {
+  background: linear-gradient(0deg, #5c5c5cf0, transparent)
+}
+
 #toolbar * {
   outline: none;
 }
@@ -149,10 +154,11 @@ body.light {
   color: rgba(255, 255, 255, .9);
 }
 #toolbar i.fa.dark {
-  color: rgba(5, 5, 5, .55);
+  /* color: rgba(5, 5, 5, .55); */
+  color: rgba(5, 5, 5, .8);
 }
 #toolbar i.fa.dark:hover {
-  color: rgba(5, 5, 5, .9);
+  color: rgba(5, 5, 5, 1);
 }
 
 #toolbar #toolbarToggle {
@@ -183,12 +189,15 @@ body.light {
   position: absolute;
   /* right: 0; */
   left: 0;
-  opacity: .4;
+  opacity: .25;
   z-index: 11;
   bottom: 0;
 }
 #toolbar #toggle_help:hover {
   opacity: 1;
+}
+.dark #toolbar #toggle_help {
+  opacity: .6;
 }
 
 #toolbar,
