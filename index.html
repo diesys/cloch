@@ -18,7 +18,8 @@
   <script src="js/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
   
   <!-- STYLE -->
- 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+ 	<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"> -->
+ 	<link rel="stylesheet" href="css/fa/fa.min.css" crossorigin="anonymous">
 
 
   <!-- Mobile Specifics -->
@@ -124,10 +125,14 @@
           </g>
         </g>
       </svg>
+      <p class="time_indicator" id="digital_clock"></p>
     </div>
 
     <div id="toolbar">
+      <i id="toggle_help" class="toggleHelp light fa fa-question-circle"></i>
+
       <i id="toolbarToggle" class="light fa fa-chevron-circle-up"></i>
+      
       <div id="control_buttons" class="hidden">
         <i id="colorpicker" class="light fa fa-palette"></i>
           <ol id="palette" class="hidden">
@@ -153,15 +158,15 @@
         <i id="toggle_show" class="light fa fa-clock"></i>
         <div id="toggle_stop_menu">
           <i id="startstop_cloch" class="light fa fa-pause"></i>
-          <p class="time_indicator" id="digital_clock"></p>
           <!-- <i id="toggle_manual" class="time_indicator fa fa-pen"></i> -->
         </div>   
         <div id="timepicker-spinbox"></div>
       </div>
-      <i id="toggle_help" class="light fa fa-question-circle"></i>
     </div>
 
     <div id="help" class="help hidden">
+      <span class="button close toggleHelp" id="close_details">+</span>
+
       <h1>Cos'è Cloch?</h1>
 
       <p>Cloch è un'orologio grafico che cerca un approccio diverso nello scandire il tempo, è fatto per essere visto e non letto. Una volta capito sarà facile capire l'ora anche vedendolo a distanza o di sfuggita.</p>

@@ -441,15 +441,9 @@ window.onload = function () {
     // $("#control_buttons").hide();  debug
     $("#toolbarToggle").bind({
         click: function () {
-            $("#control_buttons").fadeToggle();
-
-            setTimeout(function () {
-                // button
-                if ($("#control_buttons").is(":hidden"))
-                    $("#toolbarToggle").css('transform', 'rotate(0deg');
-                else
-                    $("#toolbarToggle").css('transform', 'rotate(180deg)');
-            }, 600);
+            // $("#control_buttons").fadeToggle();
+            $("#control_buttons").toggleClass('hidden');
+            $("#toolbarToggle").toggleClass('showButton');
         },
     });
     /// SELECT MANUALLY HOUR AND MINUTE
@@ -468,7 +462,9 @@ window.onload = function () {
     });
 
     $("#toggle_show").click(function () {
-        $('#toggle_stop_menu').fadeToggle()
+        // when added edit option enable !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // $('#toggle_stop_menu').fadeToggle()
+        $('#digital_clock').fadeToggle()
 
         if (config['debug']) {
             console.log("manual timing toggle");
@@ -510,11 +506,13 @@ window.onload = function () {
     });
 
     // help toggle
-    $('#toggle_help').click(function () {
+    $('.toggleHelp').click(function () {
         $('#help').fadeToggle()
-        $('#toolbarToggle').fadeToggle()
-        $('#colorpicker').fadeToggle()
-        $('#toggle_show').fadeToggle()
+        // $('#toolbarToggle').fadeToggle()
+        // $('#colorpicker').fadeToggle()
+        $('#palette').fadeOut()
+        // $('#toggle_show').fadeToggle()
+        document.body.classList.toggle('inactive')
     });
 
 
@@ -522,6 +520,7 @@ window.onload = function () {
     $('#toggle_stop_menu').hide()
     $('#control_buttons').hide()
     $('#palette').hide()
+    $('#digital_clock').hide()  
     // $('#theme_toggle').hide()
 
     // sets transition for background body and gradient after page loading

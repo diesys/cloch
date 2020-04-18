@@ -4,14 +4,15 @@ function createWindow () {
   // Create the browser window.
   const win = new BrowserWindow({
     autoHideMenuBar: true,
-    minHeight: 350,
+    minHeight: 420,
     height: 500,
-    minWidth: 300,
+    minWidth: 380,
     width: 500,
     radii: [0, 0, 0, 0],
     // frame: true,
     frame: false,
     transparent: false,
+    backgroundColor: '#111',
     webPreferences: {
         // nodeIntegrationInWorker: true
     },
