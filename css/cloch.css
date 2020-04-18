@@ -163,8 +163,7 @@ body.light {
   transition: all .5s;
   flex: 1;
 }
-#toolbar #toolbarToggle.showButton,
-#toolbar #toolbarToggle:hover {
+#toolbar #toolbarToggle.showButton {
   opacity: 1;
   transform: rotate(90deg);
 }
