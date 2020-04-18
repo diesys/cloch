@@ -59,6 +59,7 @@ body.light {
   vertical-align: middle;
   text-align: center;
   z-index: 10;
+  user-select: none;
 }
 
 #toolbar i.fa {
