@@ -114,7 +114,6 @@ body.light {
   position: absolute;
   width: 100%;
   max-width: 100%;
-  /* overflow: hidden; */
   margin: 0;
   /* padding: 10px 20px; */
   /* background: rgba(0, 0, 0, .1); */
@@ -124,7 +123,10 @@ body.light {
   text-align: center;
   z-index: 10;
   user-select: none;
-  overflow: hidden;
+  /* overflow-x: hidden; */
+}
+#toolbar * {
+  outline: none;
 }
 
 #toolbar i.fa {
@@ -183,7 +185,7 @@ body.light {
   /* right: 0; */
   left: 0;
   opacity: .4;
-  /* z-index: 14; */
+  z-index: 11;
   bottom: 0;
 }
 #toolbar #toggle_help:hover {

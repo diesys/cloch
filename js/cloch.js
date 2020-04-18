@@ -443,6 +443,7 @@ window.onload = function () {
         click: function () {
             // $("#control_buttons").fadeToggle();
             $("#control_buttons").toggleClass('hidden');
+            $("#palette").fadeOut();
             $("#toolbarToggle").toggleClass('showButton');
         },
     });
