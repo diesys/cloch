@@ -274,15 +274,19 @@ function changeColor(color, duration = .8) {
     $('div.pcr-button').css({
         'background': color
     })
-    $('#browserColor').attr('content', color);
-    $('#browserColorwp').attr('content', color);
-    $('#browserColorap').attr('content', color);
+    $('a').css({
+        'color': color,
+        'textShadow': color + ' 0 0 1.5px'
+    })
+    $('#browserColor').attr('content', color)
+    $('#browserColorwp').attr('content', color)
+    $('#browserColorap').attr('content', color)
 
     if (config['debug']) {
-        console.log("new color", color);
+        console.log("new color", color)
     }
 
-    config['color'] = color.replace(/\s/g, '');
+    config['color'] = color.replace(/\s/g, '')
     addClrToURL()
     // addToURL({'color': config['color']})
 }

@@ -347,7 +347,9 @@ ol#palette.rsquared {
   text-transform: uppercase;
 }
 #help a {
+  transition: color .5s;
   color: #ddddddf0;
+  /* text-shadow: 0 0 2px #ddddddf0; */
 }
 
 .button.close {
