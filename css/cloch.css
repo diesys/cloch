@@ -175,27 +175,41 @@ svg#cloch {
 /* palette */
 ol#palette {
   position: absolute;
-  bottom: 40px;
+  bottom: 50px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1000;
   border-radius: 10px;
-  box-shadow: 0 2px 20px -3px rgba(0, 0, 0, .7);
+  box-shadow: 0 2px 30px -3px rgba(0, 0, 0, .8);
   background: rgba(0, 0, 0, .9);
   width: auto;
   display: flex;
   justify-content: space-evenly;
   align-content: center;
-  padding: 4px 6px;
+  padding: 0;
+  overflow: hidden;
 }
 #palette li {
-  height: 30px;
-  width: 30px;
+  height: 2.5em;
+  width: 2em;
   list-style: none;
   cursor: pointer;
-  margin: 2px;
-  border-radius: 10px;
+  border-radius: 0px;
   transition: all .3s;
+  margin: 0px;
+  opacity: 1;
+}
+#palette li:hover,
+#palette li:active,
+#palette li:focus {
+  opacity: .8;
+}
+ol#palette.rsquared {
+  padding: 4px 6px;
+}
+#palette.rsquared li {
+  border-radius: 10px;
+  margin: 2px;
 }
 
 @media screen and (max-width: 500px) {
@@ -205,13 +219,14 @@ ol#palette {
     /* padding: 8px 10px 5px 10px; */
     box-shadow: 0 2px 20px -3px rgba(0, 0, 0, .7);
     width: 100%;
+    border-radius: 0;
     /* min-width: 150px; */
   }
 
   #palette li {
-    height: 35px;
-    width: 35px;
-    margin: 1px 0px;
+    height: 3em;
+    width: 3em;
+    /* margin: 1px 0px; */
   }
 }
 
