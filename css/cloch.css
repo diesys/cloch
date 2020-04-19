@@ -56,7 +56,14 @@
     filter: blur(0);
   }
 }
-
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  40% {
+    opacity: 0;
+  }
+}
 ::-webkit-scrollbar {
   display: none;
 }
@@ -108,6 +115,11 @@ body.light {
 
 .light #digital_clock {
   color: #00000070;
+}
+
+p#digital_clock.paused {
+  animation: blink 1.5s;
+  animation-iteration-count: infinite;
 }
 
 /* TOOLBAR */

@@ -1,17 +1,8 @@
 ////////// TO - DO //////////////////
 
 // ***** ripulire file in API/main da poter essere riutilizzato (fare min e gzipped)
-// ***** color palette: usare flex 
-
-// chromecast
-
-// ** far apparire la UI in ritardo cosi' da non avere artifici a caricamento pagina vuota (magari fare dopo la pulizia del codice)
-
-// bg esagonale, colori piatti, o al massimo tipo cartone come il quadrante
 
 // show/hide delle info da disegnare sulle ore, e sui minuti cosi da renderlo piu comprensibile all'inizio, tipo: numeri minuti e ore su cubo di cloch, fatte con div testo html font rubik e con tweenmax rotazione 3d. animazione sui numeri? creazione tracciato (drawsvg plugin?)? 
-
-// nell 'howto mettere il compare approssimato sui minuti tra orlogio e cloch
 
 // rivedere funzione aggiorna ora che cancella le altre allo stato iniziale se non servono
 
@@ -20,8 +11,6 @@
 // lampeggio su cloch in pausa
 
 // fare lightmode automatico per colori chiari di sfondo
-
-// fare versione con minuti relativi (minuto 0 parte da dove sta l'indicatore ore), Va mostrato che la modalita' e' diversa
 
 
 /////// CLOCH API //////////////////////
@@ -45,7 +34,6 @@ function setHour(new_hour, style = 'fade') {
         };
     transl = "translate(" + hour['X'] + 'px, ' + hour['Y'] + "px)",
         duration = 1,
-        // durationFade = .1,
         mask_opacity = '';
 
     // adding hour to the conf
@@ -84,8 +72,7 @@ function setHour(new_hour, style = 'fade') {
             opacity: mask_opacity,
             ease: Power2.easeOut,
         });
-    } else
-    if (style == 'move') {
+    } else if (style == 'move') {
         TweenMax.to(sunMoon[0], duration, {
             delay: 0,
             transformOrigin: "50% 50%",
@@ -101,11 +88,8 @@ function setHour(new_hour, style = 'fade') {
     }
 }
 
-function setMinute(min, theme) {
+function setMinute(min, theme = config['theme']) {
     if (min < 60) {
-        // var minOpacity = lazy ? minutesStateLazy : minutesState;
-        // console.log('lazy = ', lazy, '\nopacity levels:', minOpacity);
-
         // a minute is about 0.2, toFixed gives 1 dec digit,tmp to string,separate dec from floor
         var tmp = ((min / 5) % 12).toFixed(1).toString().split('.'),
             // to int and normalize newMin[1] for index opacity ranges [0..3] levels
@@ -130,79 +114,47 @@ function setMinute(min, theme) {
 
         // indicators' animations
         if (theme == 'dark') {
-            // LIGHT MODE base indicator
-            TweenMax.fromTo(first, 8 * durationFade, {
-                fill: minutesColors['first_start'][newMin['opacity_index']],
-                delay: 2 * durationFade,
-            }, {
-                fill: minutesColors['first'][newMin['opacity_index']],
-                delay: 2 * durationFade,
-            });
-            // next indicator
-            TweenMax.fromTo(second, 8 * durationFade, {
-                fill: minutesColors['second_start'][newMin['opacity_index']],
-                delay: 2 * durationFade,
-            }, {
-                fill: minutesColors['second'][newMin['opacity_index']],
-                delay: 2 * durationFade,
-            });
-
-            // remove bg from other indicators
-            for (i = 0; i < 12; i++)
-                if (i != newMin['indicator_index'])
-                    if (i % 2 == 0) {
-                        TweenMax.to(minutes[i], 8 * durationFade, {
-                            fill: 'rgba(0,0,0,.07)',
-                            delay: 0,
-                        });
-                    }
-            else {
-                TweenMax.to(minutes[i], 8 * durationFade, {
-                    delay: 0,
-                    fill: 'rgba(0,0,0,.04)',
-                });
-            }
+            colors = minutesColors
         } else if (theme == 'light') {
-            // DARK MODE base indicator
-            TweenMax.fromTo(first, 8 * durationFade, {
-                fill: minutesColorsDark['first_start'][newMin['opacity_index']],
-                delay: 2 * durationFade,
-            }, {
-                fill: minutesColorsDark['first'][newMin['opacity_index']],
-                delay: 2 * durationFade,
-            });
-            // next indicator
-            TweenMax.fromTo(second, 8 * durationFade, {
-                fill: minutesColorsDark['second_start'][newMin['opacity_index']],
-                delay: 2 * durationFade,
-            }, {
-                fill: minutesColorsDark['second'][newMin['opacity_index']],
-                delay: 2 * durationFade,
-            });
-
-            // remove bg from other indicators
-            for (i = 0; i < 12; i++)
-                if (i != newMin['indicator_index'])
-                    if (i % 2 == 0) {
-                        TweenMax.to(minutes[i], 8 * durationFade, {
-                            fill: 'rgba(0,0,0,.05)',
-                            delay: 0,
-                        });
-                    }
-            else {
-                TweenMax.to(minutes[i], 8 * durationFade, {
-                    delay: 0,
-                    fill: 'rgba(0,0,0,.02)',
-                });
-            }
+            colors = minutesColorsLight
         }
+
+        TweenMax.fromTo(first, 8 * durationFade, {
+            fill: colors['first_start'][newMin['opacity_index']],
+            delay: 2 * durationFade,
+        }, {
+            fill: colors['first'][newMin['opacity_index']],
+            delay: 2 * durationFade,
+        });
+        // next indicator
+        TweenMax.fromTo(second, 8 * durationFade, {
+            fill: colors['second_start'][newMin['opacity_index']],
+            delay: 2 * durationFade,
+        }, {
+            fill: colors['second'][newMin['opacity_index']],
+            delay: 2 * durationFade,
+        });
+
+        // remove bg from other indicators
+        for (i = 0; i < 12; i++)
+            if (i != newMin['indicator_index'])
+                if (i % 2 == 0) {
+                    TweenMax.to(minutes[i], 8 * durationFade, {
+                        fill: 'rgba(0,0,0,.07)',
+                        delay: 0,
+                    });
+                } else {
+                    TweenMax.to(minutes[i], 8 * durationFade, {
+                        delay: 0,
+                        fill: 'rgba(0,0,0,.04)',
+                    });
+                }
 
         // change digital time in toolbar
         temp_min = config['minute']['value'];
         tmp_min = temp_min < 10 ? '0' + temp_min : temp_min;
         new_digital_time = config['hour']['value'] + ':' + tmp_min;
         $("#digital_clock").html(new_digital_time);
-
 
         if (config['debug']) {
             console.log("new minute: ", min);
@@ -212,50 +164,42 @@ function setMinute(min, theme) {
 }
 
 function toggleTheme(theme) {
-    if(!theme)
+    if (!theme)
         theme = config['theme']
-    
+
     if (config['debug'])
         console.log('curr theme', theme)
 
     if (theme == 'dark') {
         new_fill_sunmoon = '#040404'
-        // fill_cubhex = 'rgba(0,0,0,.75)'
         new_theme = 'light'
     } else if (theme == 'light') {
         new_fill_sunmoon = '#ffffff'
-        // fill_cubhex = '#000000'
         new_theme = 'dark'
-    } else 
+    } else
         console.log('wrong theme...')
 
     // minutes
     setMinute(config['minute']['value'], new_theme);
-    
+
     // hours
     TweenMax.to(sunMoon[1], .5, {
         fill: new_fill_sunmoon,
         ease: Power2.easeOut,
     });
-    // central "cubhex"
-    // for (i = 0; i < 3; i++)
-    //     TweenMax.to(cubex[i], .5, {
-    //         fill: fill_cubhex,
-    //         ease: Power2.easeOut,
-    //     });
 
     // preserves the blur and just toggles body and gradient dont know why it's inverted......!!!!!!!!!!
     $('body').removeClass(theme)
     $('#grad').removeClass(theme)
     $('body').addClass(new_theme)
     $('#grad').addClass(new_theme)
-    
+
     // toolbar coloring
     $('#toolbar i.fa').switchClass(new_theme, theme, 1000, "easeInOutQuad");
-    
-    if(config['debug'])
+
+    if (config['debug'])
         console.log('new theme', new_theme)
-    
+
     // writing to conf
     config['theme'] = new_theme;
 
@@ -297,44 +241,28 @@ function changeColor(color, duration = .8) {
 
     config['color'] = color.replace(/\s/g, '')
     updateThemeURL()
-    // addClrToURL()
-    // addToURL(['color'])
-}
-
-function addToURL(parameters) {
-    if(parameters.lenght != 0) {
-        for (var key in parameters)
-            if (parameters.hasOwnProperty(key)) {
-                if (window.history.replaceState) {
-                    //prevents browser from storing history with each change:
-                    window.history.replaceState({
-                        'color': config[key],
-                    }, 'newcolor', '?color=' + config['color']);
-                }
-            } else 
-                console.log('Wrong parameter, missing key')
-    } else 
-        console.log('Parameters must be an array')
 }
 
 function updateThemeURL() {
-// function addClrToURL() {
     if (window.history.replaceState) {
         //prevents browser from storing history with each change:
         window.history.replaceState({
             'color': config['color'],
             'theme': config['theme']
         }, 'newclrtheme', '?color=' + config['color'] + '&theme=' + config['theme']);
-        // }, 'newclrtheme', '?color=' + config['color']);
     }
 }
 
 function clochToggle() {
     if (stopCloch) {
-        $("#startstop_cloch").attr('class', 'fa fa-pause');
+        $("#startstop_cloch").addClass('fa-pause');
+        $("#startstop_cloch").removeClass('fa-play');
+        $("#digital_clock").removeClass('paused');
         stopCloch = false;
     } else {
-        $("#startstop_cloch").attr('class', 'fa fa-play');
+        $("#startstop_cloch").addClass('fa-play');
+        $("#startstop_cloch").removeClass('fa-pause');
+        $("#digital_clock").addClass('paused');
         stopCloch = true;
     }
 }
@@ -363,7 +291,7 @@ function exampleHours(time = 1300) {
 }
 
 
-// CONFIGS
+// CONFIGS ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // MINUTES ANGLE: 0, 10, 20, 30, 50, 60  in clockwise order
 // MINUTES MIDDLE: 5, 15, 25, 35, 45, 55 in clockwise order
 minutes = [$('#minAng_top'), $('#minMid_rightT'), $('#minAng_topR'), $('#minMid_right'), $('#minAng_bottomR'), $('#minMid_rightB'), $('#minAng_bottom'), $('#minMid_leftB'), $('#minAng_bottomL'), $('#minMid_left'), $('#minAng_topL'), $('#minMid_leftT')],
@@ -384,7 +312,7 @@ durationFade = .1,
 stopCloch = false;
 
 // Minutes indicator color values (DARK)
-minutesColorsDark = {
+minutesColorsLight = {
     // from < animation
     'first_start': ['rgba(5,5,5,1)', 'rgba(5,5,5,1)', 'rgba(5,5,5,1)', 'rgba(5,5,5,.7)', 'rgba(5,5,5,.4)'],
     'second_start': ['rgba(0,0,0,.1)', 'rgba(5,5,5,.1)', 'rgba(5,5,5,.4)', 'rgba(5,5,5,.4)', 'rgba(5,5,5,.7)'],
@@ -408,17 +336,17 @@ minutesColors = {
 
 window.onload = function () {
     // main cloch elements
-    cloch = $('#cloch'),
-        quadrant = $('#quadranthx'),
-        background = $('#backgroundhx');
+    cloch = $('#cloch')
+    quadrant = $('#quadranthx')
+    background = $('#backgroundhx')
 
-    // shows the cloch
-    cloch.css({
-        'opacity': '1'
-    });
+    // // shows the cloch
+    // cloch.css({
+    //     'opacity': '1'
+    // });
 
 
-    ////// MAIN ///////////   
+    ////// MAIN ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     // get url color if any
     config = getUrlVars();
@@ -429,8 +357,12 @@ window.onload = function () {
 
     // gets new date starts adding to config file 
     date = new Date();
-    config['hour'] = {'value': date.getHours()};
-    config['minute'] = {'value': date.getMinutes()};
+    config['hour'] = {
+        'value': date.getHours()
+    };
+    config['minute'] = {
+        'value': date.getMinutes()
+    };
 
     setTimeout(function () {
         setHour(date.getHours());
@@ -488,7 +420,7 @@ window.onload = function () {
 
     $("#toggle_show").click(function () {
         // when added edit option, enable !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        // $('#toggle_stop_menu').fadeToggle()
+        $('#toggle_stop_menu').fadeToggle()
         $('#digital_clock').fadeToggle()
 
         if (config['debug']) {
@@ -518,9 +450,6 @@ window.onload = function () {
     document.querySelector('#theme_toggle').addEventListener('click', function () {
         toggleTheme()
     });
-    // $('#theme_toggle').click(function () {
-    //     config['theme'] == 'light' ? changeTheme('dark') : changeTheme('light');
-    // });
 
 
     // binds clicking pickr not working DAMN - magari rifare il selettore semplice cosi?
@@ -545,10 +474,9 @@ window.onload = function () {
     $('#toggle_stop_menu').hide()
     $('#control_buttons').hide()
     $('#palette').hide()
-    $('#digital_clock').hide()  
+    $('#digital_clock').hide()
 
     // sets transition for background body and gradient after page loading
     $('body').css('transition', 'background .8s');
 
-    setMinute(config['minute']['value'], config['theme']);
 }
