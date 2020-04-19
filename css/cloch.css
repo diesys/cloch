@@ -119,13 +119,20 @@ body.light {
   top: 50%;
   /* transform: translate(-50%,-52%); */
   /* transform: translate(-50%,-160%) skew(60deg, -30deg); */
-  transform: translate(-50%, calc(-50% - 1.7em)) skew(60deg, -30deg);
+  /* transform: translate(-50%, calc(-50% - 1.7em)) skew(60deg, -30deg); */
+  transform: translate(calc(-50% + .2em), calc(-50% - 1.8em)) skew(60deg, -30deg);
+  text-align: center;
+  justify-content: center;
   /* transform: translate(-50%, calc(-50% - 1.7em)) skew(60deg, -30deg); */
   transition: all .4s ease;
   animation: fadeInBlur 1s;
   /* text-shadow: 0 1px 5px #00000070; */
   text-shadow: -2px 1px 4px #00000050;
   pointer-events: none;
+}
+
+#digital_clock.hidden {
+  opacity: 0;
 }
 
 .light #digital_clock {
@@ -281,16 +288,20 @@ p#digital_clock:not(.paused) > i#digital_clock_sec_ind {
 }
 
 #quadranthx_container {
-  display: block;
+  display: flex;
   position: absolute;
+  justify-content: center;
+  align-items: center;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -52%);
+  max-width: 100%;
+  max-height: calc(100% - 5em);
+  transform: translate(-50%, -52%); /* scale(1); */
   transition: filter 1s;
 }
 
 body.inactive>#quadranthx_container {
-  filter: blur(5px);
+  filter: blur(4px);
 }
 
 svg#cloch {

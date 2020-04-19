@@ -421,7 +421,7 @@ window.onload = function () {
     $("#toggle_show").click(function () {
         // when added edit option, enable !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         $('#toggle_stop_menu').fadeToggle()
-        $('#digital_clock').fadeToggle()
+        $('#digital_clock').toggleClass('hidden')
 
         if (config['debug']) {
             console.log("manual timing toggle");
@@ -474,7 +474,7 @@ window.onload = function () {
     $('#toggle_stop_menu').hide()
     $('#control_buttons').hide()
     $('#palette').hide()
-    $('#digital_clock').hide()
+    // $('#digital_clock').hide()
 
     // sets transition for background body and gradient after page loading
     $('body').css('transition', 'background .8s');
