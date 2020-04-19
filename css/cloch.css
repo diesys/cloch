@@ -106,7 +106,8 @@ body.light {
   opacity: .25;
   position: absolute;
   /* font-size: 28px; */
-  font-size: 1.6em;
+  /* font-size: 1.6em; */
+  font-size: 2.2em;
   height: 1.7em;
   width: 1.7em;
   /* font-size: 1.6em;
@@ -120,7 +121,8 @@ body.light {
   /* transform: translate(-50%,-52%); */
   /* transform: translate(-50%,-160%) skew(60deg, -30deg); */
   /* transform: translate(-50%, calc(-50% - 1.7em)) skew(60deg, -30deg); */
-  transform: translate(calc(-50% + .2em), calc(-50% - 1.8em)) skew(60deg, -30deg);
+  /* transform: translate(calc(-50% + .2em), calc(-50% - 1.8em)) skew(60deg, -30deg); */
+  transform: translate(calc(-50% + .3em), calc(-50% - 1.9em)) skew(60deg, -30deg);
   text-align: center;
   justify-content: center;
   /* transform: translate(-50%, calc(-50% - 1.7em)) skew(60deg, -30deg); */
@@ -297,11 +299,14 @@ p#digital_clock:not(.paused) > i#digital_clock_sec_ind {
   max-width: 100%;
   max-height: calc(100% - 5em);
   transform: translate(-50%, -52%); /* scale(1); */
-  transition: filter 1s;
+  transition: filter .7s .3s;
 }
 
-body.inactive>#quadranthx_container {
-  filter: blur(4px);
+body>#quadranthx_container, body #digital_clock {
+  transition: filter .8s .1s;
+}
+body.inactive>#quadranthx_container, body.inactive #digital_clock {
+  filter: blur(5px);
 }
 
 svg#cloch {
@@ -381,7 +386,7 @@ ol#palette.rsquared {
   color: #fff;
   /* z-index: 12; */
   padding: 5% 10%;
-  padding-bottom: 3em;
+  padding-bottom: 3em !important;
   overflow-y: auto;
   text-align: justify;
   line-height: 1.2em;
