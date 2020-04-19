@@ -1,18 +1,3 @@
-////////// TO - DO //////////////////
-
-// ***** ripulire file in API/main da poter essere riutilizzato (fare min e gzipped)
-
-// show/hide delle info da disegnare sulle ore, e sui minuti cosi da renderlo piu comprensibile all'inizio, tipo: numeri minuti e ore su cubo di cloch, fatte con div testo html font rubik e con tweenmax rotazione 3d. animazione sui numeri? creazione tracciato (drawsvg plugin?)? 
-
-// rivedere funzione aggiorna ora che cancella le altre allo stato iniziale se non servono
-
-// implementare ora nell'url
-
-// lampeggio su cloch in pausa
-
-// fare lightmode automatico per colori chiari di sfondo
-
-
 /////// CLOCH API //////////////////////
 
 function getUrlVars() {
@@ -399,7 +384,7 @@ window.onload = function () {
     $("#toolbarToggle").bind({
         click: function () {
             $("#control_buttons").toggleClass('hidden');
-            $("#palette").toggleClass('hidden');
+            // $("#palette").toggleClass('hidden');
             $("#toolbarToggle").toggleClass('showButton');
         },
     });
@@ -420,7 +405,9 @@ window.onload = function () {
 
     $("#toggle_show").click(function () {
         // when added edit option, enable !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        $('#toggle_stop_menu').fadeToggle()
+        // $('#toggle_stop_menu').fadeToggle()
+        // $('#startstop_cloch').fadeToggle()
+        $('#startstop_cloch').toggleClass('hidden')
         $('#digital_clock').toggleClass('hidden')
 
         if (config['debug']) {
@@ -438,7 +425,8 @@ window.onload = function () {
 
     // newpalette
     $('#colorpicker').click(function () {
-        $('#palette').fadeToggle();
+        $('#palette').toggleClass('hidden');
+        // $('#palette').fadeToggle();
         // $('#theme_toggle').fadeToggle();
 
         if (config['debug']) {
@@ -471,9 +459,9 @@ window.onload = function () {
 
 
     // setup before start
-    $('#toggle_stop_menu').hide()
-    $('#control_buttons').hide()
-    $('#palette').hide()
+    // $('#toggle_stop_menu').hide()
+    // $('#control_buttons').hide()
+    // $('#palette').hide()
     // $('#digital_clock').hide()
 
     // sets transition for background body and gradient after page loading

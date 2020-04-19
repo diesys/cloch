@@ -1,0 +1,11 @@
+////////// TO - DO //////////////////
+
+// ***** ripulire file in API/main da poter essere riutilizzato (fare min e gzipped)
+
+// show/hide delle info da disegnare sulle ore, e sui minuti cosi da renderlo piu comprensibile all'inizio, tipo: numeri minuti e ore su cubo di cloch, fatte con div testo html font rubik e con tweenmax rotazione 3d. animazione sui numeri? creazione tracciato (drawsvg plugin?)? 
+
+// implementare ora nell'url
+
+// fare versione 12h con indicatore sui lati
+
+// cambiare colori di cubhex in base a dove si sposta l'indicat. delle ore

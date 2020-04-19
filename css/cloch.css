@@ -56,6 +56,15 @@
     filter: blur(0);
   }
 }
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    pointer-events: none;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 @keyframes blink {
   0%, 100% {
     filter: opacity(1);
@@ -183,15 +192,15 @@ p#digital_clock:not(.paused) > i#digital_clock_sec_ind {
 }
 
 #toolbar i.fa {
-  color: rgba(255, 255, 255, .55);
   font-size: 32px;
   padding: 4px;
   margin: 8px;
   transition: all .3s .1s;
   cursor: pointer;
+  text-shadow: 0 1px 3px #000000c0;
+  flex: 1;
 }
 #toolbar i.fa:hover {
-  color: rgba(255, 255, 255, .9);
   transition: all .3s;
 }
 
@@ -202,49 +211,62 @@ p#digital_clock:not(.paused) > i#digital_clock_sec_ind {
   color: rgba(5, 5, 5, 1);
 }
 #toolbar i.fa.light {
-  color: rgba(255, 255, 255, .55);
+  color: rgba(205, 205, 205, .6);
 }
 #toolbar i.fa.light:hover {
-  color: rgba(255, 255, 255, .9);
+  color: rgba(255, 255, 255, .8);
 }
 
 #toolbar #toolbarToggle {
-  opacity: .6;
-  font-size: 24px;
+  /* opacity: .6; */
+  /* font-size: 24px; */
   transform-origin: 50% 50%;
   transform: rotate(0deg);
   transition: all .5s;
   flex: 1;
 }
 #toolbar #toolbarToggle.showButton {
-  opacity: 1;
-  transform: rotate(90deg);
+  /* opacity: 1; */
+  /* arrow */
+  /* transform: rotate(90deg); */
+  /* plus */
+  transform: rotate(45deg);
 }
 
 #toolbar #control_buttons {
   display: flex !important;
   align-items: center;
-  flex: 2;
+  /* flex: 2; */
+  flex: 5;
   transition: all .8s;
-  overflow-y: hidden;
+  /* overflow-y: hidden; */
+  overflow: hidden;
 }
 #toolbar #control_buttons.hidden {
   flex: 0;
 }
 
 #toolbar #toggle_help {
-  position: absolute;
+  flex: 1;
+  /* position: absolute; */
   /* right: 0; */
-  left: 0;
-  opacity: .25;
-  z-index: 11;
-  bottom: 0;
+  /* left: 0; */
+  /* opacity: .25; */
+  /* z-index: 11; */
+  /* bottom: 0; */
 }
 #toolbar #toggle_help:hover {
-  opacity: 1;
+  /* opacity: 1; */
 }
 .light #toolbar #toggle_help {
-  opacity: .6;
+  /* opacity: .6; */
+}
+
+#toolbar #startstop_cloch {
+  flex: 1;
+}
+#toolbar #startstop_cloch.hidden {
+  flex: 0;
 }
 
 #toolbar,
@@ -254,6 +276,81 @@ p#digital_clock:not(.paused) > i#digital_clock_sec_ind {
   align-items: center;
 }
 
+/* palette */
+ol#palette:not(.hidden) {
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9;
+  border-radius: 10px;
+  box-shadow: 0 2px 30px -3px rgba(0, 0, 0, .8);
+  background: rgba(0, 0, 0, .9);
+  /* width: auto; */
+  display: flex;
+  justify-content: space-evenly;
+  align-content: center;
+  padding: 0;
+  overflow: hidden;
+  pointer-events: all;
+  user-select: none;
+  animation: fadeIn 1s;
+}
+
+ol#palette.hidden {
+  /* display: block; */
+  overflow: hidden;
+  animation: fadeIn 1s reverse;
+}
+
+.light #palette:not(.hidden) {
+  box-shadow: 0 2px 30px -8px rgba(0, 0, 0, .4);
+}
+
+#palette li {
+  height: 2.5em;
+  width: 2em;
+  list-style: none;
+  cursor: pointer;
+  border-radius: 0px;
+  transition: all .3s;
+  margin: 0px;
+  opacity: 1;
+}
+
+#palette li:hover,
+#palette li:active,
+#palette li:focus {
+  opacity: .8;
+}
+
+ol#palette.rsquared {
+  padding: 4px 6px;
+}
+
+#palette.rsquared li {
+  border-radius: 10px;
+  margin: 2px;
+}
+
+@media screen and (max-width: 500px) {
+
+  /* palette */
+  ol#palette {
+    /* bottom: 40px; */
+    /* padding: 8px 10px 5px 10px; */
+    box-shadow: 0 2px 20px -3px rgba(0, 0, 0, .7);
+    width: 100%;
+    border-radius: 0 !important;
+    /* min-width: 150px; */
+  }
+
+  #palette li {
+    height: 3em;
+    width: 3em;
+    /* margin: 1px 0px; */
+  }
+}
 
 
 #grad {
@@ -315,66 +412,31 @@ svg#cloch {
   pointer-events: none;
 }
 
-/* palette */
-ol#palette:not(.hidden) {
-  position: absolute;
-  bottom: 50px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 9;
-  border-radius: 10px;
-  box-shadow: 0 2px 30px -3px rgba(0, 0, 0, .8);
-  background: rgba(0, 0, 0, .9);
-  /* width: auto; */
-  display: flex;
-  justify-content: space-evenly;
-  align-content: center;
-  padding: 0;
-  overflow: hidden;
-}
-ol#palette.hidden {
-    display: none;
-}
-#palette li {
-  height: 2.5em;
-  width: 2em;
-  list-style: none;
-  cursor: pointer;
-  border-radius: 0px;
-  transition: all .3s;
-  margin: 0px;
-  opacity: 1;
-}
-#palette li:hover,
-#palette li:active,
-#palette li:focus {
-  opacity: .8;
-}
-ol#palette.rsquared {
-  padding: 4px 6px;
-}
-#palette.rsquared li {
-  border-radius: 10px;
-  margin: 2px;
-}
-
-@media screen and (max-width: 500px) {
-  /* palette */
-  ol#palette {
-    /* bottom: 40px; */
-    /* padding: 8px 10px 5px 10px; */
-    box-shadow: 0 2px 20px -3px rgba(0, 0, 0, .7);
-    width: 100%;
-    border-radius: 0 !important;
-    /* min-width: 150px; */
+@media screen and (max-width: 550px) {
+  #quadranthx_container {
+    max-width: 480px;
   }
-
-  #palette li {
-    height: 3em;
-    width: 3em;
-    /* margin: 1px 0px; */
+  #digital_clock{  
+    font-size: 1.98em;
   }
 }
+@media screen and (max-width: 450px) {
+  #quadranthx_container {
+    max-width: 380px;
+  }
+  #digital_clock{  
+    font-size: 1.6em;
+  }
+}
+@media screen and (max-width: 380px) {
+  #quadranthx_container {
+    max-width: 300px;
+  }
+  #digital_clock{  
+    font-size: 1.35em;
+  }
+}
+
 
 #help {
   position: fixed;
@@ -388,13 +450,14 @@ ol#palette.rsquared {
   padding: 5% 10%;
   padding-bottom: 3em !important;
   overflow-y: auto;
-  text-align: justify;
   line-height: 1.2em;
   transition: all .5s;
+  text-align: justify;
 }
 .light #help {
   color: #222;
-  background: #eeeeeeb0;
+  /* background: #eeeeeeb0; */
+  background:#fdfdfdc4;
 }
 #help h3,
 #help h4 {
@@ -404,6 +467,31 @@ ol#palette.rsquared {
   transition: color .5s;
   color: #ddddddf0;
   /* text-shadow: 0 0 2px #ddddddf0; */
+}
+#help > .content img {
+  transition: all .4s;
+  max-width: 100%;
+  /* float: left; */
+}
+.light #help > .content img {
+  filter: invert(100%);
+}
+#help > .content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#help > .content > .horElement {
+  display: flex;
+  align-items: center;
+}
+#help > .content > .horElement > .bigHorElement {
+  flex: 2;
+  /* padding-left: 30px; */
+}
+#help > .content > .horElement > .smallHorElement {
+  flex: 1;
 }
 
 .button.close {
