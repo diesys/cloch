@@ -153,7 +153,7 @@ function setMinute(min, theme = config['theme']) {
         // change digital time in toolbar
         temp_min = config['minute']['value'];
         tmp_min = temp_min < 10 ? '0' + temp_min : temp_min;
-        new_digital_time = config['hour']['value'] + ':' + tmp_min;
+        new_digital_time = config['hour']['value'] + "<i id='digital_clock_sec_ind'>:</i>" + tmp_min;
         $("#digital_clock").html(new_digital_time);
 
         if (config['debug']) {

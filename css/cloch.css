@@ -139,6 +139,13 @@ p#digital_clock.paused {
   animation-iteration-count: infinite;
   animation-direction: alternate;
 }
+p#digital_clock:not > i#digital_clock_sec_ind {
+  font-style: normal;
+}
+p#digital_clock:not(.paused) > i#digital_clock_sec_ind {
+  animation: blink 2s;
+  animation-iteration-count: infinite;
+}
 
 /* TOOLBAR */
 #toolbar {
