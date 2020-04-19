@@ -50,7 +50,6 @@ function setHour(new_hour, style = 'fade') {
 
     // adding hour to the conf
     config['hour'] = hour;
-    config['theme'] = 'light';
 
     // 0-5 half moon, 6-11 full sun, 12-17 half sun, 18-23 full moon
     if (new_hour >= 0 && new_hour <= 5) {
@@ -102,7 +101,7 @@ function setHour(new_hour, style = 'fade') {
     }
 }
 
-function setMinute(min, theme = 'light') {
+function setMinute(min, theme) {
     if (min < 60) {
         // var minOpacity = lazy ? minutesStateLazy : minutesState;
         // console.log('lazy = ', lazy, '\nopacity levels:', minOpacity);
@@ -130,7 +129,7 @@ function setMinute(min, theme = 'light') {
             second = minutes[(newMin['indicator_index'] + 1) % 12];
 
         // indicators' animations
-        if (theme == 'light') {
+        if (theme == 'dark') {
             // LIGHT MODE base indicator
             TweenMax.fromTo(first, 8 * durationFade, {
                 fill: minutesColors['first_start'][newMin['opacity_index']],
@@ -163,7 +162,7 @@ function setMinute(min, theme = 'light') {
                     fill: 'rgba(0,0,0,.04)',
                 });
             }
-        } else if (theme == 'dark') {
+        } else if (theme == 'light') {
             // DARK MODE base indicator
             TweenMax.fromTo(first, 8 * durationFade, {
                 fill: minutesColorsDark['first_start'][newMin['opacity_index']],
@@ -212,46 +211,56 @@ function setMinute(min, theme = 'light') {
     } else console.log('error: minutes can be [0..60]');
 }
 
+function toggleTheme(theme) {
+    if(!theme)
+        theme = config['theme']
+    
+    if (config['debug'])
+        console.log('curr theme', theme)
 
-function changeTheme(theme) {
-    // preserves the blur and just toggles body and gradient
-    $('body').toggleClass('dark')
-    $('body').toggleClass('light')
-    $('#grad').toggleClass('dark')
-    $('#grad').toggleClass('light')
+    if (theme == 'dark') {
+        new_fill_sunmoon = '#040404'
+        // fill_cubhex = 'rgba(0,0,0,.75)'
+        new_theme = 'light'
+    } else if (theme == 'light') {
+        new_fill_sunmoon = '#ffffff'
+        // fill_cubhex = '#000000'
+        new_theme = 'dark'
+    } else 
+        console.log('wrong theme...')
 
     // minutes
-    if (theme == 'dark') {
-        setMinute(config['minute']['value'], 'dark');
-        // hours
-        TweenMax.to(sunMoon[1], .5, {
-            fill: '#040404',
-            ease: Power2.easeOut,
-        });
-        for (i = 0; i < 3; i++)
-            TweenMax.to(cubex[i], .5, {
-                fill: 'rgba(0,0,0,.75)',
-                ease: Power2.easeOut,
-            });
+    setMinute(config['minute']['value'], new_theme);
+    
+    // hours
+    TweenMax.to(sunMoon[1], .5, {
+        fill: new_fill_sunmoon,
+        ease: Power2.easeOut,
+    });
+    // central "cubhex"
+    // for (i = 0; i < 3; i++)
+    //     TweenMax.to(cubex[i], .5, {
+    //         fill: fill_cubhex,
+    //         ease: Power2.easeOut,
+    //     });
 
-        $('#toolbar i.fa').switchClass("light", "dark", 1000, "easeInOutQuad");
+    // preserves the blur and just toggles body and gradient dont know why it's inverted......!!!!!!!!!!
+    $('body').removeClass(theme)
+    $('#grad').removeClass(theme)
+    $('body').addClass(new_theme)
+    $('#grad').addClass(new_theme)
+    
+    // toolbar coloring
+    $('#toolbar i.fa').switchClass(new_theme, theme, 1000, "easeInOutQuad");
+    
+    if(config['debug'])
+        console.log('new theme', new_theme)
+    
+    // writing to conf
+    config['theme'] = new_theme;
 
-    } else if (theme == 'light') {
-        setMinute(config['minute']['value'], 'light');
-        // hours
-        TweenMax.to(sunMoon[1], .5, {
-            fill: '#ffffff',
-            ease: Power2.easeOut,
-        });
-        //cubhex
-        for (i = 0; i < 3; i++)
-            TweenMax.to(cubex[i], .5, {
-                fill: '#000000',
-                ease: Power2.easeOut,
-            });
-        $('#toolbar i.fa').switchClass("dark", "light", 1000, "easeInOutQuad");
-    }
-    config['theme'] = theme;
+    // updates the url with color and theme
+    updateThemeURL()
 }
 
 function changeColor(color, duration = .8) {
@@ -287,27 +296,36 @@ function changeColor(color, duration = .8) {
     }
 
     config['color'] = color.replace(/\s/g, '')
-    addClrToURL()
-    // addToURL({'color': config['color']})
+    updateThemeURL()
+    // addClrToURL()
+    // addToURL(['color'])
 }
 
-// function addToURL(parameters) {
-//     if (window.history.replaceState) {
-//         for (var key in parameters)
-//             if (parameters.hasOwnProperty(key))
-//                 // window.history.replaceState({
-//                 window.history.pushState({
-//                     key: parameters[key]
-//                 }, key+'_'+parameters[key], '?'+key+'=' + parameters[key]);
-//     }
-// }
+function addToURL(parameters) {
+    if(parameters.lenght != 0) {
+        for (var key in parameters)
+            if (parameters.hasOwnProperty(key)) {
+                if (window.history.replaceState) {
+                    //prevents browser from storing history with each change:
+                    window.history.replaceState({
+                        'color': config[key],
+                    }, 'newcolor', '?color=' + config['color']);
+                }
+            } else 
+                console.log('Wrong parameter, missing key')
+    } else 
+        console.log('Parameters must be an array')
+}
 
-function addClrToURL() {
+function updateThemeURL() {
+// function addClrToURL() {
     if (window.history.replaceState) {
         //prevents browser from storing history with each change:
         window.history.replaceState({
-            'color': config['color']
-        }, 'newcolor', '?color=' + config['color']);
+            'color': config['color'],
+            'theme': config['theme']
+        }, 'newclrtheme', '?color=' + config['color'] + '&theme=' + config['theme']);
+        // }, 'newclrtheme', '?color=' + config['color']);
     }
 }
 
@@ -326,7 +344,7 @@ function exampleMins(time = 500) {
     j = 0;
     setInterval(function () {
         if (j < 60) {
-            setMinute(j);
+            setMinute(j, config['theme']);
             j++
         }
     }, time)
@@ -405,20 +423,18 @@ window.onload = function () {
     // get url color if any
     config = getUrlVars();
     if (!config['color'])
-        config['color'] = '#ff3c6d';
-    changeColor(config['color'], 0);
+        config['color'] = '#ff3c6d'
+    if (!config['theme'])
+        config['theme'] = 'dark'
 
     // gets new date starts adding to config file 
     date = new Date();
-    config['hour'] = {
-        'value': date.getHours()
-    };
-    config['minute'] = {
-        'value': date.getMinutes()
-    };
+    config['hour'] = {'value': date.getHours()};
+    config['minute'] = {'value': date.getMinutes()};
+
     setTimeout(function () {
         setHour(date.getHours());
-        setMinute(date.getMinutes());
+        setMinute(date.getMinutes(), config['theme']);
 
         if (config['debug']) {
             console.log("AUTO time set: ", config['hour'], ":", config['minute']);
@@ -426,6 +442,8 @@ window.onload = function () {
 
     }, 0);
 
+    changeColor(config['color'], 0) // 0 is to disable first animation on load
+    toggleTheme(config['theme'] == 'dark' ? 'light' : 'dark') // default theme is dark...
 
     // checks if there's any hour and minute in the url
     setInterval(function () {
@@ -448,9 +466,8 @@ window.onload = function () {
     // $("#control_buttons").hide();  debug
     $("#toolbarToggle").bind({
         click: function () {
-            // $("#control_buttons").fadeToggle();
             $("#control_buttons").toggleClass('hidden');
-            $("#palette").fadeOut();
+            $("#palette").toggleClass('hidden');
             $("#toolbarToggle").toggleClass('showButton');
         },
     });
@@ -464,13 +481,13 @@ window.onload = function () {
 
         $("#sel_minute").selectmenu({
             change: function (event, data) {
-                setMinute(data.item.value)
+                setMinute(data.item.value, config['theme'])
             }
         });
     });
 
     $("#toggle_show").click(function () {
-        // when added edit option enable !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // when added edit option, enable !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         // $('#toggle_stop_menu').fadeToggle()
         $('#digital_clock').fadeToggle()
 
@@ -497,10 +514,13 @@ window.onload = function () {
         }
     });
 
-    //   picker/theme selector toggle binding
-    $('#theme_toggle').click(function () {
-        config['theme'] == 'light' ? changeTheme('dark') : changeTheme('light');
+    //   theme toggle binding
+    document.querySelector('#theme_toggle').addEventListener('click', function () {
+        toggleTheme()
     });
+    // $('#theme_toggle').click(function () {
+    //     config['theme'] == 'light' ? changeTheme('dark') : changeTheme('light');
+    // });
 
 
     // binds clicking pickr not working DAMN - magari rifare il selettore semplice cosi?
@@ -516,10 +536,7 @@ window.onload = function () {
     // help toggle
     $('.toggleHelp').click(function () {
         $('#help').fadeToggle()
-        // $('#toolbarToggle').fadeToggle()
-        // $('#colorpicker').fadeToggle()
         $('#palette').fadeOut()
-        // $('#toggle_show').fadeToggle()
         document.body.classList.toggle('inactive')
     });
 
@@ -529,12 +546,9 @@ window.onload = function () {
     $('#control_buttons').hide()
     $('#palette').hide()
     $('#digital_clock').hide()  
-    // $('#theme_toggle').hide()
 
     // sets transition for background body and gradient after page loading
     $('body').css('transition', 'background .8s');
-    // $('#grad').css('transition', 'background 1s');
-    // $('#grad').css('transition-delay', '1s');
 
     setMinute(config['minute']['value'], config['theme']);
 }

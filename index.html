@@ -19,7 +19,7 @@
   
   <!-- STYLE -->
  	<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"> -->
- 	<link rel="stylesheet" href="css/fa/fa.min.css" crossorigin="anonymous">
+ 	<link rel="stylesheet" href="css/fa/fa.min.css">
 
 
   <!-- Mobile Specifics -->
@@ -55,12 +55,13 @@
   <script type="text/javascript" src="js/TweenMax.min.js" defer></script>
   <!-- main js -->
   <script src="js/cloch.min.js" defer></script>
+  <!-- <script src="js/cloch.js" defer></script> -->
 
 </head>
-<div id="grad" class="light"></div>
+<div id="grad" class="dark"></div>
 
-<body class="light">
-  
+<body class="dark">
+
     <div id="quadranthx_container">
       <svg id="cloch" width="400" height="400" version="1.1" viewBox="0 0 132.29 132.29" xmlns="http://www.w3.org/2000/svg" style="opacity: 0">
         <g id="quadranthx">
@@ -129,16 +130,16 @@
     </div>
 
     <div id="toolbar">
-      <i id="toggle_help" class="toggleHelp light fa fa-question-circle"></i>
+      <i id="toggle_help" class="toggleHelp dark fa fa-question-circle"></i>
 
-      <i id="toolbarToggle" class="light fa fa-chevron-circle-up"></i>
+      <i id="toolbarToggle" class="dark fa fa-chevron-circle-up"></i>
       
       <div id="control_buttons" class="hidden">
-        <i id="colorpicker" class="light fa fa-palette"></i>
+        <i id="colorpicker" class="dark fa fa-palette"></i>
           <ol id="palette" class="hidden">
             <li style='background:#E91E63'></li>
             <li style='background:#cc22b5'></li>
-            <li style='background:#8324d6'></li>
+            <li style='background:#913bdd'></li>
             <!-- <li style='background:#673AB7'></li> -->
             <li style='background:#3F51B5'></li>
             <li style='background:#1d8ae0'></li>
@@ -153,11 +154,11 @@
             <li style='background:#e6582d'></li>
             <li style='background:#d41818'></li>
           </ol>
-        <i id="theme_toggle" class="light fa fa-adjust"></i>
+        <i id="theme_toggle" class="dark fa fa-adjust"></i>
         <!-- <i id="startstop_cloch" class="fa fa-layer-group"></i> -->
-        <i id="toggle_show" class="light fa fa-clock"></i>
+        <i id="toggle_show" class="dark fa fa-clock"></i>
         <div id="toggle_stop_menu">
-          <i id="startstop_cloch" class="light fa fa-pause"></i>
+          <i id="startstop_cloch" class="dark fa fa-pause"></i>
           <!-- <i id="toggle_manual" class="time_indicator fa fa-pen"></i> -->
         </div>   
         <div id="timepicker-spinbox"></div>
