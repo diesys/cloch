@@ -270,11 +270,9 @@ body.inactive>#quadranthx_container {
 
 svg#cloch {
   z-index: 101;
-  -webkit-transition: .2s ease;
-  transition: .2s ease;
+  transition: .6s ease;
   pointer-events: none;
 }
-
 
 /* palette */
 ol#palette:not(.hidden) {

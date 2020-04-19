@@ -341,9 +341,9 @@ window.onload = function () {
     background = $('#backgroundhx')
 
     // // shows the cloch
-    // cloch.css({
-    //     'opacity': '1'
-    // });
+    cloch.css({
+        'opacity': '1'
+    });
 
 
     ////// MAIN ////////////////////////////////////////////////////////////////////////////////////////////////////////
