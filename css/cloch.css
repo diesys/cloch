@@ -58,10 +58,10 @@
 }
 @keyframes blink {
   0%, 100% {
-    opacity: 1;
+    filter: opacity(1);
   }
   40% {
-    opacity: 0;
+    filter: opacity(0);
   }
 }
 ::-webkit-scrollbar {
@@ -99,26 +99,31 @@ body.light {
 #digital_clock {
   font-family: 'oswald';
   margin: 0;
-  color: #ffffff90;
+  /* color: #ffffff90; */
+  color: #ffffff;
+  opacity: .25;
   position: absolute;
   font-size: 32px;
   display: inline-block;
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%,-52%);
+  /* transform: translate(-50%,-52%); */
+  transform: translate(-50%,-160%) skew(60deg, -30deg);
   transition: all .4s ease;
   animation: fadeInBlur 1s;
-  text-shadow: 0 1px 4px #00000020;
+  text-shadow: 0 1px 5px #00000070;
   pointer-events: none;
 }
 
 .light #digital_clock {
-  color: #00000070;
+  /* color: #00000050; */
+  color: #000000;
+  /* opacity: .2; */
 }
 
 p#digital_clock.paused {
-  animation: blink 1.5s;
+  animation: blink 2s;
   animation-iteration-count: infinite;
 }
 
