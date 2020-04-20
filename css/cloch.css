@@ -184,7 +184,8 @@ p#digital_clock:not(.paused) > i#digital_clock_sec_ind {
   /* overflow-x: hidden; */
 }
 .light #toolbar {
-  background: linear-gradient(0deg, #5c5c5cf0, transparent)
+  /* background: linear-gradient(0deg, #5c5c5cf0, transparent); */
+  background: linear-gradient(0deg, #a29e9ef0, transparent);
 }
 
 #toolbar * {
@@ -205,7 +206,8 @@ p#digital_clock:not(.paused) > i#digital_clock_sec_ind {
 }
 
 #toolbar i.fa.dark {
-  color: rgba(5, 5, 5, .8);
+  color: rgba(35, 35, 35, .8);
+  text-shadow: 0 1px 3px #ffffff90;
 }
 #toolbar i.fa.dark:hover {
   color: rgba(5, 5, 5, 1);
@@ -446,7 +448,6 @@ svg#cloch {
   box-sizing: border-box;
   background: #000000b0;
   color: #fff;
-  /* z-index: 12; */
   padding: 5% 10%;
   padding-bottom: 3em !important;
   overflow-y: auto;
@@ -456,7 +457,6 @@ svg#cloch {
 }
 .light #help {
   color: #222;
-  /* background: #eeeeeeb0; */
   background:#fdfdfdc4;
 }
 #help h3,
@@ -466,7 +466,10 @@ svg#cloch {
 #help a {
   transition: color .5s;
   color: #ddddddf0;
-  /* text-shadow: 0 0 2px #ddddddf0; */
+}
+.light #help a {
+  /* text-shadow: 0px 0px 2px rgb(255, 255, 255, .9) !important; */
+  filter: brightness(70%);
 }
 #help > .content img {
   transition: all .4s;
@@ -485,6 +488,11 @@ svg#cloch {
 #help > .content > .horElement {
   display: flex;
   align-items: center;
+  margin: 30px 0;
+  border-bottom: 1px solid #cccccc60;
+}
+.light #help > .content > .horElement {
+  border-bottom: 1px solid #55555570;
 }
 #help > .content > .horElement > .bigHorElement {
   flex: 2;
@@ -492,6 +500,13 @@ svg#cloch {
 }
 #help > .content > .horElement > .smallHorElement {
   flex: 1;
+}
+#help > .content > .horElement > .smallHorElement,
+#help > .content > .horElement > .bigHorElement {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .button.close {
@@ -502,14 +517,14 @@ svg#cloch {
   -webkit-transform-origin: 50% 50%;
   position: fixed;
   top: 5px;
-  right: 16px;
+  /* right: 16px; */
+  left: 0;
   cursor: pointer;
   user-select: none;
   z-index: 30;
   height: 1.12em;
-  width: 1.12em;
-  border-radius: 2em;
-  text-align: center;
+  /* width: 1.12em; */
+  width: auto;
   margin: 12px -0px;
   /* box-shadow: 0 1px 10px -2px #00000000; */
   text-shadow: 0 1px 2px #000000a0;

@@ -459,10 +459,6 @@ window.onload = function () {
 
 
     // setup before start
-    // $('#toggle_stop_menu').hide()
-    // $('#control_buttons').hide()
-    // $('#palette').hide()
-    // $('#digital_clock').hide()
 
     // sets transition for background body and gradient after page loading
     $('body').css('transition', 'background .8s');
