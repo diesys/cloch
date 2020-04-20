@@ -179,13 +179,19 @@ p#digital_clock:not(.paused) > i#digital_clock_sec_ind {
   text-align: center;
   z-index: 10;
   user-select: none;
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.9), transparent);
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
   transition: background .6s;
   /* overflow-x: hidden; */
 }
 .light #toolbar {
   /* background: linear-gradient(0deg, #5c5c5cf0, transparent); */
   background: linear-gradient(0deg, #a29e9ef0, transparent);
+}
+body.inactive #toolbar {
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.4));
+}
+body.inactive.light #toolbar {
+  background: linear-gradient(0deg, #a29e9ef0, #eeeeeea0);
 }
 
 #toolbar * {
@@ -508,6 +514,22 @@ svg#cloch {
   align-items: center;
   justify-content: space-between;
 }
+
+@media screen and (max-width: 600px) {
+  #help>.content>.horElement>.bigHorElement {
+    flex: 1;
+  }
+
+  #help>.content>.horElement>.smallHorElement {
+    flex: 1;
+  }
+}
+@media screen and (max-width: 600px) {
+  #help>.content .horElement {
+    flex-direction: column;
+  }
+}
+
 
 .button.close {
   font-size: 3em;
