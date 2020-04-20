@@ -384,7 +384,8 @@ window.onload = function () {
     $("#toolbarToggle").bind({
         click: function () {
             $("#control_buttons").toggleClass('hidden');
-            // $("#palette").toggleClass('hidden');
+            if($(this).hasClass('showButton'))
+                $("#palette").addClass('hidden');
             $("#toolbarToggle").toggleClass('showButton');
         },
     });
@@ -441,7 +442,7 @@ window.onload = function () {
 
 
     // binds clicking pickr not working DAMN - magari rifare il selettore semplice cosi?
-    $('ol#palette>li').click(function (e) {
+    $('#palette>#colors>li').click(function (e) {
         var color = $(e.target).css('background-color');
         changeColor(color);
 
