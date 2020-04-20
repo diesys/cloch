@@ -256,18 +256,6 @@ body.inactive.light #toolbar {
 
 #toolbar #toggle_help {
   flex: 1;
-  /* position: absolute; */
-  /* right: 0; */
-  /* left: 0; */
-  /* opacity: .25; */
-  /* z-index: 11; */
-  /* bottom: 0; */
-}
-#toolbar #toggle_help:hover {
-  /* opacity: 1; */
-}
-.light #toolbar #toggle_help {
-  /* opacity: .6; */
 }
 
 #toolbar #startstop_cloch {
@@ -477,6 +465,12 @@ svg#cloch {
   /* text-shadow: 0px 0px 2px rgb(255, 255, 255, .9) !important; */
   filter: brightness(70%);
 }
+#help > .content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* max-width: 600px; */
+}
 #help > .content img {
   transition: all .4s;
   max-width: 100%;
@@ -485,20 +479,18 @@ svg#cloch {
 .light #help > .content img {
   filter: invert(100%);
 }
-#help > .content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
 #help > .content > .horElement {
   display: flex;
   align-items: center;
-  margin: 30px 0;
+  margin: 20px 0;
   border-bottom: 1px solid #cccccc60;
 }
 .light #help > .content > .horElement {
   border-bottom: 1px solid #55555570;
+}
+#help > .content > .horElement div:first-child {
+  align-self: flex-start;
 }
 #help > .content > .horElement > .bigHorElement {
   flex: 2;
