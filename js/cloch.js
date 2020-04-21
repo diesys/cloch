@@ -474,7 +474,7 @@ window.onload = function () {
     // help toggle
     $('.toggleHelp').click(function () {
         $('#help').fadeToggle()
-        $('#palette').fadeOut()
+        // $('#palette').fadeOut()
         document.body.classList.toggle('inactive')
     });
 
