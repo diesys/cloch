@@ -275,6 +275,17 @@ function exampleHours(time = 1300) {
     // console.log(i,j)
 }
 
+// handler for manual time input
+function manualTime(event) {
+    new_h = parseInt(event.target.value.split(':')[0])
+    new_m = parseInt(event.target.value.split(':')[1])
+    if(new_h != config['hour']['value'])
+        setHour(new_h)
+    if(new_m != config['minute']['value']) 
+        setMinute(new_m)
+    // console.log(new_time)
+}
+
 
 // CONFIGS ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // MINUTES ANGLE: 0, 10, 20, 30, 50, 60  in clockwise order
@@ -404,11 +415,17 @@ window.onload = function () {
         });
     });
 
+    $("#toggle_clockSettings").click(function () {
+        $('#clock_settings').toggleClass('hidden')
+    });
+
     $("#toggle_show").click(function () {
+        $("#toggle_show").toggleClass('fa-eye')
+        $("#toggle_show").toggleClass('fa-eye-slash')
         // when added edit option, enable !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         // $('#toggle_stop_menu').fadeToggle()
         // $('#startstop_cloch').fadeToggle()
-        $('#startstop_cloch').toggleClass('hidden')
+        // $('#startstop_cloch').toggleClass('hidden')
         $('#digital_clock').toggleClass('hidden')
 
         if (config['debug']) {
@@ -418,6 +435,9 @@ window.onload = function () {
 
     $("#startstop_cloch").click(function () {
         clochToggle();
+
+        // toggle disable state to the input (you can change time only on pause)
+        $('#manual_time_input').prop("disabled", (_, val) => !val);
 
         if (config['debug']) {
             console.log("start/stop toggled");

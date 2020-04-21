@@ -9,3 +9,5 @@
 // fare versione 12h con indicatore sui lati
 
 // cambiare colori di cubhex in base a dove si sposta l'indicat. delle ore
+
+// funzione aggiorna digital clock, da chiamare onchange sull'input e al cambio ora in genere (al momento solo cambio minuti)
