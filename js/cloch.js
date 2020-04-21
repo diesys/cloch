@@ -201,16 +201,16 @@ function changeColor(color, duration = .8) {
         },
     });
     var maskColorChange = TweenMax.to(sunMoon[2], duration, {
-        delay: 0,
-        transformOrigin: "50% 50%",
-        css: {
-            fill: color
-        },
+        // delay: 0,
+        // transformOrigin: "50% 50%",
+        css: {fill: color},
     });
 
     // changes browser and button color
-    $('div.pcr-button').css({
-        'background': color
+    $('div.pcr-button').css({'background': color})
+    $('.colored.title').css({
+        'color': color,
+        'textShadow': 'rgba(0,0,0,.5) 0 0 3px'
     })
     $('a').css({
         'color': color,
@@ -396,38 +396,19 @@ window.onload = function () {
         click: function () {
             $("#control_buttons").toggleClass('hidden');
             if($(this).hasClass('showButton')) 
-                // $("#palette").addClass('hidden');
-                // palette and clock settings
-                $(".subtoolbar").addClass('hidden');
+                $(".subtoolbar").addClass('hidden'); // palette and clock settings
             $("#toolbarToggle").toggleClass('showButton');
         },
     });
     /// SELECT MANUALLY HOUR AND MINUTE
-    $(function () {
-        $("#sel_hour").selectmenu({
-            change: function (event, data) {
-                setHour(data.item.value)
-            }
-        });
-
-        $("#sel_minute").selectmenu({
-            change: function (event, data) {
-                setMinute(data.item.value, config['theme'])
-            }
-        });
-    });
-
     $("#toggle_clockSettings").click(function () {
         $('#clock_settings').toggleClass('hidden')
+        $('#palette').addClass('hidden');
     });
 
     $("#toggle_show").click(function () {
         $("#toggle_show").toggleClass('fa-eye')
         $("#toggle_show").toggleClass('fa-eye-slash')
-        // when added edit option, enable !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        // $('#toggle_stop_menu').fadeToggle()
-        // $('#startstop_cloch').fadeToggle()
-        // $('#startstop_cloch').toggleClass('hidden')
         $('#digital_clock').toggleClass('hidden')
 
         if (config['debug']) {
@@ -449,8 +430,7 @@ window.onload = function () {
     // newpalette
     $('#colorpicker').click(function () {
         $('#palette').toggleClass('hidden');
-        // $('#palette').fadeToggle();
-        // $('#theme_toggle').fadeToggle();
+        $('#clock_settings').addClass('hidden');
 
         if (config['debug']) {
             console.log("palette toggle");
@@ -475,8 +455,12 @@ window.onload = function () {
 
     // help toggle
     $('.toggleHelp').click(function () {
-        $('#help').fadeToggle()
+        $('#help').toggleClass('hidden')
+        $('#palette').addClass('hidden');
+        $('#clock_settings').addClass('hidden');
+        // $('#help').fadeToggle()
         // $('#palette').fadeOut()
+        // $('#clock_settings').fadeOut()
         document.body.classList.toggle('inactive')
     });
 

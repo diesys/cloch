@@ -137,6 +137,7 @@ body.light {
 
 #digital_clock.hidden {
   filter: opacity(0) blur(10px);
+  animation: none !important;
 }
 
 .light #digital_clock {
@@ -301,7 +302,13 @@ body.inactive.light #toolbar {
   color: #eee;
   font-family: 'Baloo Tamma 2';
   font-size: 1.2em;
+  cursor: text;
 }
+#clock_settings input[type="time"]:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
 .light #clock_settings input[type="time"] {
   color: #222;
 }
@@ -509,10 +516,17 @@ svg#cloch {
   transition: color .5s;
   color: #ddddddf0;
 }
-.light #help a {
-  /* text-shadow: 0px 0px 2px rgb(255, 255, 255, .9) !important; */
-  filter: brightness(70%);
+
+.dark #help .colored.title,
+.dark #help a {
+  filter: brightness(120%);
 }
+.light #help .colored.title,
+.light #help a {
+  filter: brightness(75%);
+  text-shadow: #fff 0 0 5px !important;
+}
+
 #help > .content {
   display: flex;
   flex-direction: column;
