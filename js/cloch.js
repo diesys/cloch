@@ -395,8 +395,10 @@ window.onload = function () {
     $("#toolbarToggle").bind({
         click: function () {
             $("#control_buttons").toggleClass('hidden');
-            if($(this).hasClass('showButton'))
-                $("#palette").addClass('hidden');
+            if($(this).hasClass('showButton')) 
+                // $("#palette").addClass('hidden');
+                // palette and clock settings
+                $(".subtoolbar").addClass('hidden');
             $("#toolbarToggle").toggleClass('showButton');
         },
     });
