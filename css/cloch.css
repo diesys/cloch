@@ -569,16 +569,18 @@ svg#cloch {
   justify-content: space-between;
 }
 
-@media screen and (max-width: 600px) {
-  #help>.content>.horElement>.bigHorElement {
-    flex: 1;
-  }
-
+@media screen and (min-width: 1000px) {
+  #help>.content>.horElement>.bigHorElement,
   #help>.content>.horElement>.smallHorElement {
     flex: 1;
   }
 }
+
 @media screen and (max-width: 600px) {
+  #help>.content>.horElement>.bigHorElement,
+  #help>.content>.horElement>.smallHorElement {
+    flex: 1;
+  }
   #help>.content .horElement {
     flex-direction: column;
   }
