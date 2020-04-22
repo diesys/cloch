@@ -377,10 +377,13 @@ window.onload = function () {
 
     // get url color if any
     config = getUrlVars()
-    if (!config['color'])
+    if (!config['color']) {
         config['color'] = '#ff3c6d'
-    if (!config['theme'])
+        config['first_visit'] = true
+    }
+    if (!config['theme']) {
         config['theme'] = 'dark'
+    }
 
     // gets new date starts adding to config file 
     date = new Date();
@@ -501,5 +504,11 @@ window.onload = function () {
             console.log("Help toggled")
         }
     })
+
+    // ON FIRST RUN SHOWS THE HELP 
+    if(config['first_visit']) {
+        show(help)
+        document.querySelector('body').classList.add('inactive')
+    }
 
 }
