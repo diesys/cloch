@@ -222,13 +222,13 @@ function updateThemeURL() {
 
 function clochToggle() {
     if (clochStopped) {
-        document.querySelector("#startstop_cloch").classList.add('fa-pause');
-        document.querySelector("#startstop_cloch").classList.remove('fa-play');
+        startstop_cloch.classList.add('fa-pause');
+        startstop_cloch.classList.remove('fa-play');
         document.querySelector("#digital_clock").classList.remove('paused');
         clochStopped = false;
     } else {
-        document.querySelector("#startstop_cloch").classList.add('fa-play');
-        document.querySelector("#startstop_cloch").classList.remove('fa-pause');
+        startstop_cloch.classList.add('fa-play');
+        startstop_cloch.classList.remove('fa-pause');
         document.querySelector("#digital_clock").classList.add('paused');
         clochStopped = true;
     }
@@ -334,6 +334,23 @@ window.onload = function () {
     quadrant = document.querySelector('#quadranthx')
     background = document.querySelector('#backgroundhx')
 
+    // UI elements
+    toggle_toolbar = document.querySelector("#toggle_toolbar")
+    subToolbars = document.querySelectorAll(".subtoolbar")
+    toolbar_buttons = document.querySelector("#toolbar_buttons")
+    toggle_theme = document.querySelector('#toggle_theme')
+    toggle_palette = document.querySelector('#toggle_palette')
+    palette = document.querySelector('#palette')
+    paletteColors = document.querySelectorAll('#palette>#colors>li')
+    toggle_digitalClock = document.querySelector("#toggle_digital_clock")
+    digital_clock = document.querySelector('#digital_clock')
+    toggle_clock_settings = document.querySelector("#toggle_clock_settings")
+    clock_settings = document.querySelector('#clock_settings')
+    startstop_cloch = document.querySelector("#startstop_cloch")
+    manual_time_input = document.querySelector('#manual_time_input')
+    helpToggles = document.querySelectorAll('.toggleHelp')
+    helpPanel = document.querySelector('#help')
+
     // cloch.setAttribute('style', 'opacity: 1')
 
     ////// MAIN ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -385,35 +402,35 @@ window.onload = function () {
 
 
     //// UI /////////////////////////////////////////////
-    document.querySelector("#toggle_toolbar").addEventListener('click', function () {
-        document.querySelector("#toolbar_buttons").classList.toggle('hidden')
+    toggle_toolbar.addEventListener('click', function () {
+        toolbar_buttons.classList.toggle('hidden')
         if(this.classList.contains('opened'))
-            document.querySelectorAll(".subtoolbar").forEach(element => { // palette and clock settings
+            subToolbars.forEach(element => { // palette and clock settings
                 element.classList.add('hidden')
             })
-        document.querySelector("#toggle_toolbar").classList.toggle('opened')
+        toggle_toolbar.classList.toggle('opened')
     });
 
     /// SELECT MANUALLY HOUR AND MINUTE
-    document.querySelector("#toggle_clock_settings").addEventListener('click', function () {
-        document.querySelector('#clock_settings').classList.toggle('hidden')
-        document.querySelector('#palette').classList.add('hidden')
+    toggle_clock_settings.addEventListener('click', function () {
+        clock_settings.classList.toggle('hidden')
+        palette.classList.add('hidden')
     });
 
-    document.querySelector("#toggle_show").addEventListener('click', function () {
-        document.querySelector("#toggle_show").classList.toggle('fa-eye')
-        document.querySelector("#toggle_show").classList.toggle('fa-eye-slash')
-        document.querySelector('#digital_clock').classList.toggle('hidden')
+    toggle_digitalClock.addEventListener('click', function () {
+        toggle_digitalClock.classList.toggle('fa-eye')
+        toggle_digitalClock.classList.toggle('fa-eye-slash')
+        digital_clock.classList.toggle('hidden')
 
         if (config['debug']) {
             console.log("manual timing toggle")
         }
     });
 
-    document.querySelector("#startstop_cloch").addEventListener('click', function () {
+    startstop_cloch.addEventListener('click', function () {
         // stops the clock and, toggles 'disable' state to the input (you can change time only on pause)
         clochToggle();
-        document.querySelector('#manual_time_input').disabled ^= true
+        manual_time_input.disabled ^= true
 
         if (config['debug']) {
             console.log("start/stop toggled")
@@ -421,9 +438,9 @@ window.onload = function () {
     });
 
     // palette opening
-    document.querySelector('#toggle_palette').addEventListener('click', function () {
-        document.querySelector('#palette').classList.toggle('hidden')
-        document.querySelector('#clock_settings').classList.add('hidden')
+    toggle_palette.addEventListener('click', function () {
+        palette.classList.toggle('hidden')
+        clock_settings.classList.add('hidden')
 
         if (config['debug']) {
             console.log("palette toggle")
@@ -431,10 +448,9 @@ window.onload = function () {
     });
 
     // palette changing colors
-    document.querySelectorAll('#palette>#colors>li').forEach(element => {
+    paletteColors.forEach(element => {
         element.addEventListener('click', function (e) {
-            var color = e.target.getAttribute('data-color')
-            changeColor(color)
+            changeColor(e.target.getAttribute('data-color'))
         })
         if (config['debug']) {
             console.log("palette color chaged to:", color)
@@ -442,16 +458,16 @@ window.onload = function () {
     })
 
     // theme toggle binding
-    document.querySelector('#theme_toggle').addEventListener('click', function () {
+    toggle_theme.addEventListener('click', function () {
         toggleTheme()
     });
 
     // help toggle
-    document.querySelectorAll('.toggleHelp').forEach(element => {
+    helpToggles.forEach(element => {
         element.addEventListener('click', function () {
-            document.querySelector('#help').classList.toggle('hidden')
-            document.querySelector('#palette').classList.add('hidden')
-            document.querySelector('#clock_settings').classList.add('hidden')
+            helpPanel.classList.toggle('hidden')
+            palette.classList.add('hidden')
+            clock_settings.classList.add('hidden')
             document.body.classList.toggle('inactive')
         })
         if (config['debug']) {
