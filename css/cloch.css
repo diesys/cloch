@@ -339,25 +339,25 @@ body.inactive.light #toolbar {
   height: 2.2em;
   width: 2.1em;
 }
-#palette #theme_toggle li {
+#palette #toggle_theme li {
   font-size: 1.4em;
   padding: .1em 0;
   height: 1.4em;
 }
 
-#palette #theme_toggle #light {
+#palette #toggle_theme #light {
   color: #222;
   background: #eee;
 }
-#palette #theme_toggle #dark {
+#palette #toggle_theme #dark {
   color: #eee;
   background: #222;
 }
 
-.light #palette #theme_toggle #light {
+.light #palette #toggle_theme #light {
   flex: 3;
 }
-.dark #palette #theme_toggle #dark {
+.dark #palette #toggle_theme #dark {
   flex: 3;
 }
 
