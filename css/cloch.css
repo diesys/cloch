@@ -131,12 +131,11 @@ body.light {
   transition: all .7s ease;
   text-shadow: -2px 1px 4px #00000050;
   pointer-events: none;
-  /* animation: fadeInBlur 1s; */
   filter: opacity(1) blur(0);
 }
 
 #digital_clock.hidden {
-  filter: opacity(0) blur(10px);
+  filter: opacity(0) blur(8px);
   animation: none !important;
 }
 
@@ -270,8 +269,10 @@ body.inactive.light #toolbar {
   flex-direction: column;
   overflow: hidden;
   pointer-events: all;
-  animation: fadeIn 1s;
+  animation: fadeIn .8s;
   user-select: none;
+  filter: opacity(1);
+  transition: filter .8s;
 }
 #clock_settings:not(.hidden) {
   color: #eee;
@@ -302,7 +303,7 @@ body.inactive.light #toolbar {
 
 #palette.hidden {
   overflow: hidden;
-  animation: fadeIn 1s reverse;
+  animation: fadeIn .8s reverse;
 }
 
 .light #palette:not(.hidden),
@@ -481,12 +482,20 @@ svg#cloch {
   padding-bottom: 3em !important;
   overflow-y: auto;
   line-height: 1.2em;
-  transition: all .5s;
+  transition: all .8s;
   text-align: justify;
+  animation: fadeIn .8s;
+  user-select: none;
 }
 .light #help {
   color: #222;
   background:#fdfdfdc4;
+}
+#help.hidden {
+  animation: none !important;
+  pointer-events: none;
+  opacity: 0;
+  display: block !important;
 }
 #help h3,
 #help h4 {
