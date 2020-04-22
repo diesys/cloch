@@ -175,20 +175,16 @@ p#digital_clock:not(.paused) > i#digital_clock_sec_ind {
   transition: background .6s;
   /* overflow-x: hidden; */
 }
-.light #toolbar {
-  /* background: linear-gradient(0deg, #5c5c5cf0, transparent); */
-  background: linear-gradient(0deg, #a29e9ef0, transparent);
-}
 body.inactive #toolbar {
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.4));
+}
+.light #toolbar {
+  background: linear-gradient(0deg, #a29e9ef0, transparent);
 }
 body.inactive.light #toolbar {
   background: linear-gradient(0deg, #a29e9ef0, #eeeeeea0);
 }
-
-#toolbar * {
-  outline: none;
-}
+#toolbar * {outline: none;}
 
 #toolbar i.fa {
   font-size: 32px;
@@ -203,48 +199,40 @@ body.inactive.light #toolbar {
   transition: all .3s;
 }
 
-#toolbar i.fa.dark {
+.light #toolbar i.fa {
   color: rgba(35, 35, 35, .8);
   text-shadow: 0 1px 3px #ffffff90;
 }
-#toolbar i.fa.dark:hover {
+.light #toolbar i.fa:hover {
   color: rgba(5, 5, 5, 1);
 }
-#toolbar i.fa.light {
+.dark #toolbar i.fa {
   color: rgba(205, 205, 205, .6);
 }
-#toolbar i.fa.light:hover {
+.dark #toolbar i.fa:hover {
   color: rgba(255, 255, 255, .8);
 }
 
-#toolbar #toolbarToggle {
-  /* opacity: .6; */
-  /* font-size: 24px; */
+#toolbar #toggle_toolbar {
   transform-origin: 50% 50%;
   transform: rotate(0deg);
   transition: all .5s;
   flex: 1;
 }
-.fa.fa-plus-circle.showButton,
-#toolbar #toolbarToggle.showButton {
-  /* opacity: 1; */
-  /* arrow */
-  /* transform: rotate(90deg); */
-  /* plus */
+.fa.fa-plus-circle.opened,
+#toolbar #toggle_toolbar.opened {
   transform: rotate(45deg);
 }
 
-#toolbar #control_buttons {
+#toolbar #toolbar_buttons {
   display: flex !important;
   align-items: center;
-  /* flex: 2; */
   flex: 3;
   transition: all .8s;
   justify-content: space-evenly;
-  /* overflow-y: hidden; */
   overflow: hidden;
 }
-#toolbar #control_buttons.hidden {
+#toolbar #toolbar_buttons.hidden {
   flex: 0;
 }
 
@@ -277,7 +265,6 @@ body.inactive.light #toolbar {
   border-radius: 10px;
   box-shadow: 0 2px 30px -3px rgba(0, 0, 0, .8);
   background: rgba(0, 0, 0, .9);
-  /* width: auto; */
   padding: 0;
   display: flex;
   flex-direction: column;
@@ -314,7 +301,6 @@ body.inactive.light #toolbar {
 }
 
 #palette.hidden {
-  /* display: block; */
   overflow: hidden;
   animation: fadeIn 1s reverse;
 }
@@ -385,21 +371,15 @@ body.inactive.light #toolbar {
 }
 
 @media screen and (max-width: 500px) {
-
-  /* palette */
   #palette {
-    /* bottom: 40px; */
-    /* padding: 8px 10px 5px 10px; */
     box-shadow: 0 2px 20px -3px rgba(0, 0, 0, .7);
     width: 100%;
     border-radius: 0 !important;
-    /* min-width: 150px; */
   }
 
   #palette #colors li {
     height: 3em;
     width: 3em;
-    /* margin: 1px 0px; */
   }
 }
 
@@ -416,7 +396,7 @@ body.inactive.light #toolbar {
   overflow: hidden;
   z-index: -1;
 }
-#grad.light {
+.light #grad {
   /* Safari 5.1 to 6.0 */
   background: -webkit-radial-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, .2));
   /* For Opera 11.6 to 12.0 */
@@ -426,7 +406,7 @@ body.inactive.light #toolbar {
   /* Standard syntax */
   background: radial-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, .2));
 }
-#grad.dark {
+.dark #grad {
   /* Safari 5.1 to 6.0 */
   background: -webkit-radial-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, .7));
   /* For Opera 11.6 to 12.0 */
@@ -517,12 +497,14 @@ svg#cloch {
   color: #ddddddf0;
 }
 
-.dark #help .colored.title,
-.dark #help a {
+.theme-colored, a {
+  transition: color .5s;
+}
+
+.dark #help .theme-colored {
   filter: brightness(120%);
 }
-.light #help .colored.title,
-.light #help a {
+.light #help .theme-colored {
   filter: brightness(75%);
   text-shadow: #fff 0 0 5px !important;
 }
@@ -531,12 +513,10 @@ svg#cloch {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* max-width: 600px; */
 }
 #help > .content img {
   transition: all .4s;
   max-width: 100%;
-  /* float: left; */
 }
 .light #help > .content img {
   filter: invert(100%);
@@ -593,16 +573,13 @@ svg#cloch {
   -webkit-transform-origin: 50% 50%;
   position: fixed;
   top: 5px;
-  /* right: 16px; */
   left: 0;
   cursor: pointer;
   user-select: none;
   z-index: 30;
   height: 1.12em;
-  /* width: 1.12em; */
   width: auto;
   margin: 12px -0px;
-  /* box-shadow: 0 1px 10px -2px #00000000; */
   text-shadow: 0 1px 2px #000000a0;
   transition: all .4s;
 }
@@ -613,5 +590,4 @@ svg#cloch {
 .button.close:hover {
   color: #fff;
   text-shadow: 0 1px 4px #000000c0;
-  /* box-shadow: 0 1px 10px -2px #000000e0; */
 }

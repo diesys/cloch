@@ -136,16 +136,16 @@ function setMinute(min, theme = config['theme']) {
                 }
 
         // change digital time in toolbar
-        temp_min = config['minute']['value'];
-        tmp_min = temp_min < 10 ? '0' + temp_min : temp_min;
-        new_digital_time = config['hour']['value'] + "<i id='digital_clock_sec_ind'>:</i>" + tmp_min;
-        $("#digital_clock").html(new_digital_time);
+        temp_min = config['minute']['value']
+        tmp_min = temp_min < 10 ? '0' + temp_min : temp_min
+        new_digital_time = config['hour']['value'] + "<i id='digital_clock_sec_ind'>:</i>" + tmp_min
+        document.querySelector("#digital_clock").innerHTML = new_digital_time
 
         if (config['debug']) {
-            console.log("new minute: ", min);
+            console.log("new minute: ", min)
         }
 
-    } else console.log('error: minutes can be [0..60]');
+    } else console.log('error: minutes can be [0..60]')
 }
 
 function toggleTheme(theme) {
@@ -165,7 +165,7 @@ function toggleTheme(theme) {
         console.log('wrong theme...')
 
     // minutes
-    setMinute(config['minute']['value'], new_theme);
+    setMinute(config['minute']['value'], new_theme)
 
     // hours
     TweenMax.to(sunMoon[1], .5, {
@@ -173,14 +173,9 @@ function toggleTheme(theme) {
         ease: Power2.easeOut,
     });
 
-    // preserves the blur and just toggles body and gradient dont know why it's inverted......!!!!!!!!!!
-    $('body').removeClass(theme)
-    $('#grad').removeClass(theme)
-    $('body').addClass(new_theme)
-    $('#grad').addClass(new_theme)
-
-    // toolbar coloring
-    $('#toolbar i.fa').switchClass(new_theme, theme, 1000, "easeInOutQuad");
+    // toggles body class with the new theme
+    document.querySelector('body').classList.remove(theme)
+    document.querySelector('body').classList.add(new_theme)
 
     if (config['debug'])
         console.log('new theme', new_theme)
@@ -193,32 +188,19 @@ function toggleTheme(theme) {
 }
 
 function changeColor(color, duration = .8) {
-    var backgroundColorChange = TweenMax.to(background, duration, {
-        delay: 0,
-        transformOrigin: "50% 50%",
-        css: {
-            fill: color
-        },
-    });
-    var maskColorChange = TweenMax.to(sunMoon[2], duration, {
-        // delay: 0,
-        // transformOrigin: "50% 50%",
-        css: {fill: color},
-    });
+    // svg quadranthx and sunmoon mask indicator change
+    TweenMax.to(sunMoon[2], duration, {css: {fill: color}});
+    TweenMax.to(background, duration, {delay: 0,css: {fill: color}});
+
+    // changes colors to link and titles and text element with THEME-COLORED class
+    document.querySelectorAll('.theme-colored').forEach(element => {
+        element.setAttribute('style', 'color:'+ color +'; textShadow: rgba(0,0,0,.5) 0 0 3px;')
+    })
 
     // changes browser and button color
-    $('div.pcr-button').css({'background': color})
-    $('.colored.title').css({
-        'color': color,
-        'textShadow': 'rgba(0,0,0,.5) 0 0 3px'
+    document.querySelectorAll('.browser-theme-colored').forEach(element => {
+        element.setAttribute('content', color)
     })
-    $('a').css({
-        'color': color,
-        'textShadow': color + ' 0 0 1.5px'
-    })
-    $('#browserColor').attr('content', color)
-    $('#browserColorwp').attr('content', color)
-    $('#browserColorap').attr('content', color)
 
     if (config['debug']) {
         console.log("new color", color)
@@ -239,40 +221,35 @@ function updateThemeURL() {
 }
 
 function clochToggle() {
-    if (stopCloch) {
-        $("#startstop_cloch").addClass('fa-pause');
-        $("#startstop_cloch").removeClass('fa-play');
-        $("#digital_clock").removeClass('paused');
-        stopCloch = false;
+    if (clochStopped) {
+        document.querySelector("#startstop_cloch").classList.add('fa-pause');
+        document.querySelector("#startstop_cloch").classList.remove('fa-play');
+        document.querySelector("#digital_clock").classList.remove('paused');
+        clochStopped = false;
     } else {
-        $("#startstop_cloch").addClass('fa-play');
-        $("#startstop_cloch").removeClass('fa-pause');
-        $("#digital_clock").addClass('paused');
-        stopCloch = true;
+        document.querySelector("#startstop_cloch").classList.add('fa-play');
+        document.querySelector("#startstop_cloch").classList.remove('fa-pause');
+        document.querySelector("#digital_clock").classList.add('paused');
+        clochStopped = true;
     }
 }
 
 function exampleMins(time = 500) {
-    stopCloch = true;
-    j = 0;
+    clochStopped = true; j = 0;
     setInterval(function () {
         if (j < 60) {
-            setMinute(j, config['theme']);
-            j++
+            setMinute(j, config['theme']); j++
         }
     }, time)
 }
 
 function exampleHours(time = 1300) {
-    stopCloch = true;
-    i = 0;
+    clochStopped = true; i = 0;
     setInterval(function () {
         if (i < 24) {
-            setHour(i)
-            i++
+            setHour(i); i++
         }
     }, time * 2)
-    // console.log(i,j)
 }
 
 // handler for manual time input
@@ -283,29 +260,48 @@ function manualTime(event) {
         setHour(new_h)
     if(new_m != config['minute']['value']) 
         setMinute(new_m)
-    // console.log(new_time)
+    
+    if(config['debug'])
+        console.log(new_time)
 }
 
 
 // CONFIGS ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // MINUTES ANGLE: 0, 10, 20, 30, 50, 60  in clockwise order
 // MINUTES MIDDLE: 5, 15, 25, 35, 45, 55 in clockwise order
-minutes = [$('#minAng_top'), $('#minMid_rightT'), $('#minAng_topR'), $('#minMid_right'), $('#minAng_bottomR'), $('#minMid_rightB'), $('#minAng_bottom'), $('#minMid_leftB'), $('#minAng_bottomL'), $('#minMid_left'), $('#minAng_topL'), $('#minMid_leftT')],
+minutes = [
+    document.querySelector('#minAng_top'), 
+    document.querySelector('#minMid_rightT'), 
+    document.querySelector('#minAng_topR'), 
+    document.querySelector('#minMid_right'), 
+    document.querySelector('#minAng_bottomR'), 
+    document.querySelector('#minMid_rightB'), 
+    document.querySelector('#minAng_bottom'), 
+    document.querySelector('#minMid_leftB'), 
+    document.querySelector('#minAng_bottomL'), 
+    document.querySelector('#minMid_left'), 
+    document.querySelector('#minAng_topL'), 
+    document.querySelector('#minMid_leftT')
+]
 
 // indicator, sun and moon mask. sunMoon[2].opacity=0 -> sun; sunMoon[2].opacity=0 -> moon
-sunMoon = [$('#sunmoon_indicator'), $('#sun'), $('#moon_mask')],
+sunMoon = [
+    document.querySelector('#sunmoon_indicator'), 
+    document.querySelector('#sun'), 
+    document.querySelector('#moon_mask')
+]
 
 // sort of a false perspective cube on the center of the quadrant
-cubex = [$('#cubex_top'), $('#cubex_left'), $('#cubex_right')];
+// cubex = [document.querySelector('#cubex_top'), document.querySelector('#cubex_left'), document.querySelector('#cubex_right')];
 
 // Hours traslation coordinates
-hoursXY = new Array([-33.8, -19], [0, 0], [0, 40], [-33.8, 58], [-67, 38], [-67, 0]);
+hoursXY = new Array([-33.8, -19], [0, 0], [0, 40], [-33.8, 58], [-67, 38], [-67, 0])
 
 // general duration fade used for relative timing and delay
-durationFade = .1,
+durationFade = .1
 
 // global variable for start/stopping the clock for manual select
-stopCloch = false;
+clochStopped = false
 
 // Minutes indicator color values (DARK)
 minutesColorsLight = {
@@ -316,7 +312,7 @@ minutesColorsLight = {
     // to > animation
     'first': ['rgba(5,5,5,1)', 'rgba(5,5,5,1)', 'rgba(5,5,5,.7)', 'rgba(5,5,5,.4)', 'rgba(5,5,5,.4)'],
     'second': ['rgba(0,0,0,.1)', 'rgba(5,5,5,.4)', 'rgba(5,5,5,.4)', 'rgba(5,5,5,.7)', 'rgba(5,5,5,1)'],
-};
+}
 // light Minutes indicator color values 
 minutesColors = {
     // from < animation
@@ -326,26 +322,24 @@ minutesColors = {
     // to > animation
     'first': ['rgba(255,255,255,1)', 'rgba(255,255,255,1)', 'rgba(255,255,255,.7)', 'rgba(255, 255, 255, .4)', 'rgba(255, 255, 255, .4)'],
     'second': ['rgba(0,0,0,.1)', 'rgba(255,255,255,.4)', 'rgba(255,255,255,.4)', 'rgba(255, 255, 255, .7)', 'rgba(255, 255, 255, 1)'],
-};
+}
 
 
 
 window.onload = function () {
+    // shows the cloch
+    document.querySelector('#cloch').setAttribute('style', 'opacity: 1')
+    
     // main cloch elements
-    cloch = $('#cloch')
-    quadrant = $('#quadranthx')
-    background = $('#backgroundhx')
+    quadrant = document.querySelector('#quadranthx')
+    background = document.querySelector('#backgroundhx')
 
-    // // shows the cloch
-    cloch.css({
-        'opacity': '1'
-    });
-
+    // cloch.setAttribute('style', 'opacity: 1')
 
     ////// MAIN ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     // get url color if any
-    config = getUrlVars();
+    config = getUrlVars()
     if (!config['color'])
         config['color'] = '#ff3c6d'
     if (!config['theme'])
@@ -361,11 +355,11 @@ window.onload = function () {
     };
 
     setTimeout(function () {
-        setHour(date.getHours());
+        setHour(date.getHours())
         setMinute(date.getMinutes(), config['theme']);
 
         if (config['debug']) {
-            console.log("AUTO time set: ", config['hour'], ":", config['minute']);
+            console.log("AUTO time set: ", config['hour'], ":", config['minute'])
         }
 
     }, 0);
@@ -375,99 +369,94 @@ window.onload = function () {
 
     // checks if there's any hour and minute in the url
     setInterval(function () {
-        if (!stopCloch) {
-            date = new Date();
-            h = date.getHours();
-            m = date.getMinutes();
+        if (!clochStopped) {
+            date = new Date()
+            h = date.getHours()
+            m = date.getMinutes()
             if (h != config['hour']['value'])
-                setHour(h);
+                setHour(h)
             if (m != config['minute']['value'])
-                setMinute(m, config['theme']);
+                setMinute(m, config['theme'])
         }
         if (config['debug']) {
-            console.log("AUTO update time: ", h, ":", m);
+            console.log("AUTO update time: ", h, ":", m)
         }
     }, 500);
 
 
     //// UI /////////////////////////////////////////////
-    // $("#control_buttons").hide();  debug
-    $("#toolbarToggle").bind({
-        click: function () {
-            $("#control_buttons").toggleClass('hidden');
-            if($(this).hasClass('showButton')) 
-                $(".subtoolbar").addClass('hidden'); // palette and clock settings
-            $("#toolbarToggle").toggleClass('showButton');
-        },
+    document.querySelector("#toggle_toolbar").addEventListener('click', function () {
+        document.querySelector("#toolbar_buttons").classList.toggle('hidden')
+        if(this.classList.contains('opened'))
+            document.querySelectorAll(".subtoolbar").forEach(element => { // palette and clock settings
+                element.classList.add('hidden')
+            })
+        document.querySelector("#toggle_toolbar").classList.toggle('opened')
     });
+
     /// SELECT MANUALLY HOUR AND MINUTE
-    $("#toggle_clockSettings").click(function () {
-        $('#clock_settings').toggleClass('hidden')
-        $('#palette').addClass('hidden');
+    document.querySelector("#toggle_clock_settings").addEventListener('click', function () {
+        document.querySelector('#clock_settings').classList.toggle('hidden')
+        document.querySelector('#palette').classList.add('hidden')
     });
 
-    $("#toggle_show").click(function () {
-        $("#toggle_show").toggleClass('fa-eye')
-        $("#toggle_show").toggleClass('fa-eye-slash')
-        $('#digital_clock').toggleClass('hidden')
+    document.querySelector("#toggle_show").addEventListener('click', function () {
+        document.querySelector("#toggle_show").classList.toggle('fa-eye')
+        document.querySelector("#toggle_show").classList.toggle('fa-eye-slash')
+        document.querySelector('#digital_clock').classList.toggle('hidden')
 
         if (config['debug']) {
-            console.log("manual timing toggle");
+            console.log("manual timing toggle")
         }
     });
 
-    $("#startstop_cloch").click(function () {
+    document.querySelector("#startstop_cloch").addEventListener('click', function () {
+        // stops the clock and, toggles 'disable' state to the input (you can change time only on pause)
         clochToggle();
-
-        // toggle disable state to the input (you can change time only on pause)
-        $('#manual_time_input').prop("disabled", (_, val) => !val);
+        document.querySelector('#manual_time_input').disabled ^= true
 
         if (config['debug']) {
-            console.log("start/stop toggled");
+            console.log("start/stop toggled")
         }
     });
 
-    // newpalette
-    $('#colorpicker').click(function () {
-        $('#palette').toggleClass('hidden');
-        $('#clock_settings').addClass('hidden');
+    // palette opening
+    document.querySelector('#toggle_palette').addEventListener('click', function () {
+        document.querySelector('#palette').classList.toggle('hidden')
+        document.querySelector('#clock_settings').classList.add('hidden')
 
         if (config['debug']) {
-            console.log("palette toggle");
+            console.log("palette toggle")
         }
     });
 
-    //   theme toggle binding
+    // palette changing colors
+    document.querySelectorAll('#palette>#colors>li').forEach(element => {
+        element.addEventListener('click', function (e) {
+            var color = e.target.getAttribute('data-color')
+            changeColor(color)
+        })
+        if (config['debug']) {
+            console.log("palette color chaged to:", color)
+        }
+    })
+
+    // theme toggle binding
     document.querySelector('#theme_toggle').addEventListener('click', function () {
         toggleTheme()
     });
 
-
-    // binds clicking pickr not working DAMN - magari rifare il selettore semplice cosi?
-    $('#palette>#colors>li').click(function (e) {
-        var color = $(e.target).css('background-color');
-        changeColor(color);
-
-        if (config['debug']) {
-            console.log("palette color chaged to:", color);
-        }
-    });
-
     // help toggle
-    $('.toggleHelp').click(function () {
-        $('#help').toggleClass('hidden')
-        $('#palette').addClass('hidden');
-        $('#clock_settings').addClass('hidden');
-        // $('#help').fadeToggle()
-        // $('#palette').fadeOut()
-        // $('#clock_settings').fadeOut()
-        document.body.classList.toggle('inactive')
-    });
-
-
-    // setup before start
-
-    // sets transition for background body and gradient after page loading
-    $('body').css('transition', 'background .8s');
+    document.querySelectorAll('.toggleHelp').forEach(element => {
+        element.addEventListener('click', function () {
+            document.querySelector('#help').classList.toggle('hidden')
+            document.querySelector('#palette').classList.add('hidden')
+            document.querySelector('#clock_settings').classList.add('hidden')
+            document.body.classList.toggle('inactive')
+        })
+        if (config['debug']) {
+            console.log("Help toggled")
+        }
+    })
 
 }

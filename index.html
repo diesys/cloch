@@ -12,15 +12,9 @@
   <link rel="canonical" href="https://flowin.space/cloch">
   <meta name="Keywords" content="clock, symmetries, time, geometry,HTML,CSS,JavaScript,opensource,freesoftware,GPL">
   <meta name="Description" content="Cloch - An innovative and beautiful clock on an hexagon">
-  <script src="js/jquery.min.js"></script>
-
-  <!-- jquery UI -->  
-  <script src="js/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
   
   <!-- STYLE -->
- 	<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"> -->
  	<link rel="stylesheet" href="css/fa/fa.min.css">
-
 
   <!-- Mobile Specifics -->
   <meta name="HandheldFriendly" content="true" />
@@ -30,12 +24,12 @@
 
   <!-- Colors and bars -->
   <!-- Chrome, Firefox OS and Opera -->
-  <meta name="theme-color" content="#040404" id="browserColor">
+  <meta name="theme-color" class="browser-theme-colored" content="#040404" id="browserColor">
   <!-- Windows Phone -->
-  <meta name="msapplication-navbutton-color" content="#040404" id="browserColorwp">
+  <meta name="msapplication-navbutton-color" class="browser-theme-colored" content="#040404" id="browserColorwp">
   <!-- iOS Safari -->
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="#040404" id="browserColorap">
+  <meta name="apple-mobile-web-app-status-bar-style" class="browser-theme-colored" content="#040404" id="browserColorap">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   
   <!-- main css -->
@@ -52,197 +46,186 @@
   <link rel="icon" sizes="144x144" href="img/favicon144.png" type="image/x-icon">
   <link rel="icon" sizes="256x256" href="img/favicon256.png" type="image/x-icon">
 
-
+  <!-- TweenMax lib -->
   <script type="text/javascript" src="js/TweenMax.min.js" defer></script>
   <!-- main js -->
   <script src="js/cloch.min.js" defer></script>
   <!-- <script src="js/cloch.js" defer></script> -->
 
 </head>
-<div id="grad" class="dark"></div>
 
 <body class="dark">
+  <div id="grad" class="dark"></div>
 
-    <div id="quadranthx_container">
-      <svg id="cloch" width="550" height="550" version="1.1" viewBox="0 0 132.29 132.29" xmlns="http://www.w3.org/2000/svg" style="opacity: 0">
-        <g id="quadranthx">
-          <path id="backgroundhx" d="m66.146 9.4495c10.489 3e-7 43.856 19.265 49.101 28.348 5.2444 9.0836 5.2444 47.613-1e-5 56.696-5.2444 9.0836-38.612 28.348-49.101 28.348s-43.856-19.265-49.101-28.348c-5.2444-9.0836-5.2444-47.613 1e-6 -56.696 5.2444-9.0836 38.612-28.348 49.101-28.348z"
-            fill="rgba(0,0,0,0)" style="paint-order:stroke fill" />
-          <!-- <g id="minutes_angle" fill-opacity=".20373"> -->
-          <g id="minutes_angle" fill="rgba(0,0,0,.1)">
-            <path id="minAng_top" d="m66.146 9.4493c-5.2444 0-16.209 4.8162-26.517 10.768 8.4968-4.9056 44.537-4.9056 53.034 0-10.308-5.9516-21.272-10.768-26.517-10.768z"
-              style="paint-order:stroke fill" />
-            <path id="minAng_topR" d="m92.663 20.217c8.4968 4.9056 26.517 36.118 26.517 45.929 0-11.903-1.3109-23.806-3.9331-28.348-2.6222-4.5418-12.275-11.629-22.584-17.581z"
-              style="paint-order:stroke fill" />
-            <path id="minAng_bottomR" d="m119.18 66.146c0 9.8113-18.02 41.023-26.517 45.928 10.308-5.9516 19.961-13.039 22.584-17.58 2.6222-4.5418 3.9331-16.445 3.9331-28.348z"
-              style="paint-order:stroke fill" />
-            <path id="minAng_bottom" d="m92.663 112.07c-8.4968 4.9056-44.537 4.9056-53.034 0 10.308 5.9516 21.273 10.768 26.517 10.768 5.2444 0 16.208-4.8162 26.517-10.768z"
-              style="paint-order:stroke fill" />
-            <path id="minAng_bottomL" d="m39.629 112.07c-8.4968-4.9056-26.517-36.117-26.517-45.928 0 11.903 1.3109 23.806 3.9331 28.348 2.6222 4.5418 12.275 11.629 22.584 17.58z"
-              style="paint-order:stroke fill" />
-            <path id="minAng_topL" d="m13.112 66.146c0-9.8113 18.02-41.023 26.517-45.929-10.308 5.9516-19.961 13.039-22.584 17.581-2.6222 4.5418-3.9331 16.445-3.9331 28.348z"
-              style="paint-order:stroke fill" />
-          </g>
-          <!-- <g id="minutes_middle" fill="#0b0808" fill-opacity=".11765"> -->
-          <g id="minutes_middle"  fill="rgba(0,0,0,.05)">
-            <path id="minMid_right" d="m119.18 66.146c0-4.9056-4.505-15.162-10.072-24.804 4.5887 7.9479 4.5887 41.66 0 49.608 5.5671-9.6425 10.072-19.898 10.072-24.804z"
-              style="paint-order:stroke fill" />
-            <path id="minMid_rightB" d="m109.11 90.95c-4.5887 7.9479-33.784 24.804-42.962 24.804 11.134 0 22.268-1.2262 26.517-3.679 4.2484-2.4528 10.878-11.482 16.445-21.125z"
-              style="paint-order:stroke fill" />
-            <path id="minMid_leftB" d="m66.146 115.75c-9.1774 0-38.373-16.856-42.961-24.804 5.5671 9.6425 12.196 18.672 16.445 21.125 4.2484 2.4528 15.383 3.679 26.517 3.679z"
-              style="paint-order:stroke fill" />
-            <path id="minMid_left" d="m23.184 90.95c-4.5887-7.9479-4.5887-41.66 0-49.608-5.5671 9.6425-10.072 19.899-10.072 24.804 0 4.9056 4.5051 15.161 10.072 24.804z"
-              style="paint-order:stroke fill" />
-            <path id="minMid_leftT" d="m23.184 41.342c4.5887-7.9479 33.784-24.804 42.961-24.804-11.134 0-22.268 1.2262-26.517 3.679-4.2484 2.4528-10.877 11.482-16.445 21.125z"
-              style="paint-order:stroke fill" />
-            <path id="minMid_rightT" d="m66.146 16.538c9.1774 0 38.373 16.856 42.962 24.804-5.5671-9.6425-12.197-18.672-16.445-21.125-4.2484-2.4528-15.383-3.679-26.517-3.679z"
-              style="paint-order:stroke fill" />
-          </g>T
-          <g id="cubex">
-            <path id="cubex_top" d="m66.146 37.758c-5.3009 0-22.045 9.9081-24.695 14.499 2.1114 2.7209 20.676 13.454 24.384 14.122 0.0598 0.0108 0.11599 0.0188 0.16793 0.0243 0.052 5e-3 0.0999 8e-3 0.14367 8e-3 0.0438 0 0.0917-3e-3 0.14367-8e-3 0.0519-5e-3 0.10813-0.0135 0.16793-0.0243 3.7081-0.66823 22.274-11.402 24.384-14.123-2.6505-4.5908-19.394-14.498-24.695-14.498z"
-              fill-opacity=".02" style="paint-order:stroke fill" />
-            <path id="cubex_left" d="m41.451 52.257c-2.4744 4.9947-2.4276 23.608 0.14467 28.063 2.6222 4.5418 19.306 14.174 24.55 14.174v-28.083c-2.8045 0-22.516-11.346-24.695-14.155z"
-              fill-opacity=".04" style="paint-order:stroke fill" />
-            <path id="cubex_right" d="m90.841 52.256c-2.178 2.8081-21.89 14.155-24.695 14.155v28.083c5.2444 0 21.928-9.6325 24.55-14.174 2.5724-4.4555 2.6193-23.069 0.1447-28.063z"
-              fill-opacity=".06" stroke-opacity="0" style="paint-order:stroke fill" />
-          </g>
-          <g id="sunmoon_indicator" opacity="0">
-            <g id="sun" transform="matrix(.8916 0 0 .8916 41 38.7)" fill="#fff">
-              <path d="m66.12 4.72a3.961 3.961 0 0 0-3.961 3.961 3.961 3.961 0 0 0 3.961 3.962 3.961 3.961 0 0 0 3.961-3.962 3.961 3.961 0 0 0-3.961-3.961z"
-              />
-              <path d="m59.31 8.205c-0.2637 0-0.4771 0.212-0.4771 0.4757s0.2134 0.4771 0.4771 0.4771h1.105c0.2637 0 0.4771-0.2134 0.4771-0.4771s-0.2134-0.4757-0.4771-0.4757z"
-              />
-              <path d="m71.82 8.205c-0.2637 0-0.4771 0.212-0.4771 0.4757s0.2134 0.4771 0.4771 0.4771h1.105c0.2637 0 0.4771-0.2134 0.4771-0.4771s-0.2134-0.4757-0.4771-0.4757z"
-              />
-              <path d="m69.47 2.362c-0.1179 0.03018-0.2251 0.1055-0.2923 0.219l-0.5628 0.952c-0.1344 0.2269-0.05989 0.5181 0.167 0.6524 0.2268 0.1344 0.518 0.0599 0.6524-0.167l0.5628-0.952c0.1344-0.2269 0.05989-0.5181-0.167-0.6524-0.1134-0.06723-0.2423-0.08218-0.3602-0.05196z"
-              />
-              <path d="m63.1 13.12c-0.1179 0.03018-0.2251 0.1056-0.2923 0.219l-0.5628 0.952c-0.1344 0.2269-0.06025 0.5167 0.1667 0.6511 0.2269 0.1344 0.5181 0.0599 0.6524-0.167l0.5631-0.9507c0.1344-0.2269 0.05989-0.5181-0.167-0.6524-0.1135-0.0672-0.2423-0.08217-0.3602-0.05195z"
-              />
-              <path d="m62.77 2.362c-0.1179-0.03018-0.2467-0.01524-0.3602 0.05197-0.2269 0.1344-0.3015 0.4255-0.167 0.6524l0.5628 0.952c0.1344 0.2269 0.4255 0.3015 0.6524 0.167 0.2269-0.1344 0.3015-0.4255 0.167-0.6524l-0.5628-0.952c-0.0672-0.1135-0.1744-0.1889-0.2923-0.219z"
-              />
-              <path d="m69.14 13.12c-0.1179-0.03018-0.2467-0.01526-0.3602 0.05197-0.2269 0.1344-0.3015 0.4255-0.167 0.6524l0.5631 0.9507c0.1344 0.2269 0.4255 0.3015 0.6525 0.167 0.2268-0.1344 0.3011-0.4242 0.1667-0.6511l-0.5628-0.952c-0.06708-0.1135-0.1744-0.1889-0.2923-0.219z"/>
-            </g>
-            <path id="moon_mask" d="m100 39.5c-3.972-4.92e-4 -6.924 2.683-6.925 6.655-4.91e-4 3.973 2.414 7.193 6.387 7.193 3.972-1.77e-4 7.193-3.22 7.192-7.193-1.8e-4 -3.972-2.683-6.655-6.655-6.655zm1.513 2.902c1.373 0.7498 2.226 2.189 2.226 3.753 7e-5 2.362-1.915 4.277-4.277 4.277-1.75-7.87e-4 -3.324-1.068-3.971-2.694 4.204 2.119 7.313-2.243 6.022-5.336z"
-            fill="#71c3b1" opacity=".539" stroke-width="0" />
-          </g>
+  <div id="quadranthx_container">
+    <svg id="cloch" width="550" height="550" version="1.1" viewBox="0 0 132.29 132.29" xmlns="http://www.w3.org/2000/svg" style="opacity: 0">
+      <g id="quadranthx">
+        <path id="backgroundhx" d="m66.146 9.4495c10.489 3e-7 43.856 19.265 49.101 28.348 5.2444 9.0836 5.2444 47.613-1e-5 56.696-5.2444 9.0836-38.612 28.348-49.101 28.348s-43.856-19.265-49.101-28.348c-5.2444-9.0836-5.2444-47.613 1e-6 -56.696 5.2444-9.0836 38.612-28.348 49.101-28.348z"
+          fill="rgba(0,0,0,0)" style="paint-order:stroke fill" />
+        <g id="minutes_angle" fill="rgba(0,0,0,.1)">
+          <path id="minAng_top" d="m66.146 9.4493c-5.2444 0-16.209 4.8162-26.517 10.768 8.4968-4.9056 44.537-4.9056 53.034 0-10.308-5.9516-21.272-10.768-26.517-10.768z"
+            style="paint-order:stroke fill" />
+          <path id="minAng_topR" d="m92.663 20.217c8.4968 4.9056 26.517 36.118 26.517 45.929 0-11.903-1.3109-23.806-3.9331-28.348-2.6222-4.5418-12.275-11.629-22.584-17.581z"
+            style="paint-order:stroke fill" />
+          <path id="minAng_bottomR" d="m119.18 66.146c0 9.8113-18.02 41.023-26.517 45.928 10.308-5.9516 19.961-13.039 22.584-17.58 2.6222-4.5418 3.9331-16.445 3.9331-28.348z"
+            style="paint-order:stroke fill" />
+          <path id="minAng_bottom" d="m92.663 112.07c-8.4968 4.9056-44.537 4.9056-53.034 0 10.308 5.9516 21.273 10.768 26.517 10.768 5.2444 0 16.208-4.8162 26.517-10.768z"
+            style="paint-order:stroke fill" />
+          <path id="minAng_bottomL" d="m39.629 112.07c-8.4968-4.9056-26.517-36.117-26.517-45.928 0 11.903 1.3109 23.806 3.9331 28.348 2.6222 4.5418 12.275 11.629 22.584 17.58z"
+            style="paint-order:stroke fill" />
+          <path id="minAng_topL" d="m13.112 66.146c0-9.8113 18.02-41.023 26.517-45.929-10.308 5.9516-19.961 13.039-22.584 17.581-2.6222 4.5418-3.9331 16.445-3.9331 28.348z"
+            style="paint-order:stroke fill" />
         </g>
-      </svg>
-    </div>
-    <p class="time_indicator hidden" id="digital_clock"></p>
+        <g id="minutes_middle"  fill="rgba(0,0,0,.05)">
+          <path id="minMid_right" d="m119.18 66.146c0-4.9056-4.505-15.162-10.072-24.804 4.5887 7.9479 4.5887 41.66 0 49.608 5.5671-9.6425 10.072-19.898 10.072-24.804z"
+            style="paint-order:stroke fill" />
+          <path id="minMid_rightB" d="m109.11 90.95c-4.5887 7.9479-33.784 24.804-42.962 24.804 11.134 0 22.268-1.2262 26.517-3.679 4.2484-2.4528 10.878-11.482 16.445-21.125z"
+            style="paint-order:stroke fill" />
+          <path id="minMid_leftB" d="m66.146 115.75c-9.1774 0-38.373-16.856-42.961-24.804 5.5671 9.6425 12.196 18.672 16.445 21.125 4.2484 2.4528 15.383 3.679 26.517 3.679z"
+            style="paint-order:stroke fill" />
+          <path id="minMid_left" d="m23.184 90.95c-4.5887-7.9479-4.5887-41.66 0-49.608-5.5671 9.6425-10.072 19.899-10.072 24.804 0 4.9056 4.5051 15.161 10.072 24.804z"
+            style="paint-order:stroke fill" />
+          <path id="minMid_leftT" d="m23.184 41.342c4.5887-7.9479 33.784-24.804 42.961-24.804-11.134 0-22.268 1.2262-26.517 3.679-4.2484 2.4528-10.877 11.482-16.445 21.125z"
+            style="paint-order:stroke fill" />
+          <path id="minMid_rightT" d="m66.146 16.538c9.1774 0 38.373 16.856 42.962 24.804-5.5671-9.6425-12.197-18.672-16.445-21.125-4.2484-2.4528-15.383-3.679-26.517-3.679z"
+            style="paint-order:stroke fill" />
+        </g>T
+        <g id="cubex">
+          <path id="cubex_top" d="m66.146 37.758c-5.3009 0-22.045 9.9081-24.695 14.499 2.1114 2.7209 20.676 13.454 24.384 14.122 0.0598 0.0108 0.11599 0.0188 0.16793 0.0243 0.052 5e-3 0.0999 8e-3 0.14367 8e-3 0.0438 0 0.0917-3e-3 0.14367-8e-3 0.0519-5e-3 0.10813-0.0135 0.16793-0.0243 3.7081-0.66823 22.274-11.402 24.384-14.123-2.6505-4.5908-19.394-14.498-24.695-14.498z"
+            fill-opacity=".02" style="paint-order:stroke fill" />
+          <path id="cubex_left" d="m41.451 52.257c-2.4744 4.9947-2.4276 23.608 0.14467 28.063 2.6222 4.5418 19.306 14.174 24.55 14.174v-28.083c-2.8045 0-22.516-11.346-24.695-14.155z"
+            fill-opacity=".04" style="paint-order:stroke fill" />
+          <path id="cubex_right" d="m90.841 52.256c-2.178 2.8081-21.89 14.155-24.695 14.155v28.083c5.2444 0 21.928-9.6325 24.55-14.174 2.5724-4.4555 2.6193-23.069 0.1447-28.063z"
+            fill-opacity=".06" stroke-opacity="0" style="paint-order:stroke fill" />
+        </g>
+        <g id="sunmoon_indicator" opacity="0">
+          <g id="sun" transform="matrix(.8916 0 0 .8916 41 38.7)" fill="#fff">
+            <path d="m66.12 4.72a3.961 3.961 0 0 0-3.961 3.961 3.961 3.961 0 0 0 3.961 3.962 3.961 3.961 0 0 0 3.961-3.962 3.961 3.961 0 0 0-3.961-3.961z"
+            />
+            <path d="m59.31 8.205c-0.2637 0-0.4771 0.212-0.4771 0.4757s0.2134 0.4771 0.4771 0.4771h1.105c0.2637 0 0.4771-0.2134 0.4771-0.4771s-0.2134-0.4757-0.4771-0.4757z"
+            />
+            <path d="m71.82 8.205c-0.2637 0-0.4771 0.212-0.4771 0.4757s0.2134 0.4771 0.4771 0.4771h1.105c0.2637 0 0.4771-0.2134 0.4771-0.4771s-0.2134-0.4757-0.4771-0.4757z"
+            />
+            <path d="m69.47 2.362c-0.1179 0.03018-0.2251 0.1055-0.2923 0.219l-0.5628 0.952c-0.1344 0.2269-0.05989 0.5181 0.167 0.6524 0.2268 0.1344 0.518 0.0599 0.6524-0.167l0.5628-0.952c0.1344-0.2269 0.05989-0.5181-0.167-0.6524-0.1134-0.06723-0.2423-0.08218-0.3602-0.05196z"
+            />
+            <path d="m63.1 13.12c-0.1179 0.03018-0.2251 0.1056-0.2923 0.219l-0.5628 0.952c-0.1344 0.2269-0.06025 0.5167 0.1667 0.6511 0.2269 0.1344 0.5181 0.0599 0.6524-0.167l0.5631-0.9507c0.1344-0.2269 0.05989-0.5181-0.167-0.6524-0.1135-0.0672-0.2423-0.08217-0.3602-0.05195z"
+            />
+            <path d="m62.77 2.362c-0.1179-0.03018-0.2467-0.01524-0.3602 0.05197-0.2269 0.1344-0.3015 0.4255-0.167 0.6524l0.5628 0.952c0.1344 0.2269 0.4255 0.3015 0.6524 0.167 0.2269-0.1344 0.3015-0.4255 0.167-0.6524l-0.5628-0.952c-0.0672-0.1135-0.1744-0.1889-0.2923-0.219z"
+            />
+            <path d="m69.14 13.12c-0.1179-0.03018-0.2467-0.01526-0.3602 0.05197-0.2269 0.1344-0.3015 0.4255-0.167 0.6524l0.5631 0.9507c0.1344 0.2269 0.4255 0.3015 0.6525 0.167 0.2268-0.1344 0.3011-0.4242 0.1667-0.6511l-0.5628-0.952c-0.06708-0.1135-0.1744-0.1889-0.2923-0.219z"/>
+          </g>
+          <path id="moon_mask" d="m100 39.5c-3.972-4.92e-4 -6.924 2.683-6.925 6.655-4.91e-4 3.973 2.414 7.193 6.387 7.193 3.972-1.77e-4 7.193-3.22 7.192-7.193-1.8e-4 -3.972-2.683-6.655-6.655-6.655zm1.513 2.902c1.373 0.7498 2.226 2.189 2.226 3.753 7e-5 2.362-1.915 4.277-4.277 4.277-1.75-7.87e-4 -3.324-1.068-3.971-2.694 4.204 2.119 7.313-2.243 6.022-5.336z"
+          fill="#71c3b1" opacity=".539" stroke-width="0" />
+        </g>
+      </g>
+    </svg>
+  </div>
+  <p class="time_indicator hidden" id="digital_clock"></p>
 
-    <div id="toolbar">
-      <!-- <i id="toolbarToggle" class="dark fa fa-chevron-circle-up"></i> -->
-      <i id="toolbarToggle" class="fa fa-plus-circle"></i>
+  <div id="toolbar">
+    <i id="toggle_toolbar" class="fa fa-plus-circle"></i>
+    
+    <div id="toolbar_buttons" class="hidden">
+      <i id="toggle_palette" class="fa fa-palette"></i>
+      <i id="toggle_clock_settings" class="fa fa-clock"></i>
+      <i id="toggle_help" class="toggleHelp fa fa-question-circle"></i>
+    </div>
       
-      <div id="control_buttons" class="hidden">
-        <!-- <i id="theme_toggle" class="dark fa fa-adjust"></i> -->
-        <i id="colorpicker" class="fa fa-palette"></i>
-        <!-- <i id="startstop_cloch" class="fa fa-layer-group"></i> -->
-        <i id="toggle_clockSettings" class="fa fa-clock"></i>
-        <!-- <span id="toggle_stop_menu"> -->
-          <!-- <i id="startstop_cloch" class="dark fa fa-pause hidden"></i> -->
-          <i id="toggle_help" class="toggleHelp fa fa-question-circle"></i>
-          <!-- <i id="toggle_manual" class="time_indicator fa fa-pen"></i> -->
-          <!-- </span>    -->
-          <!-- <span id="timepicker-spinbox"></span> -->
-        </div>
-        
-        <div id="clock_settings" class="hidden subtoolbar">
-          <div class="flex">
-            <i id="toggle_show" class="fa fa-eye"></i>
-            <i id="startstop_cloch" class="fa fa-pause"></i>
-          </div>
-            <!-- <i class="fa fa-p"></i> -->
-            <input type="time" id="manual_time_input" name="appt" min="00:00" max="23:59" onchange="manualTime(event)" disabled>
-        </div>
-
-      <div id="palette" class="hidden subtoolbar">
-        <ol id="colors">
-          <li style='background:#E91E63'></li>
-          <li style='background:#cc22b5'></li>
-          <li style='background:#913bdd'></li>
-          <li style='background:#3F51B5'></li>
-          <li style='background:#1d8ae0'></li>
-          <li style='background:#16bbd8'></li>
-          <li style='background:#28b98e'></li>
-          <li style='background:#4CAF50'></li>
-          <li style='background:#81c731'></li>
-          <li style='background:#b3bf17'></li>
-          <li style='background:#FFC107'></li>
-          <li style='background:#e0ad15'></li>
-          <li style='background:#e6582d'></li>
-          <li style='background:#d41818'></li>
-        </ol>
-        <ol id="theme_toggle">
-          <li id="light"><i class="fas fa-lightbulb"></i></li>
-          <li id="dark"><i class="far fa-lightbulb"></i></li>
-        </ol>
+    <div id="clock_settings" class="hidden subtoolbar">
+      <div class="flex">
+        <i id="toggle_show" class="fa fa-eye"></i>
+        <i id="startstop_cloch" class="fa fa-pause"></i>
       </div>
-
+      <input type="time" id="manual_time_input" name="appt" min="00:00" max="23:59" onchange="manualTime(event)" disabled>
     </div>
 
-    <div id="help" class="help hidden">
-      <span class="button close toggleHelp" id="close_details">+</span>
-
-      <div class="content">
-        <h1 class="colored title">Cos'è Cloch?</h1>
-
-        <div class="horElement">
-          <img class="smallHorElement" src="img/help/cloch_banner_full.png" alt="Cloch logo" width="330" height="auto">
-          <div class="bigHorElement">
-            <p><b>Un'orologio «grafico» costruito su un esagono</b>, che cerca un approccio diverso nello scandire il tempo. Una volta capito sarà semplice capire l'ora <u>persino vedendolo a distanza o di sfuggita</u>.</p>
-            <h2 class="colored title">Come funziona?</h2>
-            <p>Cloch al posto delle lancette usa degli indicatori ma il funzionamento è quasi identico. Oltre ai canonici <b>mezzogiorno</b> e <b>mezzanotte</b> (12 AM/PM) - usa anche <b>alba</b> e <b>tramonto</b> (~6 AM/PM) come <i>punti di riferimento</i>.</p>
-          </div>
-        </div>
-
-        <div class="horElement">
-          <div class="bigHorElement">
-            <h2 class="colored title">Le ore</h2>
-            <p>Immagina di far andare la lancetta (dell'orologio classico) a velocità doppia: <b>l'indicatore delle ore</b> è l'immagine <i>sole/luna</i> e <b>si sposta tra i <u>sei</u> vertici</b> del <i>quadrante</i> (<u>quindi fa 4 giri ogni 24 ore!</u>). </p>
-            <p>I <u>quattro</u> stati (e i relativi periodi del giorno) sono indicati nella prima immagine, in quella sotto invece trovate a quali vertici corrisponde l'ora (sia AM che PM).
-            </p>
-          </div>
-          <div class="smallHorElement">
-            <img src="img/help/sunmoon.png" width="400" height="auto" alt="Hour indicator" />
-            <img src="img/help/hours.png" width="400" height="auto" alt="Hours' positions" />
-          </div>
-        </div>
-
-        <div class="horElement">
-          <div class="smallHorElement">
-            <h2 class="colored title">I minuti</h2>
-            <p>Per segnalare i minuti ci sono <u>dodici</u> indicatori posti sul bordo del <i>quadrante</i> come in figura. L'<b>indicatore più intenso è quello principale</b> cioè più vicino al minuto attuale e (l'eventuale) <b>indicatore più trasparente</b> adiacente indica di <u>quanti minuti si dista dal principale</u>.</p>
-            <p>L'animazione mostra i <i>10 minuti</i> <b>tra un'ipotetica ora e la successiva</b>. Ma vi <u>basterà vedere la <i>zona illuminata</i> per una buona approssimazione</u>, di meno di 5 minuti!</p>
-          </div>
-          <div class="bigHorElement">
-            <img src="img/help/minutes.png" width="360" height="auto" alt="All minutes indicator" />
-            <img src="img/help/min_indicator.gif" width="400" height="auto" alt="Minutes indicator animation" />
-          </div>
-        </div>
-        
-        
-        <div class="horElement">
-          <div class="smallHorElement">
-            <h3 class="colored title">Personalizzalo</h3>
-            <p>Clicca su <i class="fa fa-plus-circle"></i> in basso per aprire il menu (e <i class="fa fa-plus-circle showButton"></i> per chiuderlo):
-              <ul>
-                <li> <i class="fa fa-palette"></i> apre la tavolozza dei colori (e <i class="fas fa-lightbulb"></i> cambia tema: <u>chiaro</u> o <u>scuro</u>)</li>
-                <li> <i class="fa fa-clock"></i> apre le opzioni dell'orologio (clicca su <i class="fa fa-eye"></i> per mostrare l'orologio digitale o su <i class="fa fa-pause"></i> per metterlo in pausa e impostare l'ora manualmente</li>
-                <li> <i class="fa fa-question-circle"></i> apre questa schermata d'aiuto</li>
-              </ul>
-            </p> 
-            <p>Questo sito <b>non utilizza cookie</b>, <u>il tema e il colore di sfondo verranno aggiunti nell'URL</u> (barra degli indirizzi) ogni volta che li cambierai. Trova la configurazione a te più adatta e salvala nei preferiti, così da avere sempre <b><i>Cloch</i> come lo preferisci!</b></p>
-            <p><b>P.S.</b> Un utente un po' più smaliziato potrà notare come è possibile aggiungere un qualunque colore nell'URL (<u>purché sia un RGB o HEX <a href="https://www.w3schools.com/colors/colors_picker.asp">valido</a></u>, anche con trasparenza) e così <b>potrete sbizzarrirvi con ogni colore possibile!</b></p>
-          </div>
-        </div>
-        
-        <p>Cloch è stato ideato da <a href="http://flowin.space">Diego Turtulici</a> e realizzato usando <a href="https://en.wikipedia.org/wiki/HTML">HTML5</a>, <a href="https://en.wikipedia.org/wiki/Cascading_Style_Sheets">CSS3</a>, <a href="https://en.wikipedia.org/wiki/JavaScript">JavaScript</a>, <a href="https://jquery.com/">JQuery</a> e <a href="https://greensock.com/tweenmax">TweenMax</a>. È una rivisitazione di un precedente prototipo, <a href="https://flowin.space/glock/"><i>Glock</i></a>.<br /><br />Si ringrazia <a href="https://eigenlab.org">eigenLab</a> per l'hosting, il <a href="https://git.eigenlab.org/sbiego/cloch">codice sorgente</a> è rilasciato sotto <a href="https://www.gnu.org/licenses/gpl-3.0.html">licenza GPLv3</a>.</p>
-      </div>
-      <br>
-      <br>
-      <br>
+    <div id="palette" class="hidden subtoolbar">
+      <ol id="colors">
+        <li data-color="#E91E63" style='background:#E91E63'></li>
+        <li data-color="#cc22b5" style='background:#cc22b5'></li>
+        <li data-color="#913bdd" style='background:#913bdd'></li>
+        <li data-color="#3F51B5" style='background:#3F51B5'></li>
+        <li data-color="#1d8ae0" style='background:#1d8ae0'></li>
+        <li data-color="#16bbd8" style='background:#16bbd8'></li>
+        <li data-color="#28b98e" style='background:#28b98e'></li>
+        <li data-color="#4CAF50" style='background:#4CAF50'></li>
+        <li data-color="#81c731" style='background:#81c731'></li>
+        <li data-color="#b3bf17" style='background:#b3bf17'></li>
+        <li data-color="#FFC107" style='background:#FFC107'></li>
+        <li data-color="#e0ad15" style='background:#e0ad15'></li>
+        <li data-color="#e6582d" style='background:#e6582d'></li>
+        <li data-color="#d41818" style='background:#d41818'></li>
+      </ol>
+      <ol id="theme_toggle">
+        <li id="light"><i class="fas fa-lightbulb"></i></li>
+        <li id="dark"><i class="far fa-lightbulb"></i></li>
+      </ol>
     </div>
+
+  </div>
+
+  <div id="help" class="help hidden">
+    <span class="button close toggleHelp" id="close_details">+</span>
+
+    <div class="content">
+      <h1 class="theme-colored">Cos'è Cloch?</h1>
+
+      <div class="horElement">
+        <img class="smallHorElement" src="img/help/cloch_banner_full.png" alt="Cloch logo" width="330" height="auto">
+        <div class="bigHorElement">
+          <p><b>Un'orologio «grafico» costruito su un esagono</b>, che cerca un approccio diverso nello scandire il tempo. Una volta capito sarà semplice capire l'ora <u>persino vedendolo a distanza o di sfuggita</u>.</p>
+          <h2 class="theme-colored">Come funziona?</h2>
+          <p>Cloch al posto delle lancette usa degli indicatori ma il funzionamento è quasi identico. Oltre ai canonici <b>mezzogiorno</b> e <b>mezzanotte</b> (12 AM/PM) - usa anche <b>alba</b> e <b>tramonto</b> (~6 AM/PM) come <i>punti di riferimento</i>.</p>
+        </div>
+      </div>
+
+      <div class="horElement">
+        <div class="bigHorElement">
+          <h2 class="theme-colored">Le ore</h2>
+          <p>Immagina di far andare la lancetta (dell'orologio classico) a velocità doppia: <b>l'indicatore delle ore</b> è l'immagine <i>sole/luna</i> e <b>si sposta tra i <u>sei</u> vertici</b> del <i>quadrante</i> (<u>quindi fa 4 giri ogni 24 ore!</u>). </p>
+          <p>I <u>quattro</u> stati (e i relativi periodi del giorno) sono indicati nella prima immagine, in quella sotto invece trovate a quali vertici corrisponde l'ora (sia AM che PM).
+          </p>
+        </div>
+        <div class="smallHorElement">
+          <img src="img/help/sunmoon.png" width="400" height="auto" alt="Hour indicator" />
+          <img src="img/help/hours.png" width="400" height="auto" alt="Hours' positions" />
+        </div>
+      </div>
+
+      <div class="horElement">
+        <div class="smallHorElement">
+          <h2 class="theme-colored">I minuti</h2>
+          <p>Per segnalare i minuti ci sono <u>dodici</u> indicatori posti sul bordo del <i>quadrante</i> come in figura. L'<b>indicatore più intenso è quello principale</b> cioè più vicino al minuto attuale e (l'eventuale) <b>indicatore più trasparente</b> adiacente indica di <u>quanti minuti si dista dal principale</u>.</p>
+          <p>L'animazione mostra i <i>10 minuti</i> <b>tra un'ipotetica ora e la successiva</b>. Ma vi <u>basterà vedere la <i>zona illuminata</i> per una buona approssimazione</u>, di meno di 5 minuti!</p>
+        </div>
+        <div class="bigHorElement">
+          <img src="img/help/minutes.png" width="360" height="auto" alt="All minutes indicator" />
+          <img src="img/help/min_indicator.gif" width="400" height="auto" alt="Minutes indicator animation" />
+        </div>
+      </div>
+      
+      
+      <div class="horElement">
+        <div class="smallHorElement">
+          <h3 class="theme-colored">Personalizzalo</h3>
+          <p>Clicca su <i class="fa fa-plus-circle"></i> in basso per aprire il menu (e <i class="fa fa-plus-circle opened"></i> per chiuderlo):
+            <ul>
+              <li> <i class="fa fa-palette"></i> apre la tavolozza dei colori (e <i class="fas fa-lightbulb"></i> cambia tema: <u>chiaro</u> o <u>scuro</u>)</li>
+              <li> <i class="fa fa-clock"></i> apre le opzioni dell'orologio (clicca su <i class="fa fa-eye"></i> per mostrare l'orologio digitale o su <i class="fa fa-pause"></i> per metterlo in pausa e impostare l'ora manualmente</li>
+              <li> <i class="fa fa-question-circle"></i> apre questa schermata d'aiuto</li>
+            </ul>
+          </p> 
+          <p>Questo sito <b>non utilizza cookie</b>, <u>il tema e il colore di sfondo verranno aggiunti nell'URL</u> (barra degli indirizzi) ogni volta che li cambierai. Trova la configurazione a te più adatta e salvala nei preferiti, così da avere sempre <b><i>Cloch</i> come lo preferisci!</b></p>
+          <p><b>P.S.</b> Un utente un po' più smaliziato potrà notare come è possibile aggiungere un qualunque colore nell'URL (<u>purché sia un RGB o HEX <a class="theme-colored" href="https://www.w3schools.com/colors/colors_picker.asp">valido</a></u>, anche con trasparenza) e così <b>potrete sbizzarrirvi con ogni colore possibile!</b></p>
+        </div>
+      </div>
+      
+      <p>Cloch è stato ideato da <a class="theme-colored" href="http://flowin.space">Diego Turtulici</a> e realizzato usando <a class="theme-colored" href="https://en.wikipedia.org/wiki/HTML">HTML5</a>, <a class="theme-colored" href="https://en.wikipedia.org/wiki/Cascading_Style_Sheets">CSS3</a>, <a class="theme-colored" href="https://en.wikipedia.org/wiki/JavaScript">JavaScript</a> e <a class="theme-colored" href="https://greensock.com/tweenmax">TweenMax</a>. È una rivisitazione di un precedente prototipo, <a class="theme-colored" href="https://flowin.space/glock/"><i>Glock</i></a>.<br /><br />Si ringrazia <a class="theme-colored" href="https://eigenlab.org">eigenLab</a> per l'hosting, il <a class="theme-colored" href="https://git.eigenlab.org/sbiego/cloch">codice sorgente</a> è rilasciato sotto <a class="theme-colored" href="https://www.gnu.org/licenses/gpl-3.0.html">licenza GPLv3</a>.</p>
+    </div>
+    <br>
+    <br>
+    <br>
+  </div>
 
 </body>
 
