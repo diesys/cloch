@@ -42,7 +42,6 @@ function setHour(new_hour, style = 'fade') {
         });
         TweenMax.to(sunMoon[0], 0, {
             delay: 3 * durationFade,
-            transformOrigin: "50% 50%",
             css: {
                 transform: transl
             },
@@ -60,7 +59,6 @@ function setHour(new_hour, style = 'fade') {
     } else if (style == 'move') {
         TweenMax.to(sunMoon[0], duration, {
             delay: 0,
-            transformOrigin: "50% 50%",
             ease: Power3.easeInOut,
             css: {
                 transform: transl
