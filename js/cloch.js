@@ -232,12 +232,12 @@ function clochToggle() {
     }
 }
 
-function hide(element) {
+function hide(element, duration = 600) {
     element.classList.add('fake_hidden')
     setTimeout(function() {
         element.classList.remove('fake_hidden')
         element.classList.add('hidden')
-    }, 800)
+    }, duration)
 }
 function show(element) {
     element.classList.remove('hidden')
@@ -245,6 +245,13 @@ function show(element) {
 
 function toggleView(element) {
     element.classList.contains('hidden') ? show(element) : hide(element)
+}
+
+function blockUserInput(element, duration = 600) {
+    element.classList.add('noInputEvents')
+    setTimeout(function() {
+        element.classList.remove('noInputEvents')
+    }, duration)
 }
 
 function exampleMins(time = 500) {
@@ -416,6 +423,7 @@ window.onload = function () {
 
     //// UI /////////////////////////////////////////////
     toggle_toolbar.addEventListener('click', function () {
+        blockUserInput(toggle_toolbar)
         toolbar_buttons.classList.toggle('hidden')
         // toggleView(toolbar_buttons)
         if(this.classList.contains('opened'))
@@ -427,11 +435,13 @@ window.onload = function () {
 
     /// SELECT MANUALLY HOUR AND MINUTE
     toggle_clock_settings.addEventListener('click', function () {
+        blockUserInput(toggle_clock_settings)
         toggleView(clock_settings) // .classList.toggle('hidden')
         hide(palette) //.classList.add('hidden')
     });
 
     toggle_digitalClock.addEventListener('click', function () {
+        blockUserInput(toggle_digitalClock)
         toggle_digitalClock.classList.toggle('fa-eye')
         toggle_digitalClock.classList.toggle('fa-eye-slash')
         digital_clock.classList.toggle('hidden')
@@ -442,6 +452,7 @@ window.onload = function () {
     });
 
     startstop_cloch.addEventListener('click', function () {
+        blockUserInput(startstop_cloch)
         // stops the clock and, toggles 'disable' state to the input (you can change time only on pause)
         clochToggle();
         manual_time_input.disabled ^= true
@@ -453,6 +464,7 @@ window.onload = function () {
 
     // palette opening
     toggle_palette.addEventListener('click', function () {
+        blockUserInput(toggle_palette)
         toggleView(palette) // .classList.toggle('hidden')
         hide(clock_settings) //.classList.add('hidden')
 
@@ -479,6 +491,7 @@ window.onload = function () {
     // help toggle
     helpToggles.forEach(element => {
         element.addEventListener('click', function () {
+            blockUserInput(element)
             toggleView(helpPanel) //.classList.toggle('hidden')
             hide(palette) //.classList.add('hidden')
             hide(clock_settings) //.classList.add('hidden')

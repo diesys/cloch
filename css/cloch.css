@@ -100,6 +100,10 @@ body.light {
   background-color: #bfbfbf;
 }
 
+.noInputEvents {
+  pointer-events: none !important;
+}
+
 .hidden {
   display: none;
 }
@@ -107,6 +111,8 @@ body.light {
   opacity: 0 !important;
   filter: opacity(0) !important;
   transition: all .8s !important;
+  pointer-events: none !important;
+  cursor: wait;
 }
 .flex {
   display: flex;
