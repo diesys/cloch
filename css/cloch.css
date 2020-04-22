@@ -103,6 +103,11 @@ body.light {
 .hidden {
   display: none;
 }
+.fake_hidden {
+  opacity: 0 !important;
+  filter: opacity(0) !important;
+  transition: all .8s !important;
+}
 .flex {
   display: flex;
 }

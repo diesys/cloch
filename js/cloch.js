@@ -232,6 +232,21 @@ function clochToggle() {
     }
 }
 
+function hide(element) {
+    element.classList.add('fake_hidden')
+    setTimeout(function() {
+        element.classList.remove('fake_hidden')
+        element.classList.add('hidden')
+    }, 800)
+}
+function show(element) {
+    element.classList.remove('hidden')
+}
+
+function toggleView(element) {
+    element.classList.contains('hidden') ? show(element) : hide(element)
+}
+
 function exampleMins(time = 500) {
     clochStopped = true; j = 0;
     setInterval(function () {
@@ -402,17 +417,18 @@ window.onload = function () {
     //// UI /////////////////////////////////////////////
     toggle_toolbar.addEventListener('click', function () {
         toolbar_buttons.classList.toggle('hidden')
+        // toggleView(toolbar_buttons)
         if(this.classList.contains('opened'))
             subToolbars.forEach(element => { // palette and clock settings
-                element.classList.add('hidden')
+                hide(element)//.classList.add('hidden')
             })
         toggle_toolbar.classList.toggle('opened')
     });
 
     /// SELECT MANUALLY HOUR AND MINUTE
     toggle_clock_settings.addEventListener('click', function () {
-        clock_settings.classList.toggle('hidden')
-        palette.classList.add('hidden')
+        toggleView(clock_settings) // .classList.toggle('hidden')
+        hide(palette) //.classList.add('hidden')
     });
 
     toggle_digitalClock.addEventListener('click', function () {
@@ -437,8 +453,8 @@ window.onload = function () {
 
     // palette opening
     toggle_palette.addEventListener('click', function () {
-        palette.classList.toggle('hidden')
-        clock_settings.classList.add('hidden')
+        toggleView(palette) // .classList.toggle('hidden')
+        hide(clock_settings) //.classList.add('hidden')
 
         if (config['debug']) {
             console.log("palette toggle")
@@ -463,9 +479,9 @@ window.onload = function () {
     // help toggle
     helpToggles.forEach(element => {
         element.addEventListener('click', function () {
-            helpPanel.classList.toggle('hidden')
-            palette.classList.add('hidden')
-            clock_settings.classList.add('hidden')
+            toggleView(helpPanel) //.classList.toggle('hidden')
+            hide(palette) //.classList.add('hidden')
+            hide(clock_settings) //.classList.add('hidden')
             document.body.classList.toggle('inactive')
         })
         if (config['debug']) {
