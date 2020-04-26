@@ -189,15 +189,16 @@ function changeColor(color, duration = .8) {
     // svg quadranthx and sunmoon mask indicator change
     TweenMax.to(sunMoon[2], duration, {css: {fill: color}});
     TweenMax.to(background, duration, {delay: 0,css: {fill: color}});
-
+    
     // changes colors to link and titles and text element with THEME-COLORED class
     document.querySelectorAll('.theme-colored').forEach(element => {
         element.setAttribute('style', 'color:'+ color +'; textShadow: rgba(0,0,0,.5) 0 0 3px;')
     })
-
+    
     // changes browser and button color
     document.querySelectorAll('.browser-theme-colored').forEach(element => {
-        element.setAttribute('content', color)
+        TweenMax.to(element, duration, {delay: 0, attr: {content: color}});
+        // element.setAttribute('content', color)
     })
 
     if (config['debug']) {
