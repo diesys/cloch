@@ -392,9 +392,10 @@ window.onload = function () {
     if (!config['theme']) {
         config['theme'] = 'dark'
     }
-    if (!config['hexCloch'] == 0)
+    if (!config['hexCloch']) {
         config['hexCloch'] = true
-    else
+    }
+    else if (config['hexCloch'] != '1' || config['hexCloch'] != 'true')
         config['hexCloch'] = false
     
     // gets new date starts adding to config file 
