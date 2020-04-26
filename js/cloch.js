@@ -219,8 +219,8 @@ function updateURL() {
         window.history.replaceState({
             'color': config['color'],
             'theme': config['theme'],
-            'hex': config['hexCloch'],
-        }, 'newclrtheme', '?color=' + config['color'] + '&theme=' + config['theme'] + '&hex=' + config['hexCloch']);
+            'hexCloch': config['hexCloch']
+        }, 'newclrtheme', '?color=' + config['color'] + '&theme=' + config['theme'] + '&hexCloch=' + config['hexCloch']);
     }
 }
 
@@ -392,10 +392,11 @@ window.onload = function () {
     if (!config['theme']) {
         config['theme'] = 'dark'
     }
-    if (!config['hex']) {
+    if (!config['hexCloch'] == 0)
         config['hexCloch'] = true
-    }
-
+    else
+        config['hexCloch'] = false
+    
     // gets new date starts adding to config file 
     date = new Date();
     config['hour'] = {
@@ -425,7 +426,7 @@ window.onload = function () {
             h = date.getHours()
             m = date.getMinutes()
             if (h != config['hour']['value'])
-                setHour(h, config['sixHour'])
+                setHour(h, config['hexCloch'])
             if (m != config['minute']['value'])
                 setMinute(m, config['theme'])
         }
@@ -466,10 +467,10 @@ window.onload = function () {
     });
 
     toggle_hex_dodec.addEventListener('click', function () {
-        updateURL()
         this.classList.toggle('hexCloch')
-        config['hexCloch'] ^= true
+        config['hexCloch'] = !config['hexCloch']
         setHour(config['hour']['value'], config['hexCloch'])
+        updateURL()
     })
 
     startstop_cloch.addEventListener('click', function () {
