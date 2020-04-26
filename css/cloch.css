@@ -120,6 +120,9 @@ body.light {
 .flex.column {
   flex-direction: column;
 }
+.evenlySpaced {
+  justify-content: space-evenly;
+}
 
 
 #digital_clock {
@@ -255,6 +258,31 @@ body.inactive.light #toolbar {
 }
 #toolbar #startstop_cloch.hidden {
   flex: 0;
+}
+#toolbar #toggle_hex_dodec > * {
+  border-radius: 2em;
+  padding: 5px 10px 1px 10px;
+  margin: 10px 0 5px 0;
+  font-weight: normal;
+  transition: all .5s;
+  opacity: .5;
+  background: #ffffff00;
+}
+#toolbar #toggle_hex_dodec > *:hover {
+  opacity: .75;
+}
+#toolbar #toggle_hex_dodec.hexCloch > :first-child,
+#toolbar #toggle_hex_dodec:not(.hexCloch) > :last-child {
+  font-weight: 900;
+  opacity: 1;
+  background: #ffffff20;
+}
+.light #toolbar #toggle_hex_dodec > * {
+  background: #00000000;
+}
+.light #toolbar #toggle_hex_dodec.hexCloch> :first-child,
+.light #toolbar #toggle_hex_dodec:not(.hexCloch)> :last-child {
+  background: #00000026;
 }
 
 #toolbar,

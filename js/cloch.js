@@ -8,18 +8,22 @@ function getUrlVars() {
     return vars;
 }
 
-function setHour(new_hour, style = 'fade') {
-    new_hour = new_hour % 24;
-    var hXY = hoursXY[new_hour % 6],
-        hour = {
-            'value': new_hour,
-            'valueHex': new_hour % 6,
-            'X': hXY[0],
-            'Y': hXY[1]
-        };
+function setHour(new_hour, sixHours = true) {//style = 'fade') {
+    style = 'fade' // using as default
+
+    new_hour = new_hour % 24
+    hour = {'value': new_hour}
+    hour['valueHex'] = new_hour % 6
+    hour['valueDodec'] = new_hour % 12
+
+    coords = sixHours ? hoursXY : hoursXYdodec
+    length = sixHours ? 6 : 12
+    hour['X'] = coords[new_hour % length][0]
+    hour['Y'] = coords[new_hour % length][1]
+
     transl = "translate(" + hour['X'] + 'px, ' + hour['Y'] + "px)",
-        duration = 1,
-        mask_opacity = '';
+    duration = 1,
+    mask_opacity = '';
 
     // adding hour to the conf
     config['hour'] = hour;
@@ -182,7 +186,7 @@ function toggleTheme(theme) {
     config['theme'] = new_theme;
 
     // updates the url with color and theme
-    updateThemeURL()
+    updateURL()
 }
 
 function changeColor(color, duration = .8) {
@@ -206,16 +210,17 @@ function changeColor(color, duration = .8) {
     }
 
     config['color'] = color.replace(/\s/g, '')
-    updateThemeURL()
+    updateURL()
 }
 
-function updateThemeURL() {
+function updateURL() {
     if (window.history.replaceState) {
         //prevents browser from storing history with each change:
         window.history.replaceState({
             'color': config['color'],
-            'theme': config['theme']
-        }, 'newclrtheme', '?color=' + config['color'] + '&theme=' + config['theme']);
+            'theme': config['theme'],
+            'hex': config['hexCloch'],
+        }, 'newclrtheme', '?color=' + config['color'] + '&theme=' + config['theme'] + '&hex=' + config['hexCloch']);
     }
 }
 
@@ -268,7 +273,7 @@ function exampleHours(time = 1300) {
     clochStopped = true; i = 0;
     setInterval(function () {
         if (i < 24) {
-            setHour(i); i++
+            setHour(i, config['hexCloch']); i++
         }
     }, time * 2)
 }
@@ -278,7 +283,7 @@ function manualTime(event) {
     new_h = parseInt(event.target.value.split(':')[0])
     new_m = parseInt(event.target.value.split(':')[1])
     if(new_h != config['hour']['value'])
-        setHour(new_h)
+        setHour(new_h, config['hexCloch'])
     if(new_m != config['minute']['value']) 
         setMinute(new_m)
     
@@ -317,6 +322,7 @@ sunMoon = [
 
 // Hours traslation coordinates
 hoursXY = new Array([-33.8, -19], [0, 0], [0, 40], [-33.8, 58], [-67, 38], [-67, 0])
+hoursXYdodec = new Array([-33.8, -19], [-15, -11], [0, 0], [2, 20], [0, 40], [-15, 51], [-33.8, 58], [-52, 51], [-67, 38], [-70, 20], [-67, 0], [-52,-11])
 
 // general duration fade used for relative timing and delay
 durationFade = .1
@@ -364,6 +370,7 @@ window.onload = function () {
     palette = document.querySelector('#palette')
     paletteColors = document.querySelectorAll('#palette>#colors>li')
     toggle_digitalClock = document.querySelector("#toggle_digital_clock")
+    toggle_hex_dodec = document.querySelector("#toggle_hex_dodec")
     digital_clock = document.querySelector('#digital_clock')
     toggle_clock_settings = document.querySelector("#toggle_clock_settings")
     clock_settings = document.querySelector('#clock_settings')
@@ -385,6 +392,9 @@ window.onload = function () {
     if (!config['theme']) {
         config['theme'] = 'dark'
     }
+    if (!config['hex']) {
+        config['hexCloch'] = true
+    }
 
     // gets new date starts adding to config file 
     date = new Date();
@@ -396,7 +406,7 @@ window.onload = function () {
     };
 
     setTimeout(function () {
-        setHour(date.getHours())
+        setHour(date.getHours(), config['hexCloch'])
         setMinute(date.getMinutes(), config['theme']);
 
         if (config['debug']) {
@@ -415,7 +425,7 @@ window.onload = function () {
             h = date.getHours()
             m = date.getMinutes()
             if (h != config['hour']['value'])
-                setHour(h)
+                setHour(h, config['sixHour'])
             if (m != config['minute']['value'])
                 setMinute(m, config['theme'])
         }
@@ -449,11 +459,18 @@ window.onload = function () {
         toggle_digitalClock.classList.toggle('fa-eye')
         toggle_digitalClock.classList.toggle('fa-eye-slash')
         digital_clock.classList.toggle('hidden')
-
+        
         if (config['debug']) {
             console.log("manual timing toggle")
         }
     });
+
+    toggle_hex_dodec.addEventListener('click', function () {
+        updateURL()
+        this.classList.toggle('hexCloch')
+        config['hexCloch'] ^= true
+        setHour(config['hour']['value'], config['hexCloch'])
+    })
 
     startstop_cloch.addEventListener('click', function () {
         blockUserInput(startstop_cloch)
