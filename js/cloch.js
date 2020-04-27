@@ -395,9 +395,11 @@ window.onload = function () {
     if (!config['hexCloch']) {
         config['hexCloch'] = true
     }
-    else if (config['hexCloch'] != '1' || config['hexCloch'] != 'true')
+    else if (config['hexCloch'] != 'true') {
         config['hexCloch'] = false
-    
+        toggle_hex_dodec.classList.remove('hexCloch')
+    }
+        
     // gets new date starts adding to config file 
     date = new Date();
     config['hour'] = {
@@ -469,7 +471,7 @@ window.onload = function () {
 
     toggle_hex_dodec.addEventListener('click', function () {
         this.classList.toggle('hexCloch')
-        config['hexCloch'] = !config['hexCloch']
+        config['hexCloch'] = Boolean(config['hexCloch']) ? false : true 
         setHour(config['hour']['value'], config['hexCloch'])
         updateURL()
     })
