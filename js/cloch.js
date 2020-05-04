@@ -76,12 +76,12 @@ function setMinute(min, theme = config['theme']) {
         // a minute is about 0.2, toFixed gives 1 dec digit,tmp to string,separate dec from floor - to int and normalize newMin[1] for index opacity ranges [0..3] levels
         config['minute']['value'] = min
         config['minute']['indicator_index'] = parseInt(((min / 5) % 12).toFixed(1).toString().split('.')[0]),
-        config['minute']['opacity_index'] = ((min / 5) % 12).toFixed(1).toString().split('.')[1] / 2
+            config['minute']['opacity_index'] = ((min / 5) % 12).toFixed(1).toString().split('.')[1] / 2
         updateDigitalClock()
 
         // selecting the indicators
         first_ind = minutes[config['minute']['indicator_index'] % 12],
-        second_ind = minutes[(config['minute']['indicator_index'] + 1) % 12];
+            second_ind = minutes[(config['minute']['indicator_index'] + 1) % 12];
 
         // ANIMATION
         gsap.fromTo(first_ind, {
@@ -91,8 +91,8 @@ function setMinute(min, theme = config['theme']) {
             fill: colors['color'],
             opacity: colors['opacity_st'][config['minute']['opacity_index']],
         })
-        
-        if(min % 5) {
+
+        if (min % 5) {
             gsap.fromTo(second_ind, {
                 opacity: 0
             }, {
@@ -153,17 +153,36 @@ function toggleTheme(theme) {
 
 function changeColor(color, duration = .8) {
     // svg quadranthx and sunmoon mask indicator change
-    gsap.to(sunMoon[2], duration, {css: {fill: color}});
-    gsap.to(background, duration, {delay: 0,css: {fill: color}});
-    
+    gsap.to(sunMoon[2], duration, {
+        css: {
+            fill: color
+        }
+    });
+    gsap.to(background, duration, {
+        delay: 0,
+        css: {
+            fill: color
+        }
+    });
+
     // changes colors to link and titles and text element with THEME-COLORED class
     document.querySelectorAll('.theme-colored').forEach(element => {
-        element.setAttribute('style', 'color:'+ color +'; textShadow: rgba(0,0,0,.5) 0 0 3px;')
+        element.setAttribute('style', 'color:' + color + '; textShadow: rgba(0,0,0,.5) 0 0 3px;')
     })
     
+    hue = hexToHue(color) + 20 // shift because starts with magenta
+    document.querySelectorAll('#help img').forEach(element => {
+        element.setAttribute('style', 'filter:' + 'hue-rotate('+hue+'deg)')
+    })
+
     // changes browser and button color
     document.querySelectorAll('.browser-theme-colored').forEach(element => {
-        gsap.to(element, duration, {delay: 0, attr: {content: color}});
+        gsap.to(element, duration, {
+            delay: 0,
+            attr: {
+                content: color
+            }
+        });
         // element.setAttribute('content', color)
     })
 
@@ -173,6 +192,57 @@ function changeColor(color, duration = .8) {
 
     config['color'] = color.replace(/\s/g, '')
     updateURL()
+}
+
+// used for hue rotation of images in help section, to be theme-colored too, returing only HUE
+// https: //css-tricks.com/converting-color-spaces-in-javascript/
+function hexToHue(H) {
+    // Convert hex to RGB first
+    let r = 0,
+        g = 0,
+        b = 0;
+    if (H.length == 4) {
+        r = "0x" + H[1] + H[1];
+        g = "0x" + H[2] + H[2];
+        b = "0x" + H[3] + H[3];
+    } else if (H.length == 7) {
+        r = "0x" + H[1] + H[2];
+        g = "0x" + H[3] + H[4];
+        b = "0x" + H[5] + H[6];
+    }
+    // Then to HSL
+    r /= 255;
+    g /= 255;
+    b /= 255;
+    let cmin = Math.min(r, g, b),
+        cmax = Math.max(r, g, b),
+        delta = cmax - cmin,
+        h = 0//,
+        // s = 0,
+        // l = 0,
+        ;
+
+    if (delta == 0)
+        h = 0;
+    else if (cmax == r)
+        h = ((g - b) / delta) % 6;
+    else if (cmax == g)
+        h = (b - r) / delta + 2;
+    else
+        h = (r - g) / delta + 4;
+
+    h = Math.round(h * 60);
+
+    if (h < 0)
+        h += 360;
+
+    // l = (cmax + cmin) / 2;
+    // s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
+    // s = +(s * 100).toFixed(1);
+    // l = +(l * 100).toFixed(1);
+
+    // return "hsl(" + h + "," + s + "%," + l + "%)";
+    return h;
 }
 
 function updateURL() {
@@ -216,11 +286,12 @@ function manualTime(event) {
 // some viewing functions ////////////////////////////////
 function hide(element, duration = 600) {
     element.classList.add('fake_hidden')
-    setTimeout(function() {
+    setTimeout(function () {
         element.classList.remove('fake_hidden')
         element.classList.add('hidden')
     }, duration)
 }
+
 function show(element) {
     element.classList.remove('hidden')
 }
@@ -231,7 +302,7 @@ function toggleView(element) {
 
 function blockUserInput(element, duration = 600) {
     element.classList.add('noInputEvents')
-    setTimeout(function() {
+    setTimeout(function () {
         element.classList.remove('noInputEvents')
     }, duration)
 }
@@ -239,43 +310,47 @@ function blockUserInput(element, duration = 600) {
 
 // some showcase/example functions ////////////////////////////////
 function exampleMins(time = 500) {
-    clochStopped = true; j = 0;
+    clochStopped = true;
+    j = 0;
     setInterval(function () {
         if (j < 60) {
-            setMinute(j, config['theme']); j++
+            setMinute(j, config['theme']);
+            j++
         }
     }, time)
 }
+
 function exampleHours(time = 1300) {
-    clochStopped = true; i = 0;
+    clochStopped = true;
+    i = 0;
     setInterval(function () {
         if (i < 24) {
-            setHour(i, config['hexCloch']); i++
+            setHour(i, config['hexCloch']);
+            i++
         }
     }, time * 2)
 }
 
-
 // CONFIGS and ELEMENTS //////////////////////////////////////////////////////////////////////////////////////////////////////
 minutes = [
-    document.querySelector('#minAng_top'), 
-    document.querySelector('#minMid_rightT'), 
-    document.querySelector('#minAng_topR'), 
-    document.querySelector('#minMid_right'), 
-    document.querySelector('#minAng_bottomR'), 
-    document.querySelector('#minMid_rightB'), 
-    document.querySelector('#minAng_bottom'), 
-    document.querySelector('#minMid_leftB'), 
-    document.querySelector('#minAng_bottomL'), 
-    document.querySelector('#minMid_left'), 
-    document.querySelector('#minAng_topL'), 
+    document.querySelector('#minAng_top'),
+    document.querySelector('#minMid_rightT'),
+    document.querySelector('#minAng_topR'),
+    document.querySelector('#minMid_right'),
+    document.querySelector('#minAng_bottomR'),
+    document.querySelector('#minMid_rightB'),
+    document.querySelector('#minAng_bottom'),
+    document.querySelector('#minMid_leftB'),
+    document.querySelector('#minAng_bottomL'),
+    document.querySelector('#minMid_left'),
+    document.querySelector('#minAng_topL'),
     document.querySelector('#minMid_leftT')
 ]
 
 // indicator, sun and moon mask. sunMoon[2].opacity=0 -> sun; sunMoon[2].opacity=0 -> moon
 sunMoon = [
-    document.querySelector('#sunmoon_indicator'), 
-    document.querySelector('#sun'), 
+    document.querySelector('#sunmoon_indicator'),
+    document.querySelector('#sun'),
     document.querySelector('#moon_mask')
 ]
 
@@ -284,18 +359,20 @@ sunMoon = [
 
 // Hours traslation coordinates
 hoursXY = new Array([-33.8, -19], [0, 0], [0, 40], [-33.8, 58], [-67, 38], [-67, 0])
-hoursXYdodec = new Array([-33.8, -19], [-15, -11], [0, 0], [2, 20], [0, 40], [-15, 51], [-33.8, 58], [-52, 51], [-67, 38], [-70, 20], [-67, 0], [-52,-11])
+hoursXYdodec = new Array([-33.8, -19], [-15, -11], [0, 0], [2, 20], [0, 40], [-15, 51], [-33.8, 58], [-52, 51], [-67, 38], [-70, 20], [-67, 0], [-52, -11])
 
 // Minutes indicator color values
 minutes_sets = { // to -> animation
-    'dark': {    // on light theme => dark indicators
+    'dark': { // on light theme => dark indicators
         'color': 'rgba(255,255,255,1)',
         'opacity_st': [1, 1, .7, .4, .4],
-        'opacity_nd': [0, .4, .4, .7, 1]},
-    'light': {   // on dark theme => light indicators
+        'opacity_nd': [0, .4, .4, .7, 1]
+    },
+    'light': { // on dark theme => light indicators
         'color': 'rgba(0,0,0,1)',
         'opacity_st': [1, 1, .6, .3, .3],
-        'opacity_nd': [0, .3, .3, .6, 1]}
+        'opacity_nd': [0, .3, .3, .6, 1]
+    }
 }
 
 // general duration fade used for relative timing and delay
