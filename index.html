@@ -54,7 +54,7 @@
 
 </head>
 
-<body class="dark">
+<body class="dark it">
   <div id="grad" class="dark"></div>
 
   <div id="quadranthx_container">
@@ -145,20 +145,20 @@
 
     <div id="palette" class="hidden subtoolbar">
       <ol id="colors">
-        <li data-color="#E91E63" style='background:#E91E63'></li>
-        <li data-color="#cc22b5" style='background:#cc22b5'></li>
-        <li data-color="#913bdd" style='background:#9c50df'></li>
-        <li data-color="#3F51B5" style='background:#4861f1'></li>
-        <li data-color="#1d8ae0" style='background:#1d8ae0'></li>
-        <li data-color="#16bbd8" style='background:#16bbd8'></li>
-        <li data-color="#28b98e" style='background:#28b98e'></li>
-        <li data-color="#4CAF50" style='background:#4CAF50'></li>
-        <li data-color="#81c731" style='background:#81c731'></li>
-        <li data-color="#b3bf17" style='background:#b3bf17'></li>
-        <li data-color="#FFC107" style='background:#FFC107'></li>
-        <li data-color="#e0ad15" style='background:#e0ad15'></li>
-        <li data-color="#e6582d" style='background:#e6582d'></li>
-        <li data-color="#d41818" style='background:#d41818'></li>
+        <li data-color="rgb(233,32,99)" style='background:#E91E63'></li>
+        <li data-color="rgb(205,35,182)" style='background:#cc22b5'></li>
+        <li data-color="rgb(155,78,223)" style='background:#913bdd'></li>
+        <li data-color="rgb(70,96,241)" style='background:#3F51B5'></li>
+        <li data-color="rgb(29,141,226)" style='background:#1d8ae0'></li>
+        <li data-color="rgb(22,189,218)" style='background:#16bbd8'></li>
+        <li data-color="rgb(40,184,141)" style='background:#28b98e'></li>
+        <li data-color="rgb(76,174,79)" style='background:#4CAF50'></li>
+        <li data-color="rgb(130,200,50)" style='background:#81c731'></li>
+        <li data-color="rgb(180,192,22)" style='background:#b3bf17'></li>
+        <li data-color="rgb(255,193,5)" style='background:#FFC107'></li>
+        <li data-color="rgb(224,173,21)" style='background:#e0ad15'></li>
+        <li data-color="rgb(230,88,45)" style='background:#e6582d'></li>
+        <li data-color="rgb(211,23,23)" style='background:#d41818'></li>
       </ol>
       <ol id="toggle_theme">
         <li id="light"><i class="fas fa-lightbulb"></i></li>
@@ -175,22 +175,40 @@
       <!-- <h1 class="theme-colored">Cos'è Cloch?</h1> -->
 
       <div class="horElement">
-        <img class="smallHorElement" src="img/help/cloch_banner_full.png" alt="Cloch logo" width="330" >
-        <div class="bigHorElement">
+        <div class="smallHorElement">
+          <a class="theme-colored it" onclick="toggleLang()" href="#"><h4>Prefer english?</h4></a>
+          <a class="theme-colored en" onclick="toggleLang()" href="#"><h4>Preferisci l'italiano?</h4></a>
+          <img src="img/help/cloch_banner_full.png" alt="Cloch logo" width="330" >
+        </div>
+        <div class="bigHorElement it">
           <p><b class="theme-colored">CLOCH</b> è un <b>orologio «grafico» costruito su un esagono</b>, che cerca un approccio diverso nello scandire il tempo. Una volta capito sarà semplice capire l'ora <u>persino vedendolo a distanza o di sfuggita</u>.</p>
           <h2 class="theme-colored">Come funziona?</h2>
           <p>Cloch al posto delle lancette usa degli indicatori ma il funzionamento è quasi identico. Oltre ai canonici <b>mezzogiorno</b> e <b>mezzanotte</b> (12 AM/PM) - usa anche <b>alba</b> e <b>tramonto</b> (~6 AM/PM) come <i>punti di riferimento</i>.</p>
         </div>
+        <div class="bigHorElement en">
+          <p><b class="theme-colored">CLOCH</b> is a <b>«graphical» cloch</b> built on a hexagon, which tries to experiment a new approach to time measuring. One understood will be easy to read the hour <u>even by distance or at a glance</u>.</p>
+          <h2 class="theme-colored">How does it work?</h2>
+          <p>Cloch instead of the typical <i>clock hands</i> uses indicators but they work in almost the same way. Beside the usual <b>noon</b> and <b>midnight</b> (12 AM/PM) - uses <b>sunrise</b> and <b>sunset</b> (~6 AM/PM) too as <i>reference points</i>.</p>
+        </div>
       </div>
 
       <div class="horElement">
-        <div class="bigHorElement">
+        <div class="bigHorElement it">
           <h2 class="theme-colored">Le ore</h2>
           <p>I <u>quattro</u> stati (e i relativi periodi del giorno) sono indicati nella prima immagine, in quella sotto invece trovate a quali vertici corrisponde l'ora (sia AM che PM). Al primo avvio <i>Cloch</i> usa la modalità 6 ore, ma è possibile usare quella a 12 ore dal menu ( <i class="fa fa-clock"></i> ).</p>
           <h4>Modalità 6 ore</h4>
           <p>Immagina di far andare la lancetta (dell'orologio classico) a velocità doppia: <b>l'indicatore delle ore</b> è l'immagine <i>sole/luna</i> e <b>si sposta tra i <u>sei</u> vertici</b> del <i>quadrante</i> (<u>quindi fa 4 giri ogni 24 ore!</u>). </p>
           <h4>Modalità 12 ore</h4>
-          <p>Gli indicatori seguono la classica lancetta dei minuti con questa opzione abilitata, immagina la lancetta come orientata verso l'indicatore più intenso (o più precisamente nella zona data dall'intensità media dei due indicatori).</p>
+          <p>Gli indicatori seguono la classica lancetta delle ore con questa opzione abilitata, le ore saranno: quelle <b>pari sui vertici</b> e quelle <b>dispari tra due vertici</b>.</p>
+          <!-- <p>Gli indicatori seguono la classica lancetta delle ore con questa opzione abilitata, immagina la lancetta come orientata verso l'indicatore più intenso (o più precisamente nella zona data dall'intensità media dei due indicatori).</p> -->
+        </div>
+        <div class="bigHorElement en">
+          <h2 class="theme-colored">Hours</h2>
+          <p>There are <u>four</u> possible states (and theirs matching periods) which are shown in the first image, in the other one below you'll find the correspondence between vertexes and hours (both AM and PM). By default <i>Cloch</i> uses 6-hour timing, but it's possible to use the canonical one 12-hour selecting it in the menu ( <i class="fa fa-clock"></i> ).</p>
+          <h4>6-hour mode</h4>
+          <p>Clock hands are moving twice the speed than normal: <b>the hours' indicator</b> is the <i>sun/moon</i> symbol and <b>it moves between the <u>six</u> vertexes</b> of the <i>quadrant</i> (<u>so it makes 4 rounds each 24 hours!</u>). </p>
+          <h4>12-hour mode</h4>
+          <p>The hours' indicator moves just as the canonical hour hand with this option enabled: <b>even hours are on the hexagon vertexes </b> and <b>odd hours are between two vertexes</b> .</p>
         </div>
         <div class="smallHorElement">
           <img src="img/help/sunmoon.png" width="400"  alt="Hour indicator" />
@@ -199,10 +217,15 @@
       </div>
 
       <div class="horElement">
-        <div class="smallHorElement">
+        <div class="smallHorElement it">
           <h2 class="theme-colored">I minuti</h2>
           <p>Per segnalare i minuti ci sono <u>dodici</u> indicatori posti sul bordo del <i>quadrante</i> come in figura. L'<b>indicatore più intenso è quello principale</b> cioè più vicino al minuto attuale e (l'eventuale) <b>indicatore più trasparente</b> adiacente indica di <u>quanti minuti si dista dal principale</u>.</p>
-          <p>L'animazione mostra i <i>10 minuti</i> <b>tra un'ipotetica ora e la successiva</b>. Ma vi <u>basterà vedere la <i>zona illuminata</i> per una buona approssimazione</u>, di meno di 5 minuti!</p>
+          <p>L'animazione mostra i <i>10 minuti</i> <b>tra un'ipotetica ora e la successiva</b>. Immagina la classica lancetta come orientata verso l'indicatore più intenso (o più precisamente nella zona data dall'intensità media dei due indicatori) per capire il minuto. Ma vi <u>basterà vedere la <i>zona illuminata</i> per una buona approssimazione</u>, di meno di 5 minuti!</p>
+        </div>
+        <div class="smallHorElement en">
+          <h2 class="theme-colored">Minutes</h2>
+          <p>To show minutes there are <u>twelve</u> indicators positioned on the border <i>quadrant</i> (see picture). The <b>most intense indicator is the reference point</b> and the (possible) <b>less intense indicator</b> adjacent shows the <u>minutes offset from the reference point</u>.</p>
+          <p>The animation shows the <i>10 minutes</i> <b>between an hypothetical hour and the next one</b>. Try to imagine the classical minute hand as oriented to the most intense indicator (more precisely to the zone between with average intensity between the two indicators) to understand the minute. But, for a pretty good approximation <u>you just need to see the <i>illuminated zone</i></u>, having a (less than) 5 minute precision!</p>
         </div>
         <div class="bigHorElement">
           <img src="img/help/minutes.png" width="360"  alt="All minutes indicator" />
@@ -212,14 +235,30 @@
       
       
       <div class="horElement">
-        <div class="smallHorElement">
+        <div class="smallHorElement en">
+          <h3 class="theme-colored">Customize it</h3>
+          <p>Click on <i class="fa fa-plus-circle"></i> below to open the menu (and <i class="fa fa-plus-circle opened"></i> to close it):</p>
+          
+          <ul>
+            <li> <i class="fa fa-palette"></i> opens the color palette <i class="fas fa-lightbulb"></i> theme toggle: <u>light</u> or <u>dark</u>)</li>
+            <li> <i class="fa fa-clock"></i> shows cloch options (click on <i class="fa fa-eye"></i> to show digital clock or on <i class="fa fa-pause"></i> to pause it and set the time manually</li>
+            <li> <i class="fa fa-question-circle"></i> opens this help screen</li>
+          </ul>
+          
+          <p><u>Feeling nostalgic, would enjoy a more classical <b>12</b> hour clock?</u> Click on <i class="fa fa-clock"></i> inside the menu and select between <b>6h</b> or <b>12h</b>!</p>
+          
+          <p>This site <b>doesn't use any cookies</b>, <u>theme, color and mode (6/12h) will be added to the URL</u> (address bar) each time you change them. Find the right configuration for you and save it to your bookmarks, to have <b><i>Cloch</i> always as you love it!</b></p>
+          <p><b>P.S.</b> A more curious user may have seen how it' possible to add any possible color inside the URL (<u>must be a RGB or HEX <a class="theme-colored" href="https://www.w3schools.com/colors/colors_picker.asp">valid</a> color</u>, also with alpha channel) so <b>you can feel really free!</b></p>
+        </div>
+        <div class="smallHorElement it">
           <h3 class="theme-colored">Personalizzalo</h3>
           <p>Clicca su <i class="fa fa-plus-circle"></i> in basso per aprire il menu (e <i class="fa fa-plus-circle opened"></i> per chiuderlo):</p>
-            <ul>
-              <li> <i class="fa fa-palette"></i> apre la tavolozza dei colori (e <i class="fas fa-lightbulb"></i> cambia tema: <u>chiaro</u> o <u>scuro</u>)</li>
-              <li> <i class="fa fa-clock"></i> apre le opzioni dell'orologio (clicca su <i class="fa fa-eye"></i> per mostrare l'orologio digitale o su <i class="fa fa-pause"></i> per metterlo in pausa e impostare l'ora manualmente</li>
-              <li> <i class="fa fa-question-circle"></i> apre questa schermata d'aiuto</li>
-            </ul>
+
+          <ul>
+            <li> <i class="fa fa-palette"></i> apre la tavolozza dei colori (e <i class="fas fa-lightbulb"></i> cambia tema: <u>chiaro</u> o <u>scuro</u>)</li>
+            <li> <i class="fa fa-clock"></i> apre le opzioni dell'orologio (clicca su <i class="fa fa-eye"></i> per mostrare l'orologio digitale o su <i class="fa fa-pause"></i> per metterlo in pausa e impostare l'ora manualmente</li>
+            <li> <i class="fa fa-question-circle"></i> apre questa schermata d'aiuto</li>
+          </ul>
           
           <p><u>Preferisci leggere l'orologio a <b>12</b> ore?</u> Clicca nel menu <i class="fa fa-clock"></i> e seleziona tra <b>6h</b> o <b>12h</b>!</p>
           
@@ -228,7 +267,9 @@
         </div>
       </div>
       
-      <p>Cloch è stato ideato da <a class="theme-colored" href="http://flowin.space">Diego Turtulici</a> e realizzato usando <a class="theme-colored" href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fflowin.space%2Fcloch%2F">HTML5</a>, <a class="theme-colored" href="https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fflowin.space%2Fcloch%2Fcss%2Fcloch.css">CSS3</a> (validati), <a class="theme-colored" href="https://en.wikipedia.org/wiki/JavaScript">JavaScript</a> puro e <a class="theme-colored" href="https://greensock.com/gsap/">GSAP</a>. È una rivisitazione di un precedente prototipo, <a class="theme-colored" href="https://flowin.space/glock/"><i>Glock</i></a>.<br /><br />Si ringrazia <a class="theme-colored" href="https://eigenlab.org">eigenLab</a> per l'hosting, il <a class="theme-colored" href="https://git.eigenlab.org/sbiego/cloch">codice sorgente</a> è rilasciato sotto <a class="theme-colored" href="https://www.gnu.org/licenses/gpl-3.0.html">licenza GPLv3</a>.</p>
+      <p class="it">Cloch è stato ideato da <a class="theme-colored" href="http://flowin.space">Diego Turtulici</a> e realizzato usando <a class="theme-colored" href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fflowin.space%2Fcloch%2F">HTML5</a>, <a class="theme-colored" href="https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fflowin.space%2Fcloch%2Fcss%2Fcloch.css">CSS3</a> (validati), <a class="theme-colored" href="https://en.wikipedia.org/wiki/JavaScript">JavaScript</a> puro e <a class="theme-colored" href="https://greensock.com/gsap/">GSAP</a>. È una rivisitazione di un precedente prototipo, <a class="theme-colored" href="https://flowin.space/glock/"><i>Glock</i></a>.<br /><br />Si ringrazia <a class="theme-colored" href="https://eigenlab.org">eigenLab</a> per l'hosting, il <a class="theme-colored" href="https://git.eigenlab.org/sbiego/cloch">codice sorgente</a> è rilasciato sotto <a class="theme-colored" href="https://www.gnu.org/licenses/gpl-3.0.html">licenza GPLv3</a>.</p>
+
+      <p class="en">Cloch made by <a class="theme-colored" href="http://flowin.space">Diego Turtulici</a> using <a class="theme-colored" href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fflowin.space%2Fcloch%2F">HTML5</a>, <a class="theme-colored" href="https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fflowin.space%2Fcloch%2Fcss%2Fcloch.css">CSS3</a> (validated), pure <a class="theme-colored" href="https://en.wikipedia.org/wiki/JavaScript">JavaScript</a> and <a class="theme-colored" href="https://greensock.com/gsap/">GSAP</a>. It's a remake rivisited version of one of my previous works, <a class="theme-colored" href="https://flowin.space/glock/"><i>Glock</i></a>.<br /><br />Thanks to <a class="theme-colored" href="https://eigenlab.org">eigenLab</a> for hosting, here you can find the <a class="theme-colored" href="https://git.eigenlab.org/sbiego/cloch">source code</a> under <a class="theme-colored" href="https://www.gnu.org/licenses/gpl-3.0.html">GPLv3 license</a>.</p>
     </div>
     <br>
     <br>

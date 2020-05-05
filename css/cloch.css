@@ -120,9 +120,27 @@ body.light {
 .flex.column {
   flex-direction: column;
 }
+
 .evenlySpaced {
   justify-content: space-evenly;
 }
+
+/* multilanguage */
+.en *.it {
+  display: none !important;
+}
+
+.it *.en {
+  display: none !important;
+}
+
+/* body.en a::before {
+  content: attr(data-text-en);
+}
+
+body.it a::before {
+  content: attr(data-text-it);
+} */
 
 
 #digital_clock {

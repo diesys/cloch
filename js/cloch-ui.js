@@ -31,7 +31,8 @@ window.onload = function () {
     // get url color if any
     config = getUrlVars()
     if (!config['color']) {
-        config['color'] = '#ff3c6d'
+        // config['color'] = '#ff3c6d'
+        config['color'] = 'rgb(255,60,109)'
         config['first_visit'] = true
     }
     if (!config['theme']) {
@@ -43,6 +44,12 @@ window.onload = function () {
     else if (config['hexCloch'] != 'true') {
         config['hexCloch'] = false
         toggle_hex_dodec.classList.remove('hexCloch')
+    }
+    if (config['lang'] == 'en') {
+        document.querySelector('body').classList.remove('it')
+        document.querySelector('body').classList.add('en')
+    } else {
+        config['lang'] = 'it'
     }
 
     // gets new date starts adding to config file 

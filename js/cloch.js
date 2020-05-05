@@ -261,8 +261,9 @@ function updateURL() {
         window.history.replaceState({
             'color': config['color'],
             'theme': config['theme'],
-            'hexCloch': config['hexCloch']
-        }, 'newclrtheme', '?color=' + config['color'] + '&theme=' + config['theme'] + '&hexCloch=' + config['hexCloch']);
+            'hexCloch': config['hexCloch'],
+            'lang': config['lang']
+        }, 'newclrtheme', '?color=' + config['color'] + '&theme=' + config['theme'] + '&hexCloch=' + config['hexCloch'] + '&lang=' + config['lang']);
     }
 }
 
@@ -339,6 +340,13 @@ function exampleHours(time = 1300) {
             i++
         }
     }, time * 2)
+}
+
+function toggleLang() {
+    document.querySelector('body').classList.toggle('en')
+    document.querySelector('body').classList.toggle('it')
+    config['lang'] = document.querySelector('body').classList.contains('it') ? 'it' : 'en'
+    updateURL()
 }
 
 // CONFIGS and ELEMENTS //////////////////////////////////////////////////////////////////////////////////////////////////////
