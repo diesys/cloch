@@ -196,7 +196,7 @@ function changeImgFilter(color) {
     hue = hexToHue(color) + 20 // shift because starts with magenta
     if(document.querySelector('body').classList.contains('light')) {
         hue -= 180 // for inverted colors _ shift 
-        filter = 'hue-rotate('+ hue + 'deg)' + ' invert(1) brightness(.85) contrast(1.2)'
+        filter = 'hue-rotate('+ hue + 'deg)' + ' invert(1) contrast(1.1)'
     } else {
         filter = 'hue-rotate(' + hue + 'deg)'
     }
