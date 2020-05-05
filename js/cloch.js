@@ -141,6 +141,8 @@ function toggleTheme(theme) {
     document.querySelector('body').classList.remove(theme)
     document.querySelector('body').classList.add(new_theme)
 
+    changeImgFilter(config['color'])
+
     if (config['debug'])
         console.log('new theme', new_theme)
 
@@ -169,11 +171,6 @@ function changeColor(color, duration = .8) {
     document.querySelectorAll('.theme-colored').forEach(element => {
         element.setAttribute('style', 'color:' + color + '; textShadow: rgba(0,0,0,.5) 0 0 3px;')
     })
-    
-    hue = hexToHue(color) + 20 // shift because starts with magenta
-    document.querySelectorAll('#help img').forEach(element => {
-        element.setAttribute('style', 'filter:' + 'hue-rotate('+hue+'deg)')
-    })
 
     // changes browser and button color
     document.querySelectorAll('.browser-theme-colored').forEach(element => {
@@ -186,14 +183,27 @@ function changeColor(color, duration = .8) {
         // element.setAttribute('content', color)
     })
 
-    if (config['debug']) {
+    changeImgFilter(color)
+
+    if (config['debug'])
         console.log("new color", color)
-    }
 
     config['color'] = color.replace(/\s/g, '')
     updateURL()
 }
 
+function changeImgFilter(color) { 
+    hue = hexToHue(color) + 20 // shift because starts with magenta
+    if(document.querySelector('body').classList.contains('light')) {
+        hue -= 180 // for inverted colors _ shift 
+        filter = 'hue-rotate('+ hue + 'deg)' + ' invert(1) brightness(.85) contrast(1.2)'
+    } else {
+        filter = 'hue-rotate(' + hue + 'deg)'
+    }
+    document.querySelectorAll('#help img').forEach(element => {
+        element.setAttribute('style', 'filter:' + filter)
+    })   
+}
 // used for hue rotation of images in help section, to be theme-colored too, returing only HUE
 // https: //css-tricks.com/converting-color-spaces-in-javascript/
 function hexToHue(H) {
