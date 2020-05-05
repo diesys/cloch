@@ -581,7 +581,7 @@ svg#cloch {
   align-items: center;
 }
 #help > .content img {
-  transition: all .4s;
+  transition: all 1s;
   max-width: 100%;
 }
 .light #help > .content img {
