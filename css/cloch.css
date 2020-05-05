@@ -126,12 +126,12 @@ body.light {
 }
 
 /* multilanguage */
-.en *.it {
-  display: none !important;
-}
+/* .en *.it {
+  display: none;
+} */
 
 .it *.en {
-  display: none !important;
+  display: none;
 }
 
 /* body.en a::before {
@@ -597,9 +597,9 @@ svg#cloch {
 .light #help > .content > .horElement {
   border-bottom: 1px solid #55555570;
 }
-#help > .content > .horElement div:first-child {
+/* #help > .content > .horElement div:first-child {
   align-self: flex-start;
-}
+} */
 #help > .content > .horElement > .bigHorElement {
   flex: 2;
   /* padding-left: 30px; */

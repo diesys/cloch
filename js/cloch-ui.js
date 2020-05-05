@@ -46,10 +46,14 @@ window.onload = function () {
         toggle_hex_dodec.classList.remove('hexCloch')
     }
     if (config['lang'] == 'en') {
-        document.querySelector('body').classList.remove('it')
-        document.querySelector('body').classList.add('en')
+        // document.querySelector('body').classList.remove('it')
+        // document.querySelector('body').classList.add('en')
+        this.toggleLang()
     } else {
         config['lang'] = 'it'
+        document.querySelectorAll('body *.en').forEach(element => {
+            element.setAttribute('style', 'display:none !important')
+        })
     }
 
     // gets new date starts adding to config file 

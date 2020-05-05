@@ -343,9 +343,33 @@ function exampleHours(time = 1300) {
 }
 
 function toggleLang() {
-    document.querySelector('body').classList.toggle('en')
-    document.querySelector('body').classList.toggle('it')
-    config['lang'] = document.querySelector('body').classList.contains('it') ? 'it' : 'en'
+    // toggle
+    config['lang'] = document.querySelector('body').classList.contains('it') ? 'en' : 'it'
+
+    if(config['lang'] == 'it') {
+        document.querySelector('body').classList.add('it')
+        document.querySelector('body').classList.remove('en')
+        show_selector = 'body .it'
+        hide_selector = 'body .en'
+    }
+    else {
+        document.querySelector('body').classList.add('en')
+        document.querySelector('body').classList.remove('it')
+        show_selector = 'body .en'
+        hide_selector = 'body .it'
+    }
+
+    duration = .6
+    document.querySelectorAll(show_selector).forEach(element => {
+        gsap.fromTo(element, duration, 
+            {delay: duration, css: {opacity: 0, filter: 'blur(5px)', display: 'none'}}, 
+            {css: {opacity: 1, filter: 'blur(0px)', display: 'block'}
+        })
+    })
+    document.querySelectorAll(hide_selector).forEach(element => {
+        element.style.display = 'none'
+    })
+
     updateURL()
 }
 
