@@ -584,14 +584,23 @@ svg#cloch {
   transition: all 1s;
   max-width: 100%;
 }
+.light #help > .content img {
+  filter: invert(100%);
+}
 #covid-kit {
   transition: all .8s !important;
-  filter: invert(0%);
+  top:0;
+  right:0;
+  position:fixed;
+  opacity:.8;
+  cursor:pointer;
+  z-index:20000;
+  background:url('https://flowin.space/covid/img/covid_banner_tr_light.png');
+  height:68px;
+  width:110px;
 }
-transition: all 1s;
-.light #help > .content img,
 .dark #covid-kit {
-  filter: invert(100%);
+  filter: hue-rotate(180deg) invert(100%);
 }
 
 #help > .content > .horElement {

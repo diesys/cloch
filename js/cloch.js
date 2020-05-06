@@ -207,7 +207,9 @@ function changeImgFilter(color) {
     }
     document.querySelectorAll('#help img').forEach(element => {
         element.setAttribute('style', 'filter:' + filter)
-    })   
+    })
+    document.querySelector('#covid-kit').setAttribute('style', 'filter:'+filter)
+    
 }
 // used for hue rotation of images in help section, to be theme-colored too, returing only HUE
 // https://css-tricks.com/converting-color-spaces-in-javascript/
