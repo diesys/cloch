@@ -584,7 +584,13 @@ svg#cloch {
   transition: all 1s;
   max-width: 100%;
 }
-.light #help > .content img {
+#covid-kit {
+  transition: all .8s !important;
+  filter: invert(0%);
+}
+transition: all 1s;
+.light #help > .content img,
+.dark #covid-kit {
   filter: invert(100%);
 }
 
